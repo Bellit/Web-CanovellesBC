@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import fotoEscola from '../assets/fotos/canovelles-blue-3.jpg';
+import fotoMini from '../assets/fotos/home-blue-mini.png';
+
+const etapes = [
+  { nom: 'Escoleta', text: 'Primer contacte amb la pilota a través del joc: coordinació, motricitat i, sobretot, diversió.' },
+  { nom: 'Escobol', text: 'Primeres normes i primers partits, en un entorn on el resultat és el de menys.' },
+  { nom: 'Pre-Mini i Mini', text: 'Competició federada adaptada a l’edat, i el pas natural cap als equips de formació del club.' },
+];
+---
+
+<BaseLayout title="Escola de bàsquet" description="L'Escola de Bàsquet del Canovelles BC: Escoleta, Escobol i minibàsquet per a nens i nenes de Canovelles.">
+  <PageHeader eyebrow="Des de l'any 2000" title="Escola de bàsquet" intro="Tots els equips del club han crescut a l'escola. Aquí comença la família." />
+
+  <section class="container-club grid items-center gap-12 py-16 lg:grid-cols-2">
+    <div class="prose-club">
+      <p>
+        El març de l'any 2000, el Canovelles BC va crear la seva pròpia Escola de Bàsquet perquè tots els nens i nenes a qui els agrada
+        el bàsquet el puguin aprendre i practicar a la seva ciutat.
+      </p>
+      <p>
+        Avui és la peça clau del club: ensenyem a jugar, però sobretot a fer equip, a respectar i a gaudir de l'esport.
+      </p>
+      <a href="/inscripcions/" class="btn-gold mt-4 no-underline">Fes la preinscripció</a>
+    </div>
+    <Image src={fotoEscola} alt="Una entrenadora explica una jugada a jugadors de l'escola" width={720} class="aspect-square w-full rounded-lg object-cover" />
+  </section>
+
+  <section class="bg-royal-600 py-16 text-white">
+    <div class="container-club">
+      <h2 class="text-5xl">Les etapes</h2>
+      <ol class="mt-10 grid gap-6 md:grid-cols-3">
+        {etapes.map(({ nom, text }, i) => (
+          <li class="rounded-lg bg-white/10 p-7">
+            <span class="font-display text-6xl font-extrabold text-gold-400" aria-hidden="true">{i + 1}</span>
+            <h3 class="mt-2 text-3xl">{nom}</h3>
+            <p class="mt-2 text-white/85">{text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="container-club grid items-center gap-12 py-16 lg:grid-cols-2">
+    <Image src={fotoMini} alt="" width={720} class="aspect-square w-full rounded-lg object-cover" />
+    <div>
+      <h2 class="text-5xl text-navy-900">Horaris i quotes</h2>
+      <p class="mt-5 text-lg text-ink/80">
+        Els horaris de l'escola i les quotes de la temporada són a la pàgina d'inscripcions. Si teniu dubtes, escriviu-nos i us
+        responem tan aviat com puguem.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/inscripcions/" class="btn-navy">Inscripcions</a>
+        <a href="/contacte/" class="btn border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white">Contacte</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

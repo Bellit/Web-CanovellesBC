@@ -1,0 +1,13 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <PageHeader eyebrow="Legal" title={frontmatter.title} />
+  <div class="container-club py-16">
+    <div class="prose-club"><slot /></div>
+  </div>
+</BaseLayout>

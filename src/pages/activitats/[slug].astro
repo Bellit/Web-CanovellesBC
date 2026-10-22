@@ -1,0 +1,46 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { dataLlarga, getActivitats } from '../../lib/contingut';
+
+export const getStaticPaths = (async () => {
+  const activitats = await getActivitats();
+  return activitats.map((activitat) => ({ params: { slug: activitat.id }, props: { activitat } }));
+}) satisfies GetStaticPaths;
+
+const { activitat } = Astro.props;
+const { nom, resum, inici, fi, preu, inclou, pdf, portada } = activitat.data;
+const { Content } = await render(activitat);
+---
+
+<BaseLayout title={nom} description={resum} image={portada}>
+  <PageHeader eyebrow="Activitats" title={nom} intro={resum}>
+    {inici && (
+      <p class="mt-6 inline-block rounded bg-gold-500 px-4 py-2 font-display text-2xl font-bold text-navy-950 uppercase">
+        {dataLlarga(inici)}{fi && ` – ${dataLlarga(fi)}`}
+      </p>
+    )}
+  </PageHeader>
+
+  <div class="container-club grid gap-12 py-16 lg:grid-cols-3">
+    <div class="prose-club lg:col-span-2"><Content /></div>
+    <aside class="space-y-6">
+      {portada && <Image src={portada} alt="" width={480} class="w-full rounded-lg" />}
+      {(preu || inclou.length > 0) && (
+        <div class="rounded-lg bg-white p-6 shadow-sm">
+          {preu && <p class="font-display text-3xl font-bold text-navy-900">{preu}</p>}
+          {inclou.length > 0 && (
+            <ul class="mt-4 space-y-2">
+              {inclou.map((item) => <li class="flex gap-2"><span class="text-gold-600" aria-hidden="true">●</span>{item}</li>)}
+            </ul>
+          )}
+        </div>
+      )}
+      {pdf && <a href={pdf} class="btn-navy w-full" download>Descarrega la informació (PDF)</a>}
+      <a href="/contacte/" class="btn-gold w-full">Vull participar-hi</a>
+    </aside>
+  </div>
+</BaseLayout>

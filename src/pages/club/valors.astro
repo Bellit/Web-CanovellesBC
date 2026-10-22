@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ValuesGrid from '../../components/ValuesGrid.astro';
+
+const missio = [
+  'Transmetre a aficionats, famílies, socis, entrenadors, jugadors i jugadores els valors familiars que ens identifiquen, i als més petits la humilitat, la perseverança i el compromís en cada acció.',
+  'Jugar a bàsquet amb els millors resultats possibles, transmetent il·lusió i valors perquè els canovellins i canovellines se sentin identificats amb el seu club.',
+  'Identificar-se amb els valors que representa el nostre escut.',
+];
+
+const visio = [
+  'Que les grades dels partits grans s’omplin de jugadors i jugadores del club que vénen a animar i a passar-ho bé.',
+  'Que tothom qui vingui al pavelló porti la samarreta del Canovelles BC i animi ben fort.',
+  'Consolidar els equips sèniors a les categories que mereixen, competint sense perdre els nostres valors.',
+  'Construir blocs humans que perdurin en el temps, units per un objectiu: fer del bàsquet a Canovelles una gran família.',
+  'Fer partícips les famílies i els aficionats en la gestió del club i en les moltes activitats que organitza.',
+  'Demostrar que, amb un pressupost modest i una bona gestió, es pot tirar endavant un projecte bonic i amb un balanç positiu.',
+];
+---
+
+<BaseLayout title="Valors, missió i visió" description="Els sis valors del Canovelles BC i la missió i visió del club.">
+  <PageHeader eyebrow="El club" title="Valors, missió i visió" intro="El Canovelles BC està construït sobre un valor central que no ens cansem de repetir: som una família." />
+
+  <section class="bg-navy-900 py-16">
+    <div class="container-club">
+      <p class="max-w-3xl text-lg text-white/80">
+        Aquest club va més enllà de les pistes i del pavelló. Jugadors, entrenadors, pares i mares, socis i simpatitzants: tothom qui hi
+        participa forma part de la família del Canovelles BC. Aquesta família es defineix en sis valors.
+      </p>
+      <div class="mt-10"><ValuesGrid /></div>
+    </div>
+  </section>
+
+  <section class="container-club grid gap-16 py-16 lg:grid-cols-2">
+    <div>
+      <h2 class="text-5xl text-navy-900">Missió</h2>
+      <ul class="mt-6 space-y-5">
+        {missio.map((text) => <li class="flex gap-4 text-lg text-ink/80"><span class="mt-2.5 size-2.5 shrink-0 rounded-full bg-gold-500" aria-hidden="true"></span>{text}</li>)}
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-5xl text-navy-900">Visió</h2>
+      <ul class="mt-6 space-y-5">
+        {visio.map((text) => <li class="flex gap-4 text-lg text-ink/80"><span class="mt-2.5 size-2.5 shrink-0 rounded-full bg-royal-600" aria-hidden="true"></span>{text}</li>)}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

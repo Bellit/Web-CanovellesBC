@@ -1,0 +1,77 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { club, categories } from '../../data/club';
+import { getEquips, getNoticies } from '../../lib/contingut';
+
+export const getStaticPaths = (async () => {
+  const equips = await getEquips();
+  return equips.map((equip) => ({ params: { slug: equip.id }, props: { equip } }));
+}) satisfies GetStaticPaths;
+
+const { equip } = Astro.props;
+const { nom, categoria, temporada, entrenadors, horaris, foto, urlResultats } = equip.data;
+const { Content } = await render(equip);
+const noticies = (await getNoticies()).filter((n) => n.data.equip === equip.id).slice(0, 3);
+---
+
+<BaseLayout title={nom} description={`${nom} del Canovelles BC, temporada ${temporada}: entrenadors, horaris i resultats.`} image={foto}>
+  <PageHeader eyebrow={`${categories[categoria].label} · ${temporada}`} title={nom}>
+    <a href="/equips/" class="mt-6 inline-block font-semibold text-gold-400 hover:underline">← Tots els equips</a>
+  </PageHeader>
+
+  <div class="container-club grid gap-12 py-16 lg:grid-cols-3">
+    <div class="lg:col-span-2">
+      {foto ? (
+        <Image src={foto} alt={`Foto de l'equip ${nom}`} width={960} class="w-full rounded-lg" />
+      ) : (
+        <div class="grid aspect-video place-items-center rounded-lg bg-navy-900 text-center text-white/60">
+          <div>
+            <img src="/escut.svg" alt="" width="80" height="90" class="mx-auto h-24 w-auto opacity-80" />
+            <p class="mt-4 font-display text-xl uppercase">La foto de l'equip arribarà aviat</p>
+          </div>
+        </div>
+      )}
+      {equip.body?.trim() && <div class="prose-club mt-8"><Content /></div>}
+    </div>
+
+    <aside class="space-y-6">
+      <div class="rounded-lg bg-white p-6 shadow-sm">
+        <h2 class="text-2xl text-navy-900">Cos tècnic</h2>
+        {entrenadors.length > 0
+          ? <ul class="mt-3 space-y-1">{entrenadors.map((e) => <li>{e}</li>)}</ul>
+          : <p class="mt-3 text-ink/60">Pendent de publicar.</p>}
+      </div>
+
+      <div class="rounded-lg bg-white p-6 shadow-sm">
+        <h2 class="text-2xl text-navy-900">Entrenaments</h2>
+        {horaris.length > 0 ? (
+          <ul class="mt-3 divide-y divide-navy-900/10">
+            {horaris.map(({ dia, hora, lloc }) => (
+              <li class="flex justify-between gap-4 py-2"><span class="font-semibold">{dia}</span><span>{hora}{lloc && ` · ${lloc}`}</span></li>
+            ))}
+          </ul>
+        ) : <p class="mt-3 text-ink/60">Pendent de publicar.</p>}
+      </div>
+
+      <div class="rounded-lg bg-navy-900 p-6 text-white">
+        <h2 class="text-2xl">Calendari i resultats</h2>
+        <p class="mt-2 text-white/75">Els partits, resultats i classificacions oficials són a la Federació Catalana de Basquetbol.</p>
+        <a href={urlResultats ?? club.federacio} class="btn-gold mt-5 w-full" rel="noopener">
+          {urlResultats ? 'Veure resultats' : 'Anar a basquetcatala.cat'}
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  {noticies.length > 0 && (
+    <section class="container-club pb-16">
+      <h2 class="text-4xl text-navy-900">Notícies de l'equip</h2>
+      <div class="mt-8 grid gap-8 md:grid-cols-3">{noticies.map((noticia) => <NewsCard noticia={noticia} />)}</div>
+    </section>
+  )}
+</BaseLayout>

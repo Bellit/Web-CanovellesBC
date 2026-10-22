@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+
+const patrocinadors = await getCollection('patrocinadors');
+---
+
+<section class="border-y border-navy-900/10 bg-white py-12">
+  <div class="container-club">
+    <h2 class="text-center text-2xl text-navy-900">Gràcies als nostres patrocinadors</h2>
+    {patrocinadors.length > 0 ? (
+      <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+        {patrocinadors.map(({ data }) => (
+          <li>
+            <a href={data.url} rel="noopener" class="block opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0">
+              <img src={data.logo} alt={data.nom} class="h-14 w-auto" loading="lazy" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-4 text-center text-ink/70">
+        El teu negoci pot ser aquí i ajudar el bàsquet base de Canovelles.
+        <a href="/patrocinadors/" class="ml-1 font-semibold text-royal-600 underline">Fes-te patrocinador</a>
+      </p>
+    )}
+  </div>
+</section>

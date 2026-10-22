@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource/barlow-condensed/600.css";
+@import "@fontsource/barlow-condensed/700.css";
+@import "@fontsource/barlow-condensed/800.css";
+
+/* Colors del club: blau marí i groc de l'equipació, blau royal de l'escola */
+@theme {
+  --color-navy-950: #070f29;
+  --color-navy-900: #0c1a45;
+  --color-navy-800: #142661;
+  --color-navy-700: #1d3480;
+  --color-royal-600: #2547c4;
+  --color-royal-500: #3a5fe0;
+  --color-gold-400: #ffd426;
+  --color-gold-500: #f5c400;
+  --color-gold-600: #d9a900;
+  --color-ink: #10152a;
+  --color-paper: #f6f6f2;
+
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-bold uppercase leading-none tracking-tight;
+  }
+  :focus-visible {
+    @apply outline-3 outline-offset-2 outline-gold-500;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@utility container-club {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 font-display text-lg font-bold uppercase tracking-wide transition;
+}
+@utility btn-gold {
+  @apply btn bg-gold-500 text-navy-950 hover:bg-gold-400;
+}
+@utility btn-outline {
+  @apply btn border-2 border-white text-white hover:bg-white hover:text-navy-900;
+}
+@utility btn-navy {
+  @apply btn bg-navy-900 text-white hover:bg-navy-700;
+}
+@utility eyebrow {
+  @apply font-display text-sm font-bold uppercase tracking-[0.2em] text-royal-600;
+}
+
+@layer components {
+  /* Text llarg provinent del Markdown */
+  .prose-club {
+    @apply max-w-3xl text-lg leading-relaxed text-ink/85;
+  }
+  .prose-club > * + * { @apply mt-5; }
+  .prose-club h2 { @apply mt-12 text-4xl text-navy-900; }
+  .prose-club h3 { @apply mt-8 text-2xl text-navy-900; }
+  .prose-club a { @apply font-semibold text-royal-600 underline underline-offset-2; }
+  .prose-club ul { @apply list-disc space-y-2 pl-6; }
+  .prose-club ol { @apply list-decimal space-y-2 pl-6; }
+  .prose-club strong { @apply text-navy-900; }
+  .prose-club blockquote { @apply border-l-4 border-gold-500 pl-5 italic; }
+}

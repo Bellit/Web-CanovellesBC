@@ -1,0 +1,33 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { getNoticies } from '../../lib/contingut';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return paginate(await getNoticies(), { pageSize: 9 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={page.currentPage > 1 ? `Notícies (pàgina ${page.currentPage})` : 'Notícies'} description="Actualitat, cròniques i activitats del Canovelles BC.">
+  <PageHeader eyebrow="Actualitat" title="Notícies" intro="Cròniques, activitats i tot el que passa al club." />
+
+  <section class="container-club py-16">
+    {page.data.length > 0 ? (
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">{page.data.map((noticia) => <NewsCard noticia={noticia} />)}</div>
+    ) : (
+      <p class="text-lg text-ink/70">Aviat publicarem les primeres notícies.</p>
+    )}
+
+    {page.lastPage > 1 && (
+      <nav aria-label="Paginació" class="mt-12 flex items-center justify-between">
+        {page.url.prev ? <a href={page.url.prev} class="btn-navy">← Més recents</a> : <span></span>}
+        <span class="text-ink/60">Pàgina {page.currentPage} de {page.lastPage}</span>
+        {page.url.next ? <a href={page.url.next} class="btn-navy">Més antigues →</a> : <span></span>}
+      </nav>
+    )}
+  </section>
+</BaseLayout>

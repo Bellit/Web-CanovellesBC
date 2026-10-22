@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { Image } from 'astro:assets';
+import fotoComissio from '../assets/fotos/comisio-home.jpg';
+
+const patrocinadors = await getCollection('patrocinadors');
+const avantatges = [
+  'Logo a la web del club i a les xarxes socials.',
+  'Visibilitat al pavelló durant tota la temporada.',
+  'Presència als tornejos del club: Torneig PreMini i 3D3.',
+  'Vincular la teva marca a l’esport base i als valors del club.',
+];
+---
+
+<BaseLayout title="Patrocinadors" description="Patrocinadors i col·laboradors del Canovelles BC, i com fer-se patrocinador del club.">
+  <PageHeader eyebrow="Gràcies!" title="Patrocinadors" intro="Sense les empreses i persones que ens donen suport, res no seria possible." />
+
+  {patrocinadors.length > 0 && (
+    <section class="container-club py-16">
+      <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+        {patrocinadors.map(({ data }) => (
+          <li class="grid aspect-[3/2] place-items-center rounded-lg bg-white p-6 shadow-sm">
+            <a href={data.url} rel="noopener"><img src={data.logo} alt={data.nom} class="max-h-20 w-auto" loading="lazy" /></a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="container-club grid items-center gap-12 py-16 lg:grid-cols-2">
+    <Image src={fotoComissio} alt="Membres de la comissió social del club" width={720} class="aspect-square w-full rounded-lg object-cover" />
+    <div>
+      <p class="eyebrow">Comissió social</p>
+      <h2 class="mt-2 text-5xl text-navy-900">Fes-te patrocinador</h2>
+      <p class="mt-5 text-lg text-ink/80">
+        Som un club petit que funciona gràcies a voluntaris, famílies i empreses del territori. El teu suport es converteix en
+        equipacions, material i tornejos per als nostres jugadors.
+      </p>
+      <ul class="mt-6 space-y-3">
+        {avantatges.map((a) => <li class="flex gap-3 text-lg"><span class="text-gold-600" aria-hidden="true">●</span>{a}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-white py-16">
+    <div class="container-club max-w-3xl">
+      <h2 class="text-4xl text-navy-900">Parlem-ne</h2>
+      <div class="mt-6"><ContactForm nom="patrocini" /></div>
+    </div>
+  </section>
+</BaseLayout>

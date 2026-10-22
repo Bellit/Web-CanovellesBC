@@ -1,0 +1,49 @@
+---
+// Formulari gestionat per Netlify Forms: l'atribut data-netlify fa que Netlify el detecti en el build.
+interface Props {
+  nom: string;
+  assumptes?: string[];
+  preinscripcio?: boolean;
+}
+
+const { nom, assumptes = [], preinscripcio = false } = Astro.props;
+const camp = 'mt-1 w-full rounded-md border border-navy-900/20 bg-white px-4 py-3 focus:border-royal-600 focus:outline-none';
+const etiqueta = 'block font-semibold text-navy-900';
+---
+
+<form name={nom} method="POST" action="/gracies/" data-netlify="true" netlify-honeypot="bot-field" class="grid gap-5 sm:grid-cols-2">
+  <input type="hidden" name="form-name" value={nom} />
+  <p class="hidden"><label>No omplis aquest camp: <input name="bot-field" /></label></p>
+
+  {preinscripcio && (
+    <>
+      <label class={etiqueta}>Nom del jugador/a <input required name="jugador" autocomplete="off" class={camp} /></label>
+      <label class={etiqueta}>Any de naixement <input required name="any-naixement" type="number" min="1950" max="2025" inputmode="numeric" class={camp} /></label>
+    </>
+  )}
+
+  <label class={etiqueta}>{preinscripcio ? 'Nom de la persona de contacte' : 'Nom'} <input required name="nom" autocomplete="name" class={camp} /></label>
+  <label class={etiqueta}>Correu electrònic <input required name="email" type="email" autocomplete="email" class={camp} /></label>
+  <label class={etiqueta}>Telèfon <span class="font-normal text-ink/60">(opcional)</span> <input name="telefon" type="tel" autocomplete="tel" class={camp} /></label>
+
+  {assumptes.length > 0 && (
+    <label class={etiqueta}>Assumpte
+      <select name="assumpte" class={camp}>
+        {assumptes.map((a) => <option>{a}</option>)}
+      </select>
+    </label>
+  )}
+
+  <label class:list={[etiqueta, 'sm:col-span-2']}>{preinscripcio ? 'Experiència prèvia o comentaris' : 'Missatge'}
+    <textarea name="missatge" rows="5" required={!preinscripcio} class={camp}></textarea>
+  </label>
+
+  <label class="flex items-start gap-3 text-sm sm:col-span-2">
+    <input type="checkbox" required name="privacitat" class="mt-1 size-5 accent-royal-600" />
+    <span>He llegit i accepto la <a href="/privacitat/" class="font-semibold text-royal-600 underline">política de privacitat</a>.</span>
+  </label>
+
+  <div class="sm:col-span-2">
+    <button type="submit" class="btn-navy">{preinscripcio ? 'Envia la preinscripció' : 'Envia el missatge'}</button>
+  </div>
+</form>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import { club, categories } from '../../data/club';
+import { getEquips } from '../../lib/contingut';
+
+const equips = await getEquips();
+const grups = Object.entries(categories).map(([clau, info]) => ({
+  clau,
+  ...info,
+  equips: equips.filter((e) => e.data.categoria === clau),
+}));
+---
+
+<BaseLayout title="Equips" description={`Els ${equips.length} equips del Canovelles BC la temporada ${club.temporada}: escola, formació, sèniors i veterans.`}>
+  <PageHeader eyebrow={`Temporada ${club.temporada}`} title="Els nostres equips" intro={`${equips.length} equips, de l'Escoleta als Veterans.`}>
+    <nav aria-label="Categories" class="mt-8 flex flex-wrap gap-3">
+      {grups.map(({ clau, label }) => (
+        <a href={`#${clau}`} class="rounded-full border-2 border-white/30 px-5 py-2 font-display text-lg font-semibold uppercase hover:border-gold-500 hover:text-gold-500">{label}</a>
+      ))}
+    </nav>
+  </PageHeader>
+
+  <div class="container-club space-y-16 py-16">
+    {grups.map(({ clau, label, descripcio, equips }) => (
+      <section id={clau} class="scroll-mt-28">
+        <h2 class="text-5xl text-navy-900">{label}</h2>
+        <p class="mt-2 text-ink/70">{descripcio}</p>
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {equips.map((equip) => <TeamCard equip={equip} />)}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

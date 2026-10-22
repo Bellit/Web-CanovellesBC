@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+
+// Fites extretes de la història publicada a la web anterior (fins a la temporada 2011-12).
+const fites = [
+  { any: '1995', text: 'Antonio Estirado, primer president i jugador, crea el club perquè els júniors de Canovelles puguin continuar jugant. Neix el primer equip: un Sènior Masculí a 3a Catalana B.' },
+  { any: '1998', text: 'Acord amb l’Ajuntament: els 3 equips de bàsquet base del S.A.E. Canovelles s’integren al club. Neix el Canovelles Bàsquet Club tal com el coneixem.' },
+  { any: '2000', text: 'El club crea la seva pròpia Escola de Bàsquet, clau en el futur de l’entitat.' },
+  { any: '2007', text: 'Ascens del Sènior Masculí A a 3a Catalana després dels play-offs. Rècord de 16 equips la temporada 2007-08.' },
+  { any: '2009', text: 'Primer Torneig de Mini-Bàsquet del Canovelles BC.' },
+  { any: '2011', text: 'XV aniversari del club. El Cadet Femení es proclama campió de Catalunya de nivell A, el primer títol català del club.' },
+];
+---
+
+<BaseLayout title="Història" description="La història del Canovelles Bàsquet Club des de 1995.">
+  <PageHeader eyebrow="El club" title="Història" intro="Tot va començar l'estiu de 1995, amb un grup d'amics que no volien deixar de jugar a bàsquet al seu poble." />
+
+  <section class="container-club py-16">
+    <ol class="relative max-w-3xl border-l-4 border-gold-500 pl-8">
+      {fites.map(({ any, text }) => (
+        <li class="relative pb-12 last:pb-0">
+          <span class="absolute top-1 -left-[2.65rem] size-5 rounded-full border-4 border-gold-500 bg-navy-900" aria-hidden="true"></span>
+          <p class="font-display text-5xl font-extrabold text-navy-900">{any}</p>
+          <p class="mt-2 text-lg text-ink/80">{text}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="prose-club mt-16">
+      <h2>Els pioners</h2>
+      <p>
+        Antonio Estirado, Samuel De La Lastra, Toni Castela, Pep Moratò, Jordi Pedrosa, Juan José Rodríguez, Andrés Reche,
+        Juan Francisco Cano, Rafa Sánchez, Daniel Fernández i C. Javier Tresgallo van formar, el setembre de 1995, el primer equip
+        de la història del club. Van aconseguir 3 ascensos de categoria en 5 temporades.
+      </p>
+      <h2>L'escola, el cor del club</h2>
+      <p>
+        Des que es va crear l'Escola de Bàsquet l'any 2000, tots els equips del club s'hi nodreixen o hi han crescut. Gràcies a ella,
+        qualsevol nen o nena a qui li agradi el bàsquet el pot aprendre i practicar a la seva ciutat: Canovelles.
+      </p>
+      <!-- TODO: completar la història de 2012 a l'actualitat amb la junta. -->
+    </div>
+  </section>
+</BaseLayout>

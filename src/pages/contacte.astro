@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { club } from '../data/club';
+---
+
+<BaseLayout title="Contacte" description={`Contacta amb el Canovelles BC. ${club.adreca.pavello}, ${club.adreca.carrer}, ${club.adreca.cp} ${club.adreca.poblacio}.`}>
+  <PageHeader eyebrow="Parlem" title="Contacte" intro="Tens dubtes sobre l'escola, els equips o les activitats? Escriu-nos." />
+
+  <section class="container-club grid gap-12 py-16 lg:grid-cols-3">
+    <div class="space-y-8">
+      <div>
+        <h2 class="text-3xl text-navy-900">On som</h2>
+        <address class="mt-3 text-lg not-italic">
+          {club.adreca.pavello}<br />
+          {club.adreca.carrer}<br />
+          {club.adreca.cp} {club.adreca.poblacio} ({club.adreca.provincia})
+        </address>
+        <a href={club.adreca.mapa} class="mt-3 inline-block font-semibold text-royal-600 underline" rel="noopener">Com arribar-hi</a>
+      </div>
+      <div>
+        <h2 class="text-3xl text-navy-900">Correu</h2>
+        <ul class="mt-3 space-y-2 text-lg">
+          <li>General: <a href={`mailto:${club.correus.general}`} class="font-semibold text-royal-600 underline">{club.correus.general}</a></li>
+          <li>Junta directiva: <a href={`mailto:${club.correus.junta}`} class="font-semibold text-royal-600 underline">{club.correus.junta}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rounded-lg bg-white p-6 shadow-sm sm:p-8 lg:col-span-2">
+      <h2 class="text-4xl text-navy-900">Envia'ns un missatge</h2>
+      <div class="mt-6">
+        <ContactForm nom="contacte" assumptes={['Informació general', 'Escola i inscripcions', 'Activitats i tornejos', 'Patrocini', 'Altres']} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

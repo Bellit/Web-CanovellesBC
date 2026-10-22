@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsCard from '../components/NewsCard.astro';
+import ValuesGrid from '../components/ValuesGrid.astro';
+import SponsorStrip from '../components/SponsorStrip.astro';
+import { club, categories } from '../data/club';
+import { getActivitats, getEquips, getNoticies } from '../lib/contingut';
+import fotoFamilia from '../assets/fotos/canovelles-fotofamilia-1.jpg';
+import fotoEscola from '../assets/fotos/canovelles-blue-3.jpg';
+
+const noticies = (await getNoticies()).slice(0, 3);
+const equips = await getEquips();
+const activitats = await getActivitats();
+const anys = new Date().getFullYear() - club.fundacio;
+
+const perCategoria = Object.entries(categories).map(([clau, info]) => ({
+  clau,
+  ...info,
+  equips: equips.filter((e) => e.data.categoria === clau),
+}));
+
+const xifres = [
+  { valor: club.fundacio, label: 'Any de fundació' },
+  { valor: equips.length, label: 'Equips aquesta temporada' },
+  { valor: `${anys}`, label: 'Anys fent club' },
+];
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-navy-950 text-white">
+    <Image
+      src={fotoFamilia}
+      alt="Foto de família de tots els equips del Canovelles BC a la graderia del pavelló"
+      widths={[640, 1024, 1366]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 -z-10 size-full object-cover opacity-45"
+    />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/70 to-navy-950/10"></div>
+    <div class="container-club py-24 sm:py-32 lg:py-44">
+      <p class="eyebrow text-gold-500">Bàsquet a Canovelles des de {club.fundacio}</p>
+      <h1 class="mt-4 max-w-3xl text-6xl sm:text-7xl lg:text-8xl">
+        Som club.<br /><span class="text-gold-500">Som família.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-white/85 sm:text-xl">
+        De l'Escoleta als Veterans: {equips.length} equips i una sola samarreta.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="/inscripcions/" class="btn-gold">Apunta't al club</a>
+        <a href="/equips/" class="btn-outline">Els nostres equips</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Xifres -->
+  <section class="bg-gold-500 text-navy-950" aria-label="El club en xifres">
+    <dl class="container-club grid grid-cols-3 divide-x divide-navy-950/15 py-6">
+      {xifres.map(({ valor, label }) => (
+        <div class="flex flex-col px-2 text-center">
+          <dt class="order-2 text-xs font-semibold uppercase sm:text-sm">{label}</dt>
+          <dd class="font-display text-4xl font-extrabold sm:text-5xl">{valor}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- Notícies -->
+  {noticies.length > 0 && (
+    <section class="container-club py-20">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <p class="eyebrow">Actualitat</p>
+          <h2 class="mt-2 text-5xl text-navy-900">Últimes notícies</h2>
+        </div>
+        <a href="/noticies/" class="hidden font-semibold text-royal-600 hover:underline sm:block">Totes les notícies →</a>
+      </div>
+      <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {noticies.map((noticia) => <NewsCard noticia={noticia} />)}
+      </div>
+    </section>
+  )}
+
+  <!-- Categories -->
+  <section class="bg-white py-20">
+    <div class="container-club">
+      <p class="eyebrow">Temporada {club.temporada}</p>
+      <h2 class="mt-2 text-5xl text-navy-900">Un equip per a cada edat</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {perCategoria.map(({ clau, label, descripcio, equips }) => (
+          <a href={`/equips/#${clau}`} class="group rounded-lg border-2 border-navy-900/10 p-6 transition hover:border-gold-500 hover:bg-paper">
+            <p class="font-display text-6xl font-extrabold text-royal-600/20 group-hover:text-gold-500">{equips.length}</p>
+            <h3 class="mt-1 text-3xl text-navy-900">{label}</h3>
+            <p class="mt-2 text-ink/70">{descripcio}</p>
+            <p class="mt-4 text-sm text-ink/60">{equips.map((e) => e.data.nom).join(' · ')}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Escola -->
+  <section class="container-club grid items-center gap-12 py-20 lg:grid-cols-2">
+    <Image src={fotoEscola} alt="Una entrenadora explica una jugada a jugadors de l'escola" width={720} class="aspect-square w-full rounded-lg object-cover" />
+    <div>
+      <p class="eyebrow">Escola de bàsquet</p>
+      <h2 class="mt-2 text-5xl text-navy-900">Els primers bots, a casa</h2>
+      <p class="mt-5 text-lg text-ink/80">
+        Des de l'any 2000, l'escola és el cor del club: tots els nostres equips hi han crescut. A l'Escoleta i l'Escobol, nens i nenes
+        aprenen a jugar, a fer equip i a passar-s'ho bé.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/escola/" class="btn-navy">Coneix l'escola</a>
+        <a href="/inscripcions/" class="btn border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white">Preinscripció</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activitats -->
+  <section class="bg-royal-600 py-20 text-white">
+    <div class="container-club">
+      <p class="eyebrow text-gold-400">Més que partits</p>
+      <h2 class="mt-2 text-5xl">Activitats del club</h2>
+      <div class="mt-10 grid gap-8 md:grid-cols-2">
+        {activitats.map(({ id, data }) => (
+          <a href={`/activitats/${id}/`} class="group relative flex min-h-72 flex-col justify-end overflow-hidden rounded-lg p-8">
+            {data.portada && <Image src={data.portada} alt="" width={720} class="absolute inset-0 -z-0 size-full object-cover transition group-hover:scale-105" />}
+            <span class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-navy-950/10"></span>
+            <h3 class="relative text-4xl">{data.nom}</h3>
+            <p class="relative mt-2 max-w-md text-white/85">{data.resum}</p>
+            <span class="relative mt-4 font-semibold text-gold-400">Més informació →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Valors -->
+  <section class="bg-navy-900 py-20">
+    <div class="container-club">
+      <p class="eyebrow text-gold-500">El que ens defineix</p>
+      <h2 class="mt-2 text-5xl text-white">Sis valors, una família</h2>
+      <div class="mt-10"><ValuesGrid /></div>
+      <a href="/club/valors/" class="mt-8 inline-block font-semibold text-gold-400 hover:underline">Missió i visió del club →</a>
+    </div>
+  </section>
+
+  <SponsorStrip />
+</BaseLayout>
