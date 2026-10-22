@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 ---
@@ -6,8 +7,8 @@ import PageHeader from '../components/PageHeader.astro';
 <BaseLayout title="Pàgina no trobada">
   <PageHeader eyebrow="Error 404" title="Pilota fora!" intro="La pàgina que busques no existeix o ha canviat de lloc.">
     <div class="mt-8 flex flex-wrap gap-4">
-      <a href="/" class="btn-gold">Torna a l'inici</a>
-      <a href="/equips/" class="btn-outline">Veure els equips</a>
+      <a href={url('/')} class="btn-gold">Torna a l'inici</a>
+      <a href={url('/equips/')} class="btn-outline">Veure els equips</a>
     </div>
   </PageHeader>
 </BaseLayout>

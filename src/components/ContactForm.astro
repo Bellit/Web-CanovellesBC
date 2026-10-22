@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 // Formulari gestionat per Netlify Forms: l'atribut data-netlify fa que Netlify el detecti en el build.
 interface Props {
   nom: string;
@@ -11,7 +12,7 @@ const camp = 'mt-1 w-full rounded-md border border-navy-900/20 bg-white px-4 py-
 const etiqueta = 'block font-semibold text-navy-900';
 ---
 
-<form name={nom} method="POST" action="/gracies/" data-netlify="true" netlify-honeypot="bot-field" class="grid gap-5 sm:grid-cols-2">
+<form name={nom} method="POST" action={url('/gracies/')} data-netlify="true" netlify-honeypot="bot-field" class="grid gap-5 sm:grid-cols-2">
   <input type="hidden" name="form-name" value={nom} />
   <p class="hidden"><label>No omplis aquest camp: <input name="bot-field" /></label></p>
 
@@ -40,7 +41,7 @@ const etiqueta = 'block font-semibold text-navy-900';
 
   <label class="flex items-start gap-3 text-sm sm:col-span-2">
     <input type="checkbox" required name="privacitat" class="mt-1 size-5 accent-royal-600" />
-    <span>He llegit i accepto la <a href="/privacitat/" class="font-semibold text-royal-600 underline">política de privacitat</a>.</span>
+    <span>He llegit i accepto la <a href={url('/privacitat/')} class="font-semibold text-royal-600 underline">política de privacitat</a>.</span>
   </label>
 
   <div class="sm:col-span-2">

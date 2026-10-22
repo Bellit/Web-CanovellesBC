@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NewsCard from '../components/NewsCard.astro';
@@ -49,8 +50,8 @@ const xifres = [
         De l'Escoleta als Veterans: {equips.length} equips i una sola samarreta.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <a href="/inscripcions/" class="btn-gold">Apunta't al club</a>
-        <a href="/equips/" class="btn-outline">Els nostres equips</a>
+        <a href={url('/inscripcions/')} class="btn-gold">Apunta't al club</a>
+        <a href={url('/equips/')} class="btn-outline">Els nostres equips</a>
       </div>
     </div>
   </section>
@@ -75,7 +76,7 @@ const xifres = [
           <p class="eyebrow">Actualitat</p>
           <h2 class="mt-2 text-5xl text-navy-900">Últimes notícies</h2>
         </div>
-        <a href="/noticies/" class="hidden font-semibold text-royal-600 hover:underline sm:block">Totes les notícies →</a>
+        <a href={url('/noticies/')} class="hidden font-semibold text-royal-600 hover:underline sm:block">Totes les notícies →</a>
       </div>
       <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {noticies.map((noticia) => <NewsCard noticia={noticia} />)}
@@ -90,7 +91,7 @@ const xifres = [
       <h2 class="mt-2 text-5xl text-navy-900">Un equip per a cada edat</h2>
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {perCategoria.map(({ clau, label, descripcio, equips }) => (
-          <a href={`/equips/#${clau}`} class="group rounded-lg border-2 border-navy-900/10 p-6 transition hover:border-gold-500 hover:bg-paper">
+          <a href={url(`/equips/#${clau}`)} class="group rounded-lg border-2 border-navy-900/10 p-6 transition hover:border-gold-500 hover:bg-paper">
             <p class="font-display text-6xl font-extrabold text-royal-600/20 group-hover:text-gold-500">{equips.length}</p>
             <h3 class="mt-1 text-3xl text-navy-900">{label}</h3>
             <p class="mt-2 text-ink/70">{descripcio}</p>
@@ -112,8 +113,8 @@ const xifres = [
         aprenen a jugar, a fer equip i a passar-s'ho bé.
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
-        <a href="/escola/" class="btn-navy">Coneix l'escola</a>
-        <a href="/inscripcions/" class="btn border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white">Preinscripció</a>
+        <a href={url('/escola/')} class="btn-navy">Coneix l'escola</a>
+        <a href={url('/inscripcions/')} class="btn border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white">Preinscripció</a>
       </div>
     </div>
   </section>
@@ -125,7 +126,7 @@ const xifres = [
       <h2 class="mt-2 text-5xl">Activitats del club</h2>
       <div class="mt-10 grid gap-8 md:grid-cols-2">
         {activitats.map(({ id, data }) => (
-          <a href={`/activitats/${id}/`} class="group relative flex min-h-72 flex-col justify-end overflow-hidden rounded-lg p-8">
+          <a href={url(`/activitats/${id}/`)} class="group relative flex min-h-72 flex-col justify-end overflow-hidden rounded-lg p-8">
             {data.portada && <Image src={data.portada} alt="" width={720} class="absolute inset-0 -z-0 size-full object-cover transition group-hover:scale-105" />}
             <span class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-navy-950/10"></span>
             <h3 class="relative text-4xl">{data.nom}</h3>
@@ -143,7 +144,7 @@ const xifres = [
       <p class="eyebrow text-gold-500">El que ens defineix</p>
       <h2 class="mt-2 text-5xl text-white">Sis valors, una família</h2>
       <div class="mt-10"><ValuesGrid /></div>
-      <a href="/club/valors/" class="mt-8 inline-block font-semibold text-gold-400 hover:underline">Missió i visió del club →</a>
+      <a href={url('/club/valors/')} class="mt-8 inline-block font-semibold text-gold-400 hover:underline">Missió i visió del club →</a>
     </div>
   </section>
 

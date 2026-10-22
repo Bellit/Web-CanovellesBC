@@ -33,5 +33,17 @@ Exemple de patrocinador:
 
 ## Desplegament
 
-Netlify: connecta el repositori i ja està; `netlify.toml` defineix el build i les redireccions 301 de les URLs de l'antic WordPress.
-Els formularis (`contacte`, `preinscripcio`, `patrocini`) funcionen amb Netlify Forms. Activa les notificacions per correu a *Site settings → Forms*.
+### Previsualització (GitHub Pages)
+
+Cada `push` a `main` publica la web a <https://bellit.github.io/Web-CanovellesBC/> amb `.github/workflows/pages.yml`.
+Aquesta còpia porta `noindex` perquè Google no la indexi.
+
+### Hosting definitiu
+
+`npm run build` genera la web per a `https://canovellesbc.com` a la carpeta `dist/`. Només cal pujar-ne el contingut a l'arrel del hosting.
+
+Als enllaços interns, fes servir sempre el helper `url()` (`src/lib/url.ts`), que hi afegeix la ruta base quan la web no és a l'arrel. Als fitxers Markdown, els enllaços `/...` s'ajusten sols.
+
+**Pendent:**
+- Redireccions 301 de les URLs de l'antic WordPress: `/historia/` → `/club/historia/`, `/valors-missio-i-visio/` → `/club/valors/`, `/equipos/` → `/equips/`, `/contacta/` → `/contacte/`, `/torneo-premini/` → `/activitats/torneig-premini/` i `/3d3/` → `/activitats/torneig-3d3/`.
+- Servei per als formularis (`contacte`, `preinscripcio`, `patrocini`).

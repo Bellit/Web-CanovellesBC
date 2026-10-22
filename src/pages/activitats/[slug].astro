@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import type { GetStaticPaths } from 'astro';
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
@@ -39,8 +40,8 @@ const { Content } = await render(activitat);
           )}
         </div>
       )}
-      {pdf && <a href={pdf} class="btn-navy w-full" download>Descarrega la informació (PDF)</a>}
-      <a href="/contacte/" class="btn-gold w-full">Vull participar-hi</a>
+      {pdf && <a href={url(pdf)} class="btn-navy w-full" download>Descarrega la informació (PDF)</a>}
+      <a href={url('/contacte/')} class="btn-gold w-full">Vull participar-hi</a>
     </aside>
   </div>
 </BaseLayout>

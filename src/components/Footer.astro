@@ -1,15 +1,16 @@
 ---
+import { url } from '@/lib/url';
 import { club, navegacio } from '../data/club';
 
-const xarxes = Object.entries(club.xarxes).filter(([, url]) => url);
+const xarxes = Object.entries(club.xarxes).filter(([, enllac]) => enllac);
 const any = new Date().getFullYear();
 ---
 
 <footer class="bg-navy-950 text-white/80">
   <div class="container-club grid gap-10 py-14 md:grid-cols-3">
     <div>
-      <a href="/" class="flex items-center gap-3 text-white">
-        <img src="/escut.svg" alt="" width="48" height="54" class="h-14 w-auto" />
+      <a href={url('/')} class="flex items-center gap-3 text-white">
+        <img src={url('/escut.svg')} alt="" width="48" height="54" class="h-14 w-auto" />
         <span class="font-display text-3xl leading-none font-extrabold uppercase">Canovelles <span class="text-gold-500">BC</span></span>
       </a>
       <p class="mt-4 max-w-xs">Bàsquet a Canovelles des de {club.fundacio}.</p>
@@ -19,8 +20,8 @@ const any = new Date().getFullYear();
     <nav aria-label="Peu de pàgina">
       <h2 class="text-xl text-white">El club</h2>
       <ul class="mt-4 grid grid-cols-2 gap-2">
-        {navegacio.map(({ href, label }) => <li><a href={href} class="hover:text-gold-400">{label}</a></li>)}
-        <li><a href="/inscripcions/" class="hover:text-gold-400">Inscripcions</a></li>
+        {navegacio.map(({ href, label }) => <li><a href={url(href)} class="hover:text-gold-400">{label}</a></li>)}
+        <li><a href={url('/inscripcions/')} class="hover:text-gold-400">Inscripcions</a></li>
       </ul>
     </nav>
 
@@ -33,7 +34,7 @@ const any = new Date().getFullYear();
       </address>
       {xarxes.length > 0 && (
         <ul class="mt-4 flex gap-4">
-          {xarxes.map(([nom, url]) => <li><a href={url} class="capitalize hover:text-gold-400" rel="noopener">{nom}</a></li>)}
+          {xarxes.map(([nom, enllac]) => <li><a href={enllac} class="capitalize hover:text-gold-400" rel="noopener">{nom}</a></li>)}
         </ul>
       )}
     </div>
@@ -42,9 +43,9 @@ const any = new Date().getFullYear();
     <div class="container-club flex flex-col gap-2 py-5 text-sm sm:flex-row sm:justify-between">
       <p>© {any} {club.nom}</p>
       <ul class="flex gap-4">
-        <li><a href="/avis-legal/" class="hover:text-gold-400">Avís legal</a></li>
-        <li><a href="/privacitat/" class="hover:text-gold-400">Privacitat</a></li>
-        <li><a href="/cookies/" class="hover:text-gold-400">Cookies</a></li>
+        <li><a href={url('/avis-legal/')} class="hover:text-gold-400">Avís legal</a></li>
+        <li><a href={url('/privacitat/')} class="hover:text-gold-400">Privacitat</a></li>
+        <li><a href={url('/cookies/')} class="hover:text-gold-400">Cookies</a></li>
       </ul>
     </div>
   </div>

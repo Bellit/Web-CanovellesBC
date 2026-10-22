@@ -1,14 +1,15 @@
 ---
+import { url } from '@/lib/url';
 import { club, navegacio } from '../data/club';
 
 const actual = Astro.url.pathname;
-const esActiu = (href: string) => actual.startsWith(href);
+const esActiu = (href: string) => actual.startsWith(url(href));
 ---
 
 <header class="sticky top-0 z-40 border-b-4 border-gold-500 bg-navy-900 text-white">
   <div class="container-club flex h-16 items-center justify-between gap-4 lg:h-20">
-    <a href="/" class="flex items-center gap-3" aria-label={`${club.nomCurt}, inici`}>
-      <img src="/escut.svg" alt="" width="40" height="45" class="h-10 w-auto lg:h-12" />
+    <a href={url('/')} class="flex items-center gap-3" aria-label={`${club.nomCurt}, inici`}>
+      <img src={url('/escut.svg')} alt="" width="40" height="45" class="h-10 w-auto lg:h-12" />
       <span class="font-display text-2xl leading-none font-extrabold uppercase lg:text-3xl">
         Canovelles <span class="text-gold-500">BC</span>
       </span>
@@ -19,7 +20,7 @@ const esActiu = (href: string) => actual.startsWith(href);
         {navegacio.map(({ href, label }) => (
           <li>
             <a
-              href={href}
+              href={url(href)}
               aria-current={esActiu(href) ? 'page' : undefined}
               class="rounded px-3 py-2 font-display text-lg font-semibold tracking-wide uppercase transition hover:text-gold-400 aria-[current=page]:text-gold-500"
             >
@@ -27,7 +28,7 @@ const esActiu = (href: string) => actual.startsWith(href);
             </a>
           </li>
         ))}
-        <li class="ml-2"><a href="/inscripcions/" class="btn-gold px-5 py-2">Apunta't</a></li>
+        <li class="ml-2"><a href={url('/inscripcions/')} class="btn-gold px-5 py-2">Apunta't</a></li>
       </ul>
     </nav>
 
@@ -50,7 +51,7 @@ const esActiu = (href: string) => actual.startsWith(href);
       {navegacio.map(({ href, label }) => (
         <li>
           <a
-            href={href}
+            href={url(href)}
             aria-current={esActiu(href) ? 'page' : undefined}
             class="block py-3 font-display text-2xl font-semibold uppercase aria-[current=page]:text-gold-500"
           >
@@ -58,7 +59,7 @@ const esActiu = (href: string) => actual.startsWith(href);
           </a>
         </li>
       ))}
-      <li class="pt-3 pb-2"><a href="/inscripcions/" class="btn-gold w-full">Apunta't al club</a></li>
+      <li class="pt-3 pb-2"><a href={url('/inscripcions/')} class="btn-gold w-full">Apunta't al club</a></li>
     </ul>
   </nav>
 </header>

@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -11,7 +12,7 @@ const activitats = await getActivitats();
   <PageHeader eyebrow="Més que partits" title="Activitats" intro="Tornejos i trobades que organitza el club per fer pinya amb els clubs veïns i amb les famílies." />
   <section class="container-club grid gap-10 py-16">
     {activitats.map(({ id, data }) => (
-      <a href={`/activitats/${id}/`} class="group grid overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-lg md:grid-cols-5">
+      <a href={url(`/activitats/${id}/`)} class="group grid overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-lg md:grid-cols-5">
         <div class="aspect-video bg-navy-800 md:col-span-2 md:aspect-auto">
           {data.portada && <Image src={data.portada} alt="" width={640} class="size-full object-cover" />}
         </div>

@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -24,7 +25,7 @@ const jsonLd = {
   name: club.nom,
   sport: 'Basketball',
   url: Astro.site?.toString(),
-  logo: new URL('/escut.svg', Astro.site).toString(),
+  logo: new URL(url('/escut.svg'), Astro.site).toString(),
   foundingDate: String(club.fundacio),
   email: club.correus.general,
   address: {
@@ -46,9 +47,10 @@ const jsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
     <meta name="theme-color" content="#0c1a45" />
+    {import.meta.env.PUBLIC_PREVIEW === 'true' && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:type" content={type} />
     <meta property="og:locale" content="ca_ES" />
     <meta property="og:site_name" content={club.nom} />

@@ -1,4 +1,5 @@
 ---
+import { url } from '@/lib/url';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { club } from '../../data/club';
@@ -15,7 +16,7 @@ const seccions = [
   <PageHeader eyebrow={`Des de ${club.fundacio}`} title="El club" intro="Un club petit amb jugadors molt grans. Coneix d'on venim i què ens mou." />
   <section class="container-club grid gap-6 py-16 sm:grid-cols-2">
     {seccions.map(({ href, titol, text }) => (
-      <a href={href} class="group rounded-lg bg-white p-8 shadow-sm ring-1 ring-navy-900/5 transition hover:shadow-lg hover:ring-gold-500">
+      <a href={url(href)} class="group rounded-lg bg-white p-8 shadow-sm ring-1 ring-navy-900/5 transition hover:shadow-lg hover:ring-gold-500">
         <h2 class="text-4xl text-navy-900 group-hover:text-royal-600">{titol}</h2>
         <p class="mt-3 text-ink/75">{text}</p>
       </a>
