@@ -1,0 +1,914 @@
+---
+import { club, grups, nascuts } from '../data/club';
+
+interface Props {
+  /** edit: the fields are inputs on the card. preview: the card mirrors inputs elsewhere on the page. */
+  mode?: 'edit' | 'preview';
+  /** preview only: ids of the page inputs the card mirrors. */
+  /** Prefix for element ids, so several cards can share a page. */
+  uid?: string;
+  nameSrc?: string;
+  yearSrc?: string;
+}
+
+const { mode = 'edit', uid = 'carnet', nameSrc, yearSrc } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const edit = mode === 'edit';
+---
+
+<div
+  class="carnet"
+  data-carnet
+  data-mode={mode}
+  data-state="empty"
+  data-name-src={nameSrc}
+  data-year-src={yearSrc}
+  data-base={base}
+>
+  <div class="carnet__flipper">
+    <div class="carnet__face carnet__front" role="group" aria-label="Carnet del club">
+      <svg class="carnet__guilloche" viewBox="0 0 400 160" preserveAspectRatio="none" aria-hidden="true">
+        {
+          Array.from({ length: 9 }, (_, i) => (
+            <path
+              d={`M0 ${40 + i * 10} ${Array.from({ length: 20 }, (_, k) => `Q${k * 20 + 10} ${40 + i * 10 + (k % 2 ? -1 : 1) * (14 - i)} ${k * 20 + 20} ${40 + i * 10}`).join(' ')}`}
+            />
+          ))
+        }
+      </svg>
+      <span class="carnet__slot" aria-hidden="true"></span>
+
+      <div class="carnet__head">
+        <img class="carnet__crest" src={`${base}/escut.svg`} alt="" width="148" height="133" />
+        <p class="carnet__club">{club.nom}</p>
+        <p class="carnet__kind">Carnet de jugador · <span>Temporada {club.temporada}</span></p>
+      </div>
+
+      <div class="carnet__photo" aria-hidden="true">
+        <span class="carnet__initials" data-initials></span>
+        <svg class="carnet__silhouette" viewBox="0 0 60 80">
+          <circle cx="30" cy="27" r="12" />
+          <path d="M8 76c1-16 10-25 22-25s21 9 22 25" />
+        </svg>
+      </div>
+
+      <div class="carnet__fields">
+        <div class="carnet__field carnet__field--name">
+          {
+            edit ? (
+              <>
+                <label class="label" for="carnet-nom">Nom</label>
+                <input id="carnet-nom" name="nom" class="carnet__input" autocomplete="off" autocapitalize="words" placeholder="El seu nom" maxlength="40" />
+              </>
+            ) : (
+              <>
+                <span class="label">Nom</span>
+                <p class="carnet__value" data-out-name>
+                  <span class="carnet__blank">El seu nom</span>
+                </p>
+              </>
+            )
+          }
+        </div>
+        <div class="carnet__field carnet__field--year">
+          {
+            edit ? (
+              <>
+                <label class="label" for="carnet-any">Any de naixement</label>
+                <input
+                  id="carnet-any"
+                  name="any"
+                  class="carnet__input"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  maxlength="4"
+                  placeholder="AAAA"
+                  aria-describedby={`${uid}-grup-out`}
+                />
+              </>
+            ) : (
+              <>
+                <span class="label">Any de naixement</span>
+                <p class="carnet__value" data-out-year>
+                  <span class="carnet__blank">—</span>
+                </p>
+              </>
+            )
+          }
+        </div>
+        <div class="carnet__field carnet__field--grup">
+          <span class="label" id={`${uid}-grup-label`}>Grup</span>
+          <output class="carnet__grup" id={`${uid}-grup-out`} data-grup aria-live={edit ? 'polite' : 'off'} aria-labelledby={`${uid}-grup-label ${uid}-grup-out`}>
+            <span class="carnet__blank">—</span>
+          </output>
+        </div>
+      </div>
+
+      <div class="carnet__sticker" data-sticker aria-hidden="true">
+        <span class="carnet__sticker-top">Temporada</span>
+        <span class="carnet__sticker-year">26<i>/</i>27</span>
+      </div>
+
+      <p class="carnet__motto">{club.lema}</p>
+      <span class="carnet__holo" aria-hidden="true"></span>
+    </div>
+
+    {
+      edit && (
+        <div class="carnet__face carnet__back" role="group" aria-label="Dors del carnet" inert>
+          <span class="carnet__band" aria-hidden="true" />
+          <div class="carnet__back-all">
+            <p class="carnet__back-title">Un grup per a cada edat</p>
+            <ul class="carnet__list">
+              {grups.map((g) => (
+                <li data-grup={g.nom}>
+                  <span>{g.nom}</span>
+                  <span>{nascuts(g.anys)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="carnet__back-one">
+            <p class="carnet__back-name" data-back-name />
+            <p class="carnet__back-years" data-back-years />
+            <p class="carnet__back-note" data-back-note />
+            <a class="carnet__back-cta" data-back-cta href={`${base}/preinscripcio/`}>
+              Fes la preinscripció
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+          <span class="carnet__holo" aria-hidden="true" />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  import { generesNom, nascuts, grupPerAny } from '../data/club';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const base = document.querySelector<HTMLElement>('[data-carnet]')?.dataset.base ?? '';
+
+  const initials = (name: string) =>
+    name
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0]!.toLocaleUpperCase('ca'))
+      .join('');
+
+  const blank = (text: string) => `<span class="carnet__blank">${text}</span>`;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+  // Re-trigger a one-shot print animation on an element.
+  const print = (el: Element, cls = 'is-printed') => {
+    el.classList.remove(cls);
+    void (el as HTMLElement).offsetWidth;
+    el.classList.add(cls);
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-carnet]').forEach((card) => {
+    const edit = card.dataset.mode === 'edit';
+    const nameIn = (edit ? card.querySelector('#carnet-nom') : document.getElementById(card.dataset.nameSrc ?? '')) as HTMLInputElement | null;
+    const yearIn = (edit ? card.querySelector('#carnet-any') : document.getElementById(card.dataset.yearSrc ?? '')) as HTMLInputElement | null;
+    const initialsEl = card.querySelector<HTMLElement>('[data-initials]')!;
+    const grupEl = card.querySelector<HTMLElement>('[data-grup]')!;
+    const sticker = card.querySelector<HTMLElement>('[data-sticker]')!;
+    const outName = card.querySelector<HTMLElement>('[data-out-name]');
+    const outYear = card.querySelector<HTMLElement>('[data-out-year]');
+    let lastGrup = '';
+
+    const update = () => {
+      const name = nameIn?.value.trim() ?? '';
+      const raw = (yearIn?.value ?? '').replace(/\D/g, '').slice(0, 4);
+      const ini = initials(name);
+      if (initialsEl.textContent !== ini) {
+        initialsEl.textContent = ini;
+        card.classList.toggle('has-name', ini.length > 0);
+      }
+      if (outName) outName.innerHTML = name ? esc(name) : blank('El seu nom');
+      if (outYear) outYear.innerHTML = raw ? raw : blank('—');
+
+      const year = Number(raw);
+      const now = new Date().getFullYear();
+      let state = 'empty';
+      let g = null;
+      if (raw.length === 4) {
+        if (year < 1930 || year > now) state = 'invalid';
+        else {
+          g = grupPerAny(year);
+          state = g ? 'found' : 'early';
+        }
+      } else if (raw.length > 0) state = 'typing';
+
+      card.dataset.state = state;
+      const label = g ? g.nom : state === 'early' ? 'Encara és aviat' : state === 'invalid' ? 'Revisa l’any' : '';
+      if (label !== lastGrup) {
+        lastGrup = label;
+        grupEl.innerHTML = label ? esc(label) : blank('—');
+        if (label) print(grupEl);
+        if (g) print(sticker, 'is-pressed');
+        else sticker.classList.remove('is-pressed');
+      }
+
+      card.dispatchEvent(new CustomEvent('carnet:update', { bubbles: true, detail: { name, year: raw, grup: g, state } }));
+
+      // Back of the card
+      const back = card.querySelector('.carnet__back');
+      back?.querySelectorAll('.carnet__list li').forEach((li) => li.classList.toggle('is-match', !!g && li.dataset.grup === g.nom));
+      if (back && g) {
+        back.querySelector('[data-back-name]')!.textContent = g.nom;
+        back.querySelector('[data-back-years]')!.textContent =
+          `Nascuts ${nascuts(g.anys)} · ${g.equips.map((e) => generesNom[e]).join(' i ')}`;
+        back.querySelector('[data-back-note]')!.textContent = g.nota;
+        const q = new URLSearchParams({ any: raw, grup: g.nom });
+        if (name) q.set('nom', name);
+        (back.querySelector('[data-back-cta]') as HTMLAnchorElement).href = `${base}/preinscripcio/?${q}`;
+      }
+    };
+
+    if (yearIn && edit) {
+      yearIn.addEventListener('input', () => {
+        yearIn.value = yearIn.value.replace(/\D/g, '').slice(0, 4);
+      });
+    }
+    nameIn?.addEventListener('input', update);
+    yearIn?.addEventListener('input', update);
+    yearIn?.addEventListener('change', update);
+    update();
+  });
+
+  // Flip: a button outside the card turns it over.
+  document.querySelectorAll<HTMLButtonElement>('[data-flip]').forEach((btn) => {
+    const card = document.getElementById(btn.dataset.flip!)?.querySelector<HTMLElement>('[data-carnet]');
+    if (!card) return;
+    const front = card.querySelector<HTMLElement>('.carnet__front')!;
+    const back = card.querySelector<HTMLElement>('.carnet__back')!;
+    const text = btn.querySelector<HTMLElement>('[data-flip-text]')!;
+
+    const setLabel = () => {
+      const flipped = card.classList.contains('is-flipped');
+      const g = card.dataset.state === 'found' ? card.querySelector('[data-grup]')!.textContent : '';
+      text.textContent = flipped ? 'Torna a l’anvers' : g ? `Gira’l: què fan a ${g}?` : 'Gira el carnet';
+      btn.setAttribute('aria-pressed', String(flipped));
+    };
+
+    const flip = (to?: boolean) => {
+      const flipped = card.classList.toggle('is-flipped', to);
+      front.inert = flipped;
+      back.inert = !flipped;
+      card.classList.toggle('reduce', reduce);
+      setLabel();
+    };
+
+    btn.addEventListener('click', () => flip());
+    card.addEventListener('carnet:update', setLabel);
+    card.closest('form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (card.dataset.state === 'found') flip(true);
+    });
+    setLabel();
+  });
+
+</script>
+
+<style>
+  .carnet {
+    --r: 3.7cqi;
+    container-type: inline-size;
+    perspective: 1800px;
+    width: 100%;
+  }
+
+  .carnet__flipper {
+    position: relative;
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.9s var(--ease-out);
+  }
+
+  .carnet.is-flipped .carnet__flipper {
+    transform: rotateY(180deg);
+  }
+
+  .carnet.reduce .carnet__flipper {
+    transition: none;
+  }
+
+  .carnet__face {
+    grid-area: 1 / 1;
+    position: relative;
+    border-radius: 3.7cqi;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  .carnet.reduce .carnet__face {
+    transition: opacity 0.25s linear;
+  }
+
+  .carnet.reduce.is-flipped .carnet__front,
+  .carnet.reduce:not(.is-flipped) .carnet__back {
+    opacity: 0;
+  }
+
+  /* ---------- Front ---------- */
+  .carnet__front {
+    aspect-ratio: 1.586;
+    display: grid;
+    grid-template-columns: 26cqi 1fr;
+    grid-template-rows: auto 1fr auto;
+    column-gap: 5cqi;
+    padding: 5cqi 5.5cqi 5.4cqi;
+    background:
+      linear-gradient(140deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0) 38%),
+      linear-gradient(320deg, rgb(156 191 223 / 0.35), rgb(156 191 223 / 0) 45%),
+      var(--sky);
+  }
+
+  .carnet__guilloche {
+    position: absolute;
+    right: -4%;
+    bottom: 6%;
+    width: 72%;
+    height: 46%;
+    fill: none;
+    stroke: var(--sky-deep);
+    stroke-width: 0.8;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .carnet__slot {
+    position: absolute;
+    top: 2.6cqi;
+    left: 50%;
+    width: 11cqi;
+    height: 2cqi;
+    translate: -50% 0;
+    border-radius: 2cqi;
+    background: var(--mist);
+    box-shadow: inset 0 1px 2px rgb(36 67 95 / 0.35);
+  }
+
+  .carnet__head {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 2.6cqi;
+    align-items: center;
+    margin-bottom: 3.4cqi;
+    padding-right: 17cqi;
+  }
+
+  .carnet__crest {
+    grid-row: span 2;
+    width: 10.5cqi;
+    height: auto;
+  }
+
+  .carnet__club {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: 4.1cqi;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    align-self: end;
+  }
+
+  .carnet__kind {
+    margin-top: 0.8cqi;
+    font-size: 2.1cqi;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    align-self: start;
+  }
+
+  .carnet__photo {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 3 / 4;
+    align-self: start;
+    border-radius: 2.2cqi;
+    background: var(--sky-soft);
+    outline: 0.35cqi dashed var(--sky-deep);
+    outline-offset: -1.4cqi;
+    overflow: hidden;
+    transition: background-color 0.5s var(--ease-out), outline-color 0.5s var(--ease-out);
+  }
+
+  .carnet__silhouette {
+    width: 52%;
+    fill: none;
+    stroke: var(--sky-deep);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: opacity 0.3s var(--ease-out);
+  }
+
+  .carnet__initials {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: 11cqi;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+  }
+
+  .carnet.has-name .carnet__photo {
+    background: var(--mint);
+    outline-color: transparent;
+  }
+
+  .carnet.has-name .carnet__silhouette {
+    opacity: 0;
+  }
+
+  .carnet.has-name .carnet__initials {
+    opacity: 1;
+    transform: none;
+  }
+
+  .carnet__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    gap: 2.6cqi 4cqi;
+    min-width: 0;
+  }
+
+  .carnet__field {
+    display: grid;
+    gap: 0.6cqi;
+    min-width: 0;
+  }
+
+  .carnet__field--name {
+    grid-column: 1 / -1;
+  }
+
+  .carnet__field .label {
+    font-size: max(11px, 1.75cqi);
+  }
+
+  .carnet__input,
+  .carnet__value,
+  .carnet__grup {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0.4cqi 0 0.8cqi;
+    border: 0;
+    border-bottom: 0.3cqi dashed var(--sky-deep);
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-size: 4.6cqi;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* embossed print */
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.55);
+  }
+
+  .carnet__field--name .carnet__input,
+  .carnet__field--name .carnet__value {
+    font-size: 5.6cqi;
+  }
+
+  .carnet__input {
+    outline: none;
+    transition: border-color 0.3s var(--ease-out), background-color 0.3s var(--ease-out);
+  }
+
+  .carnet__input::placeholder {
+    color: var(--ink-soft);
+    opacity: 1;
+    font-weight: 500;
+    text-shadow: none;
+  }
+
+  .carnet__input:hover {
+    border-bottom-color: var(--ink-soft);
+  }
+
+  .carnet__input:focus-visible {
+    border-bottom-style: solid;
+    border-bottom-color: var(--ink);
+    background: rgb(255 255 255 / 0.28);
+  }
+
+  .carnet__blank {
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-shadow: none;
+  }
+
+  .carnet__grup {
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+  }
+
+  .carnet[data-state='found'] .carnet__grup {
+    border-bottom-color: var(--mint-deep);
+  }
+
+  .carnet[data-state='invalid'] .carnet__grup,
+  .carnet[data-state='early'] .carnet__grup {
+    font-size: 3.4cqi;
+    font-weight: 600;
+    white-space: normal;
+  }
+
+  .carnet__grup.is-printed {
+    animation: stamp 0.55s var(--ease-out);
+  }
+
+  @keyframes stamp {
+    from {
+      opacity: 0;
+      transform: scale(1.25);
+      filter: blur(3px);
+    }
+  }
+
+  .carnet__sticker {
+    position: absolute;
+    top: 5.2cqi;
+    right: 5.4cqi;
+    display: grid;
+    place-content: center;
+    width: 14cqi;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1;
+    color: var(--ink-soft);
+    border: 0.35cqi dashed var(--sky-deep);
+    rotate: 10deg;
+    transition: color 0.3s;
+  }
+
+  .carnet__sticker-top {
+    font-size: 1.45cqi;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .carnet__sticker-year {
+    margin-top: 0.6cqi;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 3.6cqi;
+    letter-spacing: -0.02em;
+  }
+
+  .carnet__sticker-year i {
+    font-style: normal;
+    opacity: 0.5;
+  }
+
+  .carnet__sticker.is-pressed {
+    border: 0;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0) 42%),
+      var(--butter);
+    box-shadow: 0 0.4cqi 0.8cqi rgb(36 67 95 / 0.2), inset 0 0 0 0.5cqi rgb(233 212 124 / 0.7);
+    animation: press 0.6s var(--ease-out);
+  }
+
+  @keyframes press {
+    from {
+      transform: scale(1.35) rotate(-14deg);
+      opacity: 0;
+      box-shadow: 0 3cqi 4cqi rgb(36 67 95 / 0.25);
+    }
+  }
+
+  .carnet__motto {
+    grid-column: 2;
+    align-self: end;
+    font-size: max(11px, 1.9cqi);
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .carnet__holo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1.7cqi;
+    background: var(--holo);
+    background-size: 200% 100%;
+    background-position: 0 0;
+  }
+
+  /* One shimmer when the season sticker presses on */
+  .carnet[data-state='found'] .carnet__holo {
+    animation: holo 1.6s var(--ease-out);
+  }
+
+  @keyframes holo {
+    from {
+      background-position: 200% 0;
+    }
+  }
+
+  .carnet__kind span {
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carnet__holo,
+    .carnet[data-state='found'] .carnet__holo,
+    .carnet__grup.is-printed,
+    .carnet__sticker.is-pressed {
+      animation: none;
+    }
+  }
+
+  /* ---------- Back ---------- */
+  .carnet__back {
+    transform: rotateY(180deg);
+    display: grid;
+    align-content: start;
+    padding: 13cqi 5.5cqi 5cqi;
+    background:
+      linear-gradient(140deg, rgb(255 255 255 / 0.4), rgb(255 255 255 / 0) 40%),
+      var(--sky-soft);
+    overflow: auto;
+  }
+
+  .carnet__band {
+    position: absolute;
+    top: 4cqi;
+    left: 0;
+    right: 0;
+    height: 6.5cqi;
+    background: var(--sky-deep);
+  }
+
+  .carnet__back-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: max(16px, 3.4cqi);
+    margin-bottom: 2cqi;
+  }
+
+  .carnet__list {
+    list-style: none;
+    columns: 2;
+    column-gap: 5cqi;
+  }
+
+  .carnet__list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 2cqi;
+    padding: 0.7cqi 0;
+    border-bottom: 1px solid var(--sky-deep);
+    break-inside: avoid;
+    font-size: max(13px, 2.15cqi);
+  }
+
+  .carnet__list li span:first-child {
+    font-weight: 700;
+  }
+
+  .carnet__back-one {
+    display: none;
+  }
+
+  .carnet[data-state='found'] .carnet__back-all {
+    display: none;
+  }
+
+  .carnet[data-state='found'] .carnet__back-one {
+    display: grid;
+    gap: 1.2cqi;
+    justify-items: start;
+  }
+
+  .carnet__back-name {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-size: max(30px, 8cqi);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+
+  .carnet__back-years {
+    font-weight: 700;
+    font-size: max(14px, 2.4cqi);
+    color: var(--ink-soft);
+  }
+
+  .carnet__back-note {
+    font-size: max(15px, 2.8cqi);
+    max-width: 40ch;
+  }
+
+  .carnet__back-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2cqi;
+    margin-top: 1.6cqi;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: max(16px, 2.8cqi);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-soft);
+    text-decoration-thickness: 2px;
+  }
+
+  .carnet__back-cta svg {
+    width: max(18px, 3cqi);
+    height: max(18px, 3cqi);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ---------- Portrait card (narrow containers) ---------- */
+  @container (max-width: 520px) {
+    .carnet__face {
+      border-radius: 5.5cqi;
+    }
+
+    .carnet__front {
+      aspect-ratio: auto;
+      grid-template-columns: 38cqi 1fr;
+      grid-template-rows: auto auto auto auto;
+      column-gap: 6cqi;
+      padding: 10cqi 7cqi 9cqi;
+    }
+
+    .carnet__slot {
+      top: 3.5cqi;
+      width: 16cqi;
+      height: 3cqi;
+    }
+
+    .carnet__head {
+      padding-right: 0;
+      margin-bottom: 6cqi;
+      column-gap: 4cqi;
+    }
+
+    .carnet__crest {
+      width: 17cqi;
+    }
+
+    .carnet__club {
+      font-size: 6.6cqi;
+    }
+
+    .carnet__kind {
+      font-size: 3.1cqi;
+      margin-top: 1.4cqi;
+    }
+
+    .carnet__photo {
+      grid-row: 3;
+      border-radius: 4cqi;
+    }
+
+    .carnet__initials {
+      font-size: 17cqi;
+    }
+
+    .carnet__fields {
+      display: contents;
+    }
+
+    .carnet__field--name {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      margin-bottom: 6cqi;
+    }
+
+    .carnet__field--year {
+      grid-column: 2;
+      grid-row: 3;
+      align-self: start;
+    }
+
+    .carnet__field--grup {
+      grid-column: 2;
+      grid-row: 3;
+      align-self: end;
+    }
+
+    .carnet__field .label {
+      font-size: max(11px, 2.9cqi);
+    }
+
+    .carnet__input,
+    .carnet__value,
+    .carnet__grup {
+      font-size: 7.2cqi;
+      border-bottom-width: 0.5cqi;
+    }
+
+    .carnet__field--name .carnet__input,
+    .carnet__field--name .carnet__value {
+      font-size: 8.4cqi;
+    }
+
+    .carnet[data-state='invalid'] .carnet__grup,
+    .carnet[data-state='early'] .carnet__grup {
+      font-size: 5cqi;
+    }
+
+    .carnet__sticker {
+      position: relative;
+      top: auto;
+      right: auto;
+      grid-column: 2;
+      grid-row: 4;
+      justify-self: end;
+      margin-top: 4cqi;
+      width: 22cqi;
+      border-width: 0.5cqi;
+    }
+
+    .carnet__sticker-top {
+      font-size: 2.3cqi;
+    }
+
+    .carnet__sticker-year {
+      font-size: 5.6cqi;
+    }
+
+    .carnet__motto {
+      grid-column: 1;
+      grid-row: 4;
+      align-self: center;
+      margin-top: 4cqi;
+      font-size: max(12px, 3.2cqi);
+    }
+
+    .carnet__holo {
+      height: 2.6cqi;
+    }
+
+    .carnet__guilloche {
+      width: 120%;
+      height: 34%;
+      bottom: 4%;
+    }
+
+    .carnet__back {
+      padding: 20cqi 7cqi 9cqi;
+    }
+
+    .carnet__band {
+      top: 6cqi;
+      height: 9cqi;
+    }
+
+    .carnet__list {
+      columns: 1;
+    }
+
+    /* Tall back: the chosen group on top, the whole ladder below it */
+    .carnet[data-state='found'] .carnet__back-one {
+      order: -1;
+    }
+
+    .carnet[data-state='found'] .carnet__back-all {
+      display: block;
+      margin-top: 8cqi;
+      padding-top: 5cqi;
+      border-top: 2px solid var(--ink);
+    }
+  }
+
+  .carnet__list li.is-match {
+    font-weight: 700;
+    background: linear-gradient(transparent 60%, var(--butter) 60%);
+  }
+</style>

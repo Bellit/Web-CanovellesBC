@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 -96 1480 1480" role="img" aria-label="Canovelles Basket Club">
+  <!-- Favicon: escut simplificat (sense text ni xarxa) i traços més gruixuts perquè es llegeixi a 16-32 px -->
+  <defs>
+    <clipPath id="shield">
+      <path id="shieldPath" d="M798 58 C851 60 955 64 1019 69 C1069 73 1110 78 1151 85 C1187 91 1219 98 1250 106 C1278 113 1306 119 1330 130 C1352 140 1376 152 1390 168 C1403 183 1411 203 1415 222 C1419 240 1416 256 1413 278 C1409 308 1398 352 1387 386 C1377 419 1364 450 1352 480 C1341 508 1330 530 1316 560 C1297 599 1271 651 1247 694 C1225 734 1203 772 1179 810 C1156 848 1132 884 1106 922 C1078 962 1049 1003 1015 1043 C977 1087 928 1142 888 1175 C858 1199 830 1224 800 1229 C772 1234 739 1222 712 1209 C684 1195 661 1173 634 1147 C598 1113 552 1060 517 1016 C485 976 459 936 433 896 C408 858 386 819 363 782 C340 746 318 710 295 675 C272 640 245 607 225 570 C205 532 188 491 175 450 C162 410 151 366 145 330 C140 301 137 276 140 250 C143 224 147 192 160 173 C171 158 188 150 204 141 C220 132 235 127 256 120 C284 111 323 101 360 94 C403 85 454 78 499 73 C540 68 579 66 618 63 C655 60 695 58 727 57 C753 56 768 57 798 58 Z"/>
+    </clipPath>
+  </defs>
+
+  <use href="#shieldPath" fill="none" stroke="#2B2B2B" stroke-width="150" stroke-linejoin="round"/>
+  <g clip-path="url(#shield)">
+    <rect x="0" y="0" width="768" height="1330" fill="#1C75BC"/>
+    <rect x="768" y="0" width="712" height="1330" fill="#FFF200"/>
+  </g>
+
+  <circle cx="380" cy="500" r="300" fill="#F28C3A" stroke="#2B2B2B" stroke-width="50"/>
+  <g fill="none" stroke="#2B2B2B" stroke-width="45" stroke-linecap="round">
+    <path d="M110 570 C280 490 450 455 670 465"/>
+    <path d="M360 225 C425 355 450 555 435 765"/>
+    <path d="M560 300 C505 380 490 520 560 720"/>
+  </g>
+</svg>

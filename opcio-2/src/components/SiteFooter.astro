@@ -1,0 +1,100 @@
+---
+import { club } from '../data/club';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<footer class="foot">
+  <div class="page foot__inner">
+    <div class="foot__club">
+      <img src={`${base}/escut.svg`} alt="Escut del Canovelles Bàsquet Club" width="96" height="86" />
+      <div>
+        <p class="foot__name">{club.nom}</p>
+        <p class="foot__motto">{club.lema}</p>
+      </div>
+    </div>
+    <div>
+      <p class="label">Adreça</p>
+      <p>{club.adreca.pavello}<br />{club.adreca.carrer}<br />{club.adreca.cp} {club.adreca.poblacio}</p>
+    </div>
+    <div>
+      <p class="label">Correus</p>
+      <p>
+        <a href={`mailto:${club.correus.general}`}>{club.correus.general}</a><br />
+        <a href={`mailto:${club.correus.junta}`}>{club.correus.junta}</a>
+      </p>
+    </div>
+    <div>
+      <p class="label">Competició</p>
+      <p><a href={club.federacio} rel="noopener">Federació Catalana de Bàsquet</a></p>
+    </div>
+  </div>
+  <div class="page foot__legal">© {club.fundacio}–{new Date().getFullYear()} {club.nom}</div>
+</footer>
+
+<style>
+  .foot {
+    position: relative;
+    padding-top: clamp(56px, 6vw, 80px);
+    background: var(--mist-deep);
+    font-size: 16px;
+  }
+
+  .foot__inner {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.2fr 1fr;
+    gap: 32px 40px;
+  }
+
+  .foot__club {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .foot__club img {
+    width: 84px;
+    height: auto;
+  }
+
+  .foot__name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 750;
+    line-height: 1.1;
+  }
+
+  .foot__motto {
+    margin-top: 4px;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  .foot .label {
+    margin-bottom: 8px;
+  }
+
+  .foot__legal {
+    margin-top: 48px;
+    padding: 20px 0 28px;
+    border-top: 1px solid var(--sky-deep);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 960px) {
+    .foot__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .foot__club {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .foot__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

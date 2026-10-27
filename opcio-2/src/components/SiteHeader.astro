@@ -1,0 +1,265 @@
+---
+import { club } from '../data/club';
+
+interface Props {
+  /** Hide the pre-registration button (on the pre-registration page itself). */
+  hideCta?: boolean;
+}
+
+const { hideCta = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const home = `${base}/`;
+const links = [
+  { href: `${home}#grups`, label: 'Grups' },
+  { href: `${home}#pavello`, label: 'On entrenem' },
+  { href: `${home}#club`, label: 'El club' },
+];
+---
+
+<header class="top">
+  <div class="page top__inner">
+    <a class="top__brand" href={home}>
+      <img src={`${base}/escut.svg`} alt="" width="40" height="36" />
+      <span>{club.nomCurt}</span>
+    </a>
+    <nav class="top__desk" aria-label="Seccions">
+      <ul class="top__nav">
+        {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    {!hideCta && <a class="btn btn--ink btn--small top__cta" href={`${base}/preinscripcio/`}>Preinscripció</a>}
+    <button class="top__toggle" type="button" aria-expanded="false" aria-controls="menu-mobil" data-menu-toggle>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path class="top__bar top__bar--1" d="M4 8h16" />
+        <path class="top__bar top__bar--2" d="M4 16h16" />
+      </svg>
+      <span>Menú</span>
+    </button>
+  </div>
+
+  <nav class="top__mobile" id="menu-mobil" aria-label="Seccions" hidden>
+    <ul class="page">
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      {
+        !hideCta && (
+          <li class="top__mobile-cta">
+            <a class="btn btn--ink" href={`${base}/preinscripcio/`}>
+              Fes la preinscripció
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('menu-mobil');
+  if (toggle && menu) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+    };
+    toggle.addEventListener('click', () => set(menu.hidden));
+    menu.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        set(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 761px)').addEventListener('change', (m) => m.matches && set(false));
+  }
+</script>
+
+<style>
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--mist);
+  }
+
+  .top__inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    min-height: 76px;
+  }
+
+  .top__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+  }
+
+  .top__brand img {
+    width: 40px;
+    height: auto;
+  }
+
+  .top__desk {
+    margin-left: auto;
+  }
+
+  .top__nav {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+  }
+
+  .top__nav a {
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    background: linear-gradient(var(--sky-deep), var(--sky-deep)) left bottom / 0 2px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 0.35s var(--ease-out);
+  }
+
+  .top__nav a:hover {
+    background-size: 100% 2px;
+  }
+
+  .top__toggle {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    min-height: 42px;
+    padding: 0 12px 0 8px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--sky);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background-color 0.3s var(--ease-out);
+  }
+
+  .top__toggle:hover {
+    background: var(--sky-deep);
+  }
+
+  .top__toggle svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .top__bar {
+    transform-origin: 12px 12px;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .top__toggle[aria-expanded='true'] .top__bar--1 {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .top__toggle[aria-expanded='true'] .top__bar--2 {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Mobile menu: drops under the bar on the card's plastic */
+  .top__mobile {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: 8px 0 24px;
+    background: var(--sky-soft);
+    border-radius: 0 0 var(--corner) var(--corner);
+    box-shadow: var(--shadow-card);
+    animation: drop 0.35s var(--ease-out);
+  }
+
+  .top__mobile[hidden] {
+    display: none;
+  }
+
+  @keyframes drop {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  .top__mobile ul {
+    list-style: none;
+  }
+
+  .top__mobile li:not(.top__mobile-cta) a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--sky-deep);
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+  }
+
+  .top__mobile-cta {
+    margin-top: 20px;
+  }
+
+  .top__mobile-cta .btn {
+    width: 100%;
+  }
+
+  .top__mobile-cta svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .top__mobile {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .top__desk {
+      display: none;
+    }
+
+    .top__inner {
+      gap: 10px;
+      min-height: 64px;
+    }
+
+    .top__brand {
+      font-size: 19px;
+      margin-right: auto;
+    }
+
+    .top__brand img {
+      width: 34px;
+    }
+
+    .top__toggle {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .top__cta {
+      display: none;
+    }
+  }
+</style>

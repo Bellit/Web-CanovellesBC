@@ -1,0 +1,259 @@
+@import '@fontsource-variable/gabarito';
+@import '@fontsource-variable/atkinson-hyperlegible-next';
+
+:root {
+  /* Card plastic and ground */
+  --mist: #eef4fa;
+  --mist-deep: #e2ecf6;
+  --sky: #c4dcf0;
+  --sky-soft: #d9e8f5;
+  --sky-deep: #9cbfdf;
+
+  /* Ink */
+  --ink: #24435f;
+  --ink-deep: #1a3249;
+  --ink-soft: #415e7a;
+
+  /* The other two dyes */
+  --butter: #f4e6a6;
+  --butter-deep: #e9d47c;
+  --mint: #bfe3d3;
+  --mint-deep: #93cdb4;
+
+  /* Iridescent strip, card edges only */
+  --holo: linear-gradient(90deg, #bfe3d3, #cfe3f5 22%, #d9cdf2 44%, #f2cad6 64%, #f4e6a6 82%, #bfe3d3);
+
+  --font-display: 'Gabarito Variable', 'Gabarito', system-ui, sans-serif;
+  --font-body: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+
+  --page-max: 1240px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --corner: clamp(14px, 1.5vw, 20px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: 0 1px 1px rgb(36 67 95 / 0.06), 0 10px 24px -8px rgb(36 67 95 / 0.22), 0 32px 60px -24px rgb(36 67 95 / 0.28);
+
+  color-scheme: light;
+  scrollbar-color: var(--sky-deep) var(--mist);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--mist);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--butter);
+  color: var(--ink-deep);
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  color: inherit;
+  caret-color: var(--ink);
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--sky-deep);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.page {
+  width: min(100% - 2 * var(--gutter), var(--page-max));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 50;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--mist);
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+/* Buttons: printed on the card, card corner */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.btn--ink {
+  background: var(--ink);
+  color: var(--mist);
+  box-shadow: 0 8px 18px -10px rgb(36 67 95 / 0.6);
+}
+
+.btn--ink:hover {
+  background: var(--ink-deep);
+}
+
+.btn--ink:hover svg {
+  transform: translateX(3px);
+}
+
+.btn--sky {
+  background: var(--sky);
+  color: var(--ink);
+}
+
+.btn--sky:hover {
+  background: var(--sky-deep);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--small {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* Text link with an arrow */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--sky-deep);
+}
+
+.link svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Printed card field label */
+.label {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Club photo printed on card stock */
+.print {
+  margin: 0;
+  border-radius: var(--corner);
+  overflow: hidden;
+  background: var(--sky);
+}
+
+.print img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

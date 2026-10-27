@@ -1,0 +1,36 @@
+---
+import { club } from '../data/club';
+
+// Each page imports its own stylesheet: the home uses global.css,
+// the event template (plantilles/acta) keeps its own acta.css.
+interface Props {
+  title?: string;
+  description?: string;
+  themeColor?: string;
+  noindex?: boolean;
+}
+
+const { title, description = club.descripcio, themeColor = '#c4dcf0', noindex = false } = Astro.props;
+const fullTitle = title ? `${title} | ${club.nomCurt}` : `${club.nom} | ${club.lema}`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={themeColor} />
+    {(noindex || import.meta.env.PUBLIC_PREVIEW === 'true') && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="ca_ES" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

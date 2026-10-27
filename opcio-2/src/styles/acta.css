@@ -1,0 +1,153 @@
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/kalam/400.css';
+@import '@fontsource/kalam/700.css';
+
+:root {
+  /* Paper and form ink */
+  --paper: #f3f5f2;
+  --paper-deep: #e6ebe7;
+  --ink: #0f4c4a;
+  --ink-soft: #3d6a67;
+  --rule: #9fbcb8;
+  --rule-strong: #0f4c4a;
+  --text: #13201f;
+
+  /* Scorer's pens */
+  --pen-blue: #2141b8;
+  --pen-red: #c73524;
+
+  /* Crest */
+  --ball: #f28c3a;
+
+  --font-form: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --font-hand: 'Kalam', 'Segoe Print', cursive;
+
+  --sheet-max: 1240px;
+  --gutter: clamp(16px, 3vw, 32px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  scrollbar-color: var(--ink) var(--paper-deep);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-form);
+  font-size: 17px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(33 65 184 / 0.18);
+  color: var(--text);
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  color: inherit;
+  caret-color: var(--pen-blue);
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pen-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.sheet {
+  width: min(100% - 2 * var(--gutter), var(--sheet-max));
+  margin-inline: auto;
+}
+
+/* Handwritten scorer marks */
+.hand {
+  font-family: var(--font-hand);
+  color: var(--pen-blue);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.hand--red {
+  color: var(--pen-red);
+}
+
+/* A club photo photocopied onto the sheet: toner multiplied into the paper */
+.photocopy {
+  position: relative;
+  margin: 0;
+}
+
+.photocopy img {
+  width: 100%;
+  filter: grayscale(1) contrast(1.45) brightness(1.12);
+  mix-blend-mode: multiply;
+}
+
+.photocopy figcaption {
+  margin-top: 10px;
+  font-family: var(--font-hand);
+  color: var(--pen-blue);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  transform: rotate(-1deg);
+  transform-origin: left top;
+}

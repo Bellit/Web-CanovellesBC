@@ -1,4 +1,5 @@
 # Previsualització a GitHub Pages: https://bellit.github.io/Web-CanovellesBC/
+# La portada (portada/) enllaça a cada proposta, publicada a /opcio-N/.
 name: Previsualització a GitHub Pages
 
 on:
@@ -18,24 +19,46 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Per afegir una opció nova: crea la carpeta opcio-N i afegeix-la aquí.
+        opcio: [opcio-1, opcio-2]
+    defaults:
+      run:
+        working-directory: ${{ matrix.opcio }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: ${{ matrix.opcio }}/package-lock.json
       - run: npm ci
       - run: npm run build
         env:
           SITE_URL: https://bellit.github.io
-          BASE_PATH: /Web-CanovellesBC
+          BASE_PATH: /Web-CanovellesBC/${{ matrix.opcio }}
           PUBLIC_PREVIEW: 'true'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.opcio }}
+          path: ${{ matrix.opcio }}/dist
+
+  assemble:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp -r portada _site
+      - uses: actions/download-artifact@v4
+        with:
+          path: _site
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
 
   deploy:
-    needs: build
+    needs: assemble
     runs-on: ubuntu-latest
     environment:
       name: github-pages

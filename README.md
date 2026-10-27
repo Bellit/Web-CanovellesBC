@@ -1,49 +1,37 @@
-# Canovelles BC: web oficial
+# Canovelles BC: propostes de web
 
-Web estàtica feta amb [Astro](https://astro.build) i Tailwind CSS v4. Tot el contingut són fitxers Markdown i JSON dins del repositori.
+Aquest repositori conté diverses propostes de web per al Canovelles Bàsquet Club. Cada proposta és un projecte [Astro](https://astro.build) independent.
 
-## Ordres
-
-| Ordre | Què fa |
+| Carpeta | Què és |
 |---|---|
-| `npm install` | Instal·la les dependències |
-| `npm run dev` | Servidor local a `http://localhost:4321` |
-| `npm run build` | Genera la web a `dist/` (valida el contingut) |
-| `npm run preview` | Serveix `dist/` en local |
-| `npx astro check` | Comprova els tipus |
+| `portada/` | Pàgina per triar la proposta (HTML estàtic) |
+| `opcio-1/` | Proposta 1: web completa, blau marí i groc (vegeu `opcio-1/README.md`) |
+| `opcio-2/` | Proposta 2: web v2 amb el carnet del club (vegeu `opcio-2/README.md`) |
 
-## Com editar el contingut
+## Previsualització (GitHub Pages)
 
-| Què | On |
-|---|---|
-| Dades del club (adreça, correus, xarxes, temporada) | `src/data/club.ts` |
-| Equips | `src/content/equips/*.md`: entrenadors, horaris, foto i `urlResultats` |
-| Notícies | `src/content/noticies/AAAA-MM-DD-titol.md` (copia `_plantilla.md`) |
-| Activitats i tornejos | `src/content/activitats/*.md` |
-| Patrocinadors | `src/content/patrocinadors.json` (logos a `public/patrocinadors/`) |
-| Fotos | `src/assets/fotos/` (s'optimitzen automàticament) |
-| PDFs | `public/docs/` |
-| Escut | `public/escut.svg` i `public/favicon.svg` (ara és **provisional**) |
+Cada `push` a `main` publica-ho tot amb `.github/workflows/pages.yml`:
 
-Exemple de patrocinador:
+- <https://bellit.github.io/Web-CanovellesBC/>: portada
+- <https://bellit.github.io/Web-CanovellesBC/opcio-1/>
+- <https://bellit.github.io/Web-CanovellesBC/opcio-2/>
 
-```json
-[{ "id": "forn-pep", "nom": "Forn Pep", "logo": "/patrocinadors/forn-pep.svg", "url": "https://...", "nivell": "principal" }]
+Les còpies de previsualització porten `noindex` perquè Google no les indexi.
+
+## Treballar en una proposta
+
+```
+cd opcio-1
+npm install
+npm run dev
 ```
 
-## Desplegament
+## Afegir una proposta nova
 
-### Previsualització (GitHub Pages)
+1. Crea la carpeta `opcio-3/` amb el projecte Astro. Ha de llegir `SITE_URL` i `BASE_PATH` a `astro.config.mjs` i fer servir `import.meta.env.BASE_URL` als enllaços interns.
+2. Afegeix `opcio-3` a la llista `matrix.opcio` del workflow.
+3. Afegeix una targeta a `portada/index.html`.
 
-Cada `push` a `main` publica la web a <https://bellit.github.io/Web-CanovellesBC/> amb `.github/workflows/pages.yml`.
-Aquesta còpia porta `noindex` perquè Google no la indexi.
+## Hosting definitiu
 
-### Hosting definitiu
-
-`npm run build` genera la web per a `https://canovellesbc.com` a la carpeta `dist/`. Només cal pujar-ne el contingut a l'arrel del hosting.
-
-Als enllaços interns, fes servir sempre el helper `url()` (`src/lib/url.ts`), que hi afegeix la ruta base quan la web no és a l'arrel. Als fitxers Markdown, els enllaços `/...` s'ajusten sols.
-
-**Pendent:**
-- Redireccions 301 de les URLs de l'antic WordPress: `/historia/` → `/club/historia/`, `/valors-missio-i-visio/` → `/club/valors/`, `/equipos/` → `/equips/`, `/contacta/` → `/contacte/`, `/torneo-premini/` → `/activitats/torneig-premini/` i `/3d3/` → `/activitats/torneig-3d3/`.
-- Servei per als formularis (`contacte`, `preinscripcio`, `patrocini`).
+Quan el club triï una proposta, n'hi ha prou amb fer `npm run build` dins de la seva carpeta i pujar el contingut de `dist/` a l'arrel de `canovellesbc.com`.

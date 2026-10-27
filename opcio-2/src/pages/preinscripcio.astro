@@ -1,0 +1,395 @@
+---
+import Base from '../layouts/Base.astro';
+import Carnet from '../components/Carnet.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+import { club, grups } from '../data/club';
+---
+
+<Base title="Preinscripció" description={`Preinscripció al ${club.nom} per a la temporada ${club.temporada}.`}>
+  <a class="skip" href="#principal">Salta al contingut</a>
+  <SiteHeader hideCta />
+
+  <main id="principal" class="page signup">
+    <div class="signup__intro">
+      <h1>Preinscripció</h1>
+      <p>Temporada {club.temporada}. Omple-ho i et responem amb els horaris i la quota del seu grup. No cal pagar res ara.</p>
+    </div>
+
+    <form class="form" id="signup" novalidate>
+      <fieldset>
+        <legend>El jugador o la jugadora</legend>
+        <div class="field field--wide">
+          <label for="f-nom">Nom i cognoms</label>
+          <input id="f-nom" name="nom" required autocomplete="off" autocapitalize="words" />
+          <p class="field__error" id="f-nom-err"></p>
+        </div>
+        <div class="field">
+          <label for="f-any">Any de naixement</label>
+          <input id="f-any" name="any" required inputmode="numeric" maxlength="4" autocomplete="off" placeholder="2017" />
+          <p class="field__error" id="f-any-err"></p>
+        </div>
+        <div class="field">
+          <label for="f-grup">Grup</label>
+          <select id="f-grup" name="grup">
+            <option value="">Encara no ho sé</option>
+            {grups.map((g) => <option value={g.nom}>{g.nom}</option>)}
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>La persona de contacte</legend>
+        <div class="field field--wide">
+          <label for="f-tutor">Nom de la mare, el pare o el tutor</label>
+          <input id="f-tutor" name="tutor" required autocomplete="name" />
+          <p class="field__error" id="f-tutor-err"></p>
+        </div>
+        <div class="field">
+          <label for="f-tel">Telèfon</label>
+          <input id="f-tel" name="tel" type="tel" required autocomplete="tel" />
+          <p class="field__error" id="f-tel-err"></p>
+        </div>
+        <div class="field">
+          <label for="f-mail">Correu electrònic</label>
+          <input id="f-mail" name="mail" type="email" required autocomplete="email" />
+          <p class="field__error" id="f-mail-err"></p>
+        </div>
+        <div class="field field--wide">
+          <label for="f-obs">Alguna cosa que hàgim de saber? <span class="optional">(opcional)</span></label>
+          <textarea id="f-obs" name="obs" rows="3"></textarea>
+        </div>
+      </fieldset>
+
+      <div class="form__foot">
+        <label class="consent">
+          <input type="checkbox" name="consent" required />
+          <span>Accepto que el club faci servir aquestes dades només per respondre la preinscripció.</span>
+        </label>
+        <p class="field__error" id="f-consent-err"></p>
+        <button class="btn btn--ink" type="submit">
+          Envia la preinscripció
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+        </button>
+        <p class="form__how">S’obrirà el teu correu amb tot omplert: només cal prémer enviar.</p>
+        <p class="form__done" id="signup-done" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <aside class="signup__preview" aria-label="Vista prèvia del carnet">
+      <div class="signup__sticky">
+        <Carnet mode="preview" nameSrc="f-nom" yearSrc="f-any" />
+        <p class="signup__caption">Així quedarà el seu carnet.</p>
+      </div>
+    </aside>
+  </main>
+
+  <SiteFooter />
+</Base>
+
+<script>
+  import { club, grupPerAny } from '../data/club';
+
+  const form = document.getElementById('signup') as HTMLFormElement;
+  const year = form.elements.namedItem('any') as HTMLInputElement;
+  const grup = form.elements.namedItem('grup') as HTMLSelectElement;
+  const done = document.getElementById('signup-done')!;
+
+  // Carry over what the visitor typed on the home page card.
+  const params = new URLSearchParams(location.search);
+  for (const key of ['nom', 'any', 'grup'] as const) {
+    const v = params.get(key);
+    const el = form.elements.namedItem(key) as HTMLInputElement | HTMLSelectElement | null;
+    if (v && el) el.value = key === 'any' ? v.replace(/\D/g, '').slice(0, 4) : v;
+  }
+  (form.elements.namedItem('nom') as HTMLInputElement).dispatchEvent(new Event('input'));
+  year.dispatchEvent(new Event('input'));
+
+  let autoGrup = !grup.value;
+  grup.addEventListener('change', () => (autoGrup = false));
+  year.addEventListener('input', () => {
+    year.value = year.value.replace(/\D/g, '').slice(0, 4);
+    if (!autoGrup) return;
+    const g = year.value.length === 4 ? grupPerAny(Number(year.value)) : null;
+    grup.value = g ? g.nom : '';
+  });
+
+  const messages: Record<string, string> = {
+    nom: 'Falta el nom del jugador o la jugadora.',
+    any: 'Escriu l’any de naixement amb quatre xifres, per exemple 2017.',
+    tutor: 'Falta el nom de la persona de contacte.',
+    tel: 'Falta un telèfon per poder trucar-vos.',
+    mail: 'Revisa el correu: ha de ser com nom@exemple.cat.',
+    consent: 'Cal acceptar-ho per poder respondre’t.',
+  };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let first: HTMLInputElement | null = null;
+    for (const [name, msg] of Object.entries(messages)) {
+      const field = form.elements.namedItem(name) as HTMLInputElement;
+      const err = document.getElementById(`f-${name}-err`)!;
+      const bad = name === 'any' ? !/^\d{4}$/.test(field.value.trim()) : !field.checkValidity();
+      field.setAttribute('aria-invalid', String(bad));
+      err.textContent = bad ? msg : '';
+      if (bad) field.setAttribute('aria-describedby', err.id);
+      else field.removeAttribute('aria-describedby');
+      if (bad && !first) first = field;
+    }
+    if (first) {
+      first.focus();
+      done.textContent = '';
+      return;
+    }
+    const d = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const body = [
+      `Jugador/a: ${d.nom}`,
+      `Any de naixement: ${d.any}`,
+      `Grup: ${d.grup || 'No ho sé'}`,
+      `Contacte: ${d.tutor}`,
+      `Telèfon: ${d.tel}`,
+      `Correu: ${d.mail}`,
+      d.obs ? `Observacions: ${d.obs}` : '',
+    ]
+      .filter(Boolean)
+      .join('\n');
+    const subject = `Preinscripció ${d.grup || ''} - ${d.nom}`.replace(/\s+/g, ' ');
+    const correu = club.correus.general;
+    window.location.href = `mailto:${correu}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    done.textContent = `Fet! Si no s’ha obert el correu, escriu-nos a ${correu}.`;
+  });
+</script>
+
+<style>
+  .signup {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      'intro preview'
+      'form preview';
+    grid-template-rows: auto 1fr;
+    gap: 0 clamp(32px, 6vw, 96px);
+    padding-block: clamp(32px, 5vw, 72px) clamp(72px, 9vw, 128px);
+  }
+
+  .signup__intro {
+    grid-area: intro;
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+
+  .signup h1 {
+    font-size: clamp(44px, 5.6vw, 84px);
+    font-weight: 750;
+    letter-spacing: -0.035em;
+  }
+
+  .signup__intro p {
+    margin-top: 16px;
+    max-width: 44ch;
+    color: var(--ink-soft);
+    font-size: clamp(18px, 1.45vw, 21px);
+  }
+
+  .signup__preview {
+    grid-area: preview;
+  }
+
+  .signup__sticky {
+    position: sticky;
+    top: 112px;
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .signup__sticky :global(.carnet) {
+    rotate: 2deg;
+  }
+
+  .signup__caption {
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .form {
+    grid-area: form;
+    display: grid;
+    gap: clamp(36px, 4vw, 48px);
+  }
+
+  fieldset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 20px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    float: left;
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-bottom: 4px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+    align-content: start;
+  }
+
+  .field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .field label {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--sky-deep);
+    border-radius: 12px;
+    background: #fff;
+    font-size: 18px;
+    transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  }
+
+  .field textarea {
+    resize: vertical;
+    line-height: 1.45;
+  }
+
+  .field select {
+    appearance: none;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2324435f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+        right 14px center / 20px no-repeat,
+      #fff;
+    padding-right: 44px;
+  }
+
+  .field input::placeholder {
+    color: var(--ink-soft);
+    opacity: 1;
+  }
+
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-color: var(--ink-soft);
+  }
+
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 4px var(--sky);
+  }
+
+  .field [aria-invalid='true'] {
+    border-color: #8a2f45;
+    box-shadow: 0 0 0 4px #f2cad6;
+  }
+
+  .field__error {
+    font-size: 15px;
+    font-weight: 700;
+    color: #8a2f45;
+  }
+
+  .field__error:empty {
+    display: none;
+  }
+
+  .form__foot {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+  }
+
+  .consent {
+    display: flex;
+    gap: 12px;
+    align-items: start;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .consent input {
+    width: 22px;
+    height: 22px;
+    margin: 1px 0 0;
+    accent-color: var(--ink);
+    flex: none;
+  }
+
+  .form__foot .btn svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .form__how {
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .form__done {
+    font-weight: 700;
+  }
+
+  .form__done:empty {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .signup {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'intro'
+        'preview'
+        'form';
+      grid-template-rows: auto;
+    }
+
+    .signup__preview {
+      margin-bottom: 40px;
+    }
+
+    .signup__sticky {
+      position: static;
+    }
+
+    .signup__sticky :global(.carnet) {
+      max-width: 420px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    fieldset {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

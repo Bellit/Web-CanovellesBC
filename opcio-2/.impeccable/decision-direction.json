@@ -1,0 +1,115 @@
+{
+  "title": "Elige el mundo visual de la nueva portada",
+  "question": "Nueva tirada: ha salido «El carnet del club». Quédatela, elige una alternativa o vuelve a tirar.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "El carnet del club",
+      "kicker": "THE ROLL",
+      "lineage": "El carnet de jugador/socio plastificado, con foto, número y la pegatina de la temporada",
+      "thesis": "Ser del Canovelles es tener su carnet: la portada es el carnet de tu hijo/a, a medio hacer, esperando su nombre.",
+      "palette": ["#F7FAFC", "#BCD6EC", "#24435F", "#F4E6A6", "#BFE3D3"],
+      "materials": ["plástico azul pastel mate con esquinas redondeadas de carnet", "pegatina de temporada 2026-27 en amarillo mantequilla", "banda holográfica suave (menta, rosa, lila)", "foto real del club impresa en el carnet"],
+      "viewport": "Un carnet enorme con el escudo, la foto real y los campos «Nom» y «Any de naixement»; al escribir, el carnet imprime su grupo (Escoleta, Mini…) y el botón «Fes-te'l» lleva a la preinscripción. Al bajar, el carnet se gira y su reverso es la lista de etapas.",
+      "risk": "Puede parecer un trámite o un carnet de biblioteca si el plástico, la pegatina y las fotos no se trabajan con mimo.",
+      "raised": [
+        { "from": "challenger-cloud", "raise": "El color iridiscente vive solo en los bordes y la banda holográfica; los textos quedan tranquilos y legibles." },
+        { "from": "challenger-cracktro", "raise": "El carnet es la única caja de la página: nada de tarjetas dentro de tarjetas; la jerarquía viene del tamaño y la capa." },
+        { "from": "challenger-terminal", "raise": "Lo que escribes se imprime en el carnet al momento: el estado se muestra en el propio objeto, no en avisos." },
+        { "from": "challenger-chromato", "raise": "El grupo encontrado gana peso tipográfico en la lista del reverso, como si se marcara." }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Cartell de Festa Major en risografía",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Carteles y programas de fiesta mayor impresos en risografía con tintas pastel superpuestas",
+      "thesis": "El club anunciado como la fiesta del barrio: tintas azul, amarilla y menta que se solapan con grano de risografía.",
+      "palette": ["#F6F4EE", "#7FB2E0", "#F5DC6E", "#8FD3BB", "#2A3F5C"],
+      "materials": ["papel offset con grano", "tintas risograph superpuestas y ligeramente descuadradas", "fotos del club en semitono azul", "tipografía grande de cartel"],
+      "viewport": "Un cartel vertical a pantalla completa: «Temporada 2026-27, bàsquet per a tothom a Canovelles», foto en semitono, y el programa de etapas como programa de actos con el botón de preinscripción.",
+      "risk": "La risografía está muy de moda entre diseñadores; bien hecha es cálida, pero es el camino más transitado de mi lista."
+    },
+    {
+      "id": "challenger-cards",
+      "label": "Sobre de cromos de jugador",
+      "verdict": "competitive",
+      "lineage": "Sobres de cromos con borde de color, retrato posado y estadísticas al dorso",
+      "thesis": "Cada etapa del club como un cromo con borde de color; el dorso cuenta qué se hace en esa etapa.",
+      "palette": ["#FFFFFF", "#9FC4E4", "#24435F", "#F2DE8C", "#B6DCC9"],
+      "materials": ["cartulina de cromo", "bordes de color por etapa", "dorso con tabla", "giro 3D"],
+      "viewport": "Los cromos se reparten uno a uno; el de tu año de nacimiento sale delante y se gira para mostrar su dorso.",
+      "case": "Igual de reconocible para las familias, pero menos claro: hay que repartir cromos para llegar a la respuesta.",
+      "risk": "Muy previsible para un club deportivo y fácil que derive a infantil.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-wax-pack-card-hero.webp"
+    },
+    {
+      "id": "challenger-cloud",
+      "label": "Borde iridiscente de nube",
+      "verdict": "declined",
+      "lineage": "Nubes con franjas pastel por difracción",
+      "thesis": "Una página blanca y tranquila con franjas pastel en los bordes.",
+      "palette": ["#FBFCFD", "#5D6670", "#BFE8D8", "#F2C9D6", "#CFC2EE"],
+      "materials": ["blanco nube", "franjas finas de color"],
+      "viewport": "Mucho blanco con una franja iridiscente sobre el titular.",
+      "case": "Pierde en las dos: calma bonita, pero nada que una familia reconozca como su club.",
+      "kept": "El color solo en los bordes; el texto, tranquilo.",
+      "risk": "Etéreo y genérico.",
+      "hero": "https://impeccable.style/worlds/cards/clouds-storms-auroras-iridescent-cloud-edge-hero.webp"
+    },
+    {
+      "id": "challenger-chromato",
+      "label": "Piel de cefalópodo",
+      "verdict": "declined",
+      "lineage": "Pieles que cambian de patrón",
+      "thesis": "Una superficie viva que cambia de color según el contexto.",
+      "palette": ["#F1E6D8", "#8A3A2A", "#3FB5A6"],
+      "materials": ["pigmento", "textura"],
+      "viewport": "Un patrón vivo que reacciona al cursor.",
+      "case": "Pierde en las dos: ajeno al básquet y al barrio.",
+      "kept": "El peso tipográfico cambia con el estado.",
+      "risk": "Inquietante para familias.",
+      "hero": "https://impeccable.style/worlds/cards/reefs-bioluminescent-nocturnal-chromatophore-skin-language-hero.webp"
+    },
+    {
+      "id": "challenger-cracktro",
+      "label": "Pantalla de demo de los 90",
+      "verdict": "declined",
+      "lineage": "Intros de ordenador con texto sobre negro",
+      "thesis": "Texto en capas sobre fondo negro sin cajas.",
+      "palette": ["#050505", "#EDE8DA", "#E3A23A"],
+      "materials": ["fondo negro", "texto bitmap"],
+      "viewport": "Una línea de texto quieta sobre polvo en movimiento.",
+      "case": "Pierde en las dos: oscuro y técnico, lo contrario a tu pastel.",
+      "kept": "Sin cajas dentro de cajas.",
+      "risk": "Frío y críptico.",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-cracktro-scroller-queue-hero.webp"
+    },
+    {
+      "id": "challenger-terminal",
+      "label": "Terminal de fósforo verde",
+      "verdict": "declined",
+      "lineage": "Terminales de ordenador antiguos",
+      "thesis": "La web como una conversación tecleada.",
+      "palette": ["#0A0F0A", "#39FF6A", "#1E7A3A"],
+      "materials": ["cristal curvo", "brillo de fósforo"],
+      "viewport": "Un cursor que parpadea esperando el año de nacimiento.",
+      "case": "Pierde en las dos: disfraz informático.",
+      "kept": "Lo que escribes aparece en el objeto al momento.",
+      "risk": "Nada que ver con el club.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-phosphor-terminal-midnight-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "code", "toggle": false },
+  "canon": true,
+  "canonCard": {
+    "label": "La web estándar de club",
+    "thesis": "Lo que hacen todos los clubes, en azul pastel y ejecutado impecable.",
+    "palette": ["#FFFFFF", "#24435F", "#BCD6EC", "#F4E6A6"],
+    "materials": ["foto grande de cabecera", "rejilla limpia de tarjetas"],
+    "viewport": "Foto de equipo a pantalla completa con titular y botón, debajo tarjetas de etapas y contacto.",
+    "risk": "Indistinguible de cualquier otro club, que es lo que quieres evitar."
+  },
+  "steer": true
+}

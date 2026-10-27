@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-26T12:00:00.000Z",
+  "title": "Design System: Canovelles Bàsquet Club",
+  "extensions": {
+    "colorMeta": {
+      "sky": { "role": "primary", "displayName": "Card Plastic Sky", "canonical": "#c4dcf0", "tonalRamp": ["#14273a", "#24435f", "#3f6a90", "#6b95bc", "#9cbfdf", "#c4dcf0", "#d9e8f5", "#eef4fa"] },
+      "sky-soft": { "role": "primary", "displayName": "Soft Sky", "canonical": "#d9e8f5", "tonalRamp": ["#14273a", "#24435f", "#3f6a90", "#6b95bc", "#9cbfdf", "#c4dcf0", "#d9e8f5", "#eef4fa"] },
+      "sky-deep": { "role": "primary", "displayName": "Deep Sky", "canonical": "#9cbfdf", "tonalRamp": ["#14273a", "#24435f", "#3f6a90", "#6b95bc", "#9cbfdf", "#c4dcf0", "#d9e8f5", "#eef4fa"] },
+      "butter": { "role": "secondary", "displayName": "Season Butter", "canonical": "#f4e6a6", "tonalRamp": ["#3b3209", "#665813", "#9a8526", "#c8ae45", "#e9d47c", "#f4e6a6", "#f9f0cc", "#fdf9ea"] },
+      "butter-deep": { "role": "secondary", "displayName": "Butter Rim", "canonical": "#e9d47c", "tonalRamp": ["#3b3209", "#665813", "#9a8526", "#c8ae45", "#e9d47c", "#f4e6a6", "#f9f0cc", "#fdf9ea"] },
+      "mint": { "role": "tertiary", "displayName": "Mint", "canonical": "#bfe3d3", "tonalRamp": ["#0f3326", "#1d5a43", "#358466", "#5fae8e", "#93cdb4", "#bfe3d3", "#d9efe5", "#f0f9f5"] },
+      "mint-deep": { "role": "tertiary", "displayName": "Deep Mint", "canonical": "#93cdb4", "tonalRamp": ["#0f3326", "#1d5a43", "#358466", "#5fae8e", "#93cdb4", "#bfe3d3", "#d9efe5", "#f0f9f5"] },
+      "mist": { "role": "neutral", "displayName": "Mist", "canonical": "#eef4fa", "tonalRamp": ["#1a3249", "#415e7a", "#7290ac", "#a6bdd2", "#cddbe8", "#e2ecf6", "#eef4fa", "#f8fbfd"] },
+      "mist-deep": { "role": "neutral", "displayName": "Deep Mist", "canonical": "#e2ecf6", "tonalRamp": ["#1a3249", "#415e7a", "#7290ac", "#a6bdd2", "#cddbe8", "#e2ecf6", "#eef4fa", "#f8fbfd"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["#24435f", "#415e7a", "#7290ac", "#a6bdd2", "#cddbe8", "#e2ecf6", "#f8fbfd", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Blue-Slate Ink", "canonical": "#24435f", "tonalRamp": ["#0e1c29", "#1a3249", "#24435f", "#415e7a", "#6a86a1", "#9cb2c7", "#cbd8e4", "#eef4fa"] },
+      "ink-deep": { "role": "neutral", "displayName": "Deep Ink", "canonical": "#1a3249", "tonalRamp": ["#0e1c29", "#1a3249", "#24435f", "#415e7a", "#6a86a1", "#9cb2c7", "#cbd8e4", "#eef4fa"] },
+      "ink-soft": { "role": "neutral", "displayName": "Faded Ink", "canonical": "#415e7a", "tonalRamp": ["#0e1c29", "#1a3249", "#24435f", "#415e7a", "#6a86a1", "#9cb2c7", "#cbd8e4", "#eef4fa"] },
+      "error": { "role": "error", "displayName": "Error Plum", "canonical": "#8a2f45", "tonalRamp": ["#2e0f17", "#5a1e2d", "#8a2f45", "#b04e66", "#cf7d92", "#e5a9b9", "#f2cad6", "#fbedf1"] },
+      "error-halo": { "role": "error", "displayName": "Error Halo", "canonical": "#f2cad6", "tonalRamp": ["#2e0f17", "#5a1e2d", "#8a2f45", "#b04e66", "#cf7d92", "#e5a9b9", "#f2cad6", "#fbedf1"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The one H1 per page, sentence case." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s." },
+      "quote": { "displayName": "Quote", "purpose": "The club quote." },
+      "title": { "displayName": "Title", "purpose": "Stage names; fieldset legends at a smaller clamp." },
+      "group-name": { "displayName": "Group Name", "purpose": "Group rows; 800 when matched." },
+      "card-field": { "displayName": "Card Field", "purpose": "Typed and printed values on the carnet, container-relative; name at 5.6cqi." },
+      "button": { "displayName": "Button", "purpose": "Ink and sky buttons; 16px in the small size." },
+      "lede": { "displayName": "Lede", "purpose": "First paragraph under a page H1, faded ink." },
+      "body": { "displayName": "Body", "purpose": "Running copy with tabular figures." },
+      "small": { "displayName": "Small", "purpose": "Notes, team lists, footer, form labels (bold)." },
+      "caption": { "displayName": "Caption", "purpose": "Photo captions, helper text, sticker captions." },
+      "label": { "displayName": "Label", "purpose": "Uppercase printed field labels on the card and definition terms; never above a heading." }
+    },
+    "holo": { "value": "linear-gradient(90deg, #bfe3d3, #cfe3f5 22%, #d9cdf2 44%, #f2cad6 64%, #f4e6a6 82%, #bfe3d3)", "purpose": "Iridescent strip on the bottom edge of carnet faces only; shimmers once when a group is found." },
+    "duotone": { "value": "SVG filter #duotone: luminance matrix then table R 0.118-0.902, G 0.169-0.929, B 0.353-0.973", "purpose": "Runtime blue duotone for the family photo; other photos ship pre-duotoned." },
+    "shadows": [
+      { "name": "card-lift", "value": "0 1px 1px rgb(36 67 95 / 0.06), 0 10px 24px -8px rgb(36 67 95 / 0.22), 0 32px 60px -24px rgb(36 67 95 / 0.28)", "purpose": "Carnet faces and the sticker sheet." },
+      { "name": "ink-button", "value": "0 8px 18px -10px rgb(36 67 95 / 0.6)", "purpose": "Primary ink button only." },
+      { "name": "sticker", "value": "0 1px 1px rgb(36 67 95 / 0.12), 0 4px 10px -4px rgb(36 67 95 / 0.35)", "purpose": "Value stickers and the matched-row tag." },
+      { "name": "slot-inset", "value": "inset 0 1px 2px rgb(36 67 95 / 0.35)", "purpose": "Lanyard slot on the card." },
+      { "name": "focus-halo", "value": "0 0 0 4px #c4dcf0", "purpose": "Focused form fields." },
+      { "name": "error-halo", "value": "0 0 0 4px #f2cad6", "purpose": "Invalid form fields." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing curve for every transition." },
+      { "name": "card-flip", "value": "0.9s", "purpose": "3D rotateY of the carnet; cross-fade 0.25s under reduced motion." },
+      { "name": "group-stamp", "value": "0.55s", "purpose": "Group prints in from scale 1.25 and 3px blur." },
+      { "name": "sticker-press", "value": "0.6s", "purpose": "Season sticker presses on from scale 1.35, -14deg." },
+      { "name": "holo-shimmer", "value": "1.6s", "purpose": "One pass of the iridescent strip on found." },
+      { "name": "state", "value": "0.3s", "purpose": "Buttons, inputs, nav underline (0.35s)." }
+    ],
+    "breakpoints": [
+      { "name": "card-portrait", "value": "520px (container)" },
+      { "name": "sm", "value": "560px" },
+      { "name": "nav", "value": "760px" },
+      { "name": "signup", "value": "900px" },
+      { "name": "md", "value": "960px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action, one per region; arrow nudges on hover.",
+      "html": "<a class=\"ds-btn ds-btn-ink\" href=\"#\">Fes la preinscripció <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 14px; font-family: var(--font-display, 'Gabarito Variable', system-ui, sans-serif); font-size: 18px; font-weight: 650; letter-spacing: -0.005em; text-decoration: none; cursor: pointer; transition: background-color .3s cubic-bezier(0.16,1,0.3,1), transform .3s cubic-bezier(0.16,1,0.3,1); } .ds-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ink { background: #24435f; color: #eef4fa; box-shadow: 0 8px 18px -10px rgb(36 67 95 / 0.6); } .ds-btn-ink:hover { background: #1a3249; } .ds-btn-ink:hover svg { transform: translateX(3px); } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid #24435f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Sky Button",
+      "kind": "button",
+      "refersTo": "button-sky",
+      "description": "Secondary action beside the primary, e.g. flipping the card.",
+      "html": "<button class=\"ds-btn2 ds-btn-sky\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5\"/></svg>Gira el carnet</button>",
+      "css": ".ds-btn2 { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 14px; font-family: 'Gabarito Variable', system-ui, sans-serif; font-size: 18px; font-weight: 650; cursor: pointer; transition: background-color .3s cubic-bezier(0.16,1,0.3,1); } .ds-btn2 svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; } .ds-btn-sky { background: #c4dcf0; color: #24435f; } .ds-btn-sky:hover { background: #9cbfdf; } .ds-btn2:active { transform: translateY(1px); } .ds-btn2:focus-visible { outline: 3px solid #24435f; outline-offset: 3px; }"
+    },
+    {
+      "name": "Form Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Pre-registration field with sky focus halo and plum error state.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-f\">Any de naixement</label><input id=\"ds-f\" placeholder=\"2017\"><input aria-invalid=\"true\" value=\"20\"><p class=\"ds-field-err\">Escriu l’any de naixement amb quatre xifres.</p></div>",
+      "css": ".ds-field { display: grid; gap: 6px; color: #24435f; font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif; } .ds-field label { font-weight: 700; font-size: 16px; } .ds-field input { min-height: 52px; padding: 12px 14px; border: 1.5px solid #9cbfdf; border-radius: 12px; background: #fff; font: inherit; font-size: 18px; color: #24435f; transition: border-color .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s cubic-bezier(0.16,1,0.3,1); } .ds-field input::placeholder { color: #415e7a; opacity: 1; } .ds-field input:hover { border-color: #415e7a; } .ds-field input:focus-visible { outline: none; border-color: #24435f; box-shadow: 0 0 0 4px #c4dcf0; } .ds-field input[aria-invalid='true'] { border-color: #8a2f45; box-shadow: 0 0 0 4px #f2cad6; } .ds-field-err { margin: 0; font-size: 15px; font-weight: 700; color: #8a2f45; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "description": "Sticky mist bar: crest and short name, three links with draw-in underline, small ink button.",
+      "html": "<header class=\"ds-top\"><a class=\"ds-top-brand\" href=\"#\"><svg width=\"36\" height=\"32\" viewBox=\"0 0 36 32\" aria-hidden=\"true\"><path d=\"M2 2h32v12c0 9-8 15-16 16C10 29 2 23 2 14Z\" fill=\"#c4dcf0\" stroke=\"#24435f\" stroke-width=\"2\"/></svg>Canovelles BC</a><nav><a href=\"#\">Grups</a><a href=\"#\">On entrenem</a><a href=\"#\">El club</a></nav><a class=\"ds-top-btn\" href=\"#\">Preinscripció</a></header>",
+      "css": ".ds-top { display: flex; align-items: center; gap: 32px; min-height: 76px; padding: 0 24px; background: #eef4fa; color: #24435f; font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif; } .ds-top-brand { display: flex; align-items: center; gap: 12px; font-family: 'Gabarito Variable', system-ui, sans-serif; font-size: 21px; font-weight: 750; letter-spacing: -0.015em; color: inherit; text-decoration: none; } .ds-top nav { display: flex; gap: 28px; margin-left: auto; } .ds-top nav a { font-weight: 700; font-size: 16px; color: inherit; text-decoration: none; padding-bottom: 3px; background: linear-gradient(#9cbfdf, #9cbfdf) left bottom / 0 2px no-repeat; transition: background-size .35s cubic-bezier(0.16,1,0.3,1); } .ds-top nav a:hover { background-size: 100% 2px; } .ds-top a:focus-visible { outline: 3px solid #24435f; outline-offset: 3px; border-radius: 6px; } .ds-top-btn { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border-radius: 12px; background: #24435f; color: #eef4fa; font-family: 'Gabarito Variable', system-ui, sans-serif; font-size: 16px; font-weight: 650; text-decoration: none; box-shadow: 0 8px 18px -10px rgb(36 67 95 / 0.6); } .ds-top-btn:hover { background: #1a3249; }"
+    },
+    {
+      "name": "Carnet Front",
+      "kind": "card",
+      "refersTo": "card-front",
+      "description": "The signature club card at credit-card ratio: sky plastic, printed fields, season sticker, iridescent edge strip.",
+      "html": "<div class=\"ds-carnet\"><div class=\"ds-carnet-face\"><span class=\"ds-carnet-slot\"></span><p class=\"ds-carnet-club\">Canovelles Bàsquet Club</p><p class=\"ds-carnet-kind\">Carnet de jugador · Temporada 2026-27</p><div class=\"ds-carnet-body\"><div class=\"ds-carnet-photo\">AM</div><div class=\"ds-carnet-fields\"><span class=\"ds-carnet-label\">Nom</span><span class=\"ds-carnet-value\">Aina Martí</span><span class=\"ds-carnet-label\">Grup</span><span class=\"ds-carnet-value ds-carnet-grup\">Mini</span></div></div><span class=\"ds-carnet-sticker\"><small>Temporada</small>26/27</span><span class=\"ds-carnet-holo\"></span></div></div>",
+      "css": ".ds-carnet { container-type: inline-size; width: 420px; max-width: 100%; rotate: -3deg; color: #24435f; font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif; } .ds-carnet-face { position: relative; aspect-ratio: 1.586; padding: 5cqi 5.5cqi; border-radius: 3.7cqi; overflow: hidden; background: linear-gradient(140deg, rgb(255 255 255 / .45), rgb(255 255 255 / 0) 38%), linear-gradient(320deg, rgb(156 191 223 / .35), rgb(156 191 223 / 0) 45%), #c4dcf0; box-shadow: 0 1px 1px rgb(36 67 95 / .06), 0 10px 24px -8px rgb(36 67 95 / .22), 0 32px 60px -24px rgb(36 67 95 / .28); } .ds-carnet-slot { position: absolute; top: 2.6cqi; left: 50%; width: 11cqi; height: 2cqi; translate: -50% 0; border-radius: 2cqi; background: #eef4fa; box-shadow: inset 0 1px 2px rgb(36 67 95 / .35); } .ds-carnet-club { margin: 2cqi 0 0; font-family: 'Gabarito Variable', system-ui, sans-serif; font-weight: 750; font-size: 4.1cqi; } .ds-carnet-kind { margin: .8cqi 0 3.4cqi; font-size: 2.1cqi; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #415e7a; } .ds-carnet-body { display: grid; grid-template-columns: 26cqi 1fr; gap: 5cqi; } .ds-carnet-photo { display: grid; place-items: center; aspect-ratio: 3/4; border-radius: 2.2cqi; background: #bfe3d3; font-family: 'Gabarito Variable', system-ui, sans-serif; font-weight: 750; font-size: 11cqi; } .ds-carnet-fields { display: grid; align-content: start; gap: .6cqi; } .ds-carnet-label { font-size: max(11px, 1.75cqi); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #415e7a; } .ds-carnet-value { padding: .4cqi 0 .8cqi; margin-bottom: 2cqi; border-bottom: .3cqi dashed #9cbfdf; font-family: 'Gabarito Variable', system-ui, sans-serif; font-weight: 650; font-size: 4.6cqi; text-shadow: 0 1px 0 rgb(255 255 255 / .55); } .ds-carnet-grup { border-bottom: .3cqi solid #93cdb4; } .ds-carnet-sticker { position: absolute; top: 5.2cqi; right: 5.4cqi; display: grid; place-content: center; width: 14cqi; aspect-ratio: 1; border-radius: 50%; rotate: 10deg; text-align: center; line-height: 1; font-family: 'Gabarito Variable', system-ui, sans-serif; font-weight: 800; font-size: 3.6cqi; background: radial-gradient(circle at 32% 28%, rgb(255 255 255 / .55), rgb(255 255 255 / 0) 42%), #f4e6a6; box-shadow: 0 .4cqi .8cqi rgb(36 67 95 / .2), inset 0 0 0 .5cqi rgb(233 212 124 / .7); } .ds-carnet-sticker small { font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif; font-size: 1.45cqi; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; } .ds-carnet-holo { position: absolute; left: 0; right: 0; bottom: 0; height: 1.7cqi; background: linear-gradient(90deg, #bfe3d3, #cfe3f5 22%, #d9cdf2 44%, #f2cad6 64%, #f4e6a6 82%, #bfe3d3); background-size: 200% 100%; } .ds-carnet:hover .ds-carnet-holo { animation: ds-holo 1.6s cubic-bezier(0.16,1,0.3,1) 1; } @keyframes ds-holo { from { background-position: 200% 0; } } @media (prefers-reduced-motion: reduce) { .ds-carnet:hover .ds-carnet-holo { animation: none; } }"
+    },
+    {
+      "name": "Value Stickers",
+      "kind": "chip",
+      "refersTo": "value-sticker-butter",
+      "description": "Die-cut pills in the three dyes, tilted, white border; straighten on hover.",
+      "html": "<div class=\"ds-sheet\"><span class=\"ds-sticker\" style=\"--tilt:-4deg;background:#f4e6a6\">Generositat</span><span class=\"ds-sticker\" style=\"--tilt:3deg;background:#bfe3d3\">Respecte</span><span class=\"ds-sticker\" style=\"--tilt:-2deg;background:#c4dcf0\">Pertinença</span></div>",
+      "css": ".ds-sheet { display: flex; flex-wrap: wrap; gap: 24px; padding: 28px; border-radius: 18px; background: #f8fbfd; box-shadow: 0 1px 1px rgb(36 67 95 / .06), 0 10px 24px -8px rgb(36 67 95 / .22), 0 32px 60px -24px rgb(36 67 95 / .28); } .ds-sticker { display: inline-block; padding: 9px 16px 10px; border: 4px solid #fff; border-radius: 999px; color: #24435f; font-family: 'Gabarito Variable', system-ui, sans-serif; font-size: 19px; font-weight: 700; line-height: 1.1; rotate: var(--tilt); box-shadow: 0 1px 1px rgb(36 67 95 / .12), 0 4px 10px -4px rgb(36 67 95 / .35); transition: rotate .4s cubic-bezier(0.16,1,0.3,1), translate .4s cubic-bezier(0.16,1,0.3,1); } .ds-sticker:hover { rotate: 0deg; translate: 0 -2px; }"
+    },
+    {
+      "name": "Group Row",
+      "kind": "custom",
+      "refersTo": "group-tag",
+      "description": "Group row on a deep-sky rule; a match goes to 800 and gets a tilted butter tag.",
+      "html": "<ul class=\"ds-rows\"><li class=\"ds-row\"><span class=\"ds-row-name\">Pre-Mini</span><span class=\"ds-row-years\">2017–2018</span><span class=\"ds-row-note\">Competició federada adaptada a l’edat.</span></li><li class=\"ds-row is-match\"><span class=\"ds-row-name\">Mini</span><span class=\"ds-row-years\">2015–2016</span><span class=\"ds-row-note\">El pas cap als equips de formació.</span><span class=\"ds-row-tag\">El seu grup</span></li></ul>",
+      "css": ".ds-rows { list-style: none; margin: 0; padding: 0; color: #24435f; font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif; font-variant-numeric: tabular-nums; border-top: 2px solid #24435f; } .ds-row { position: relative; display: grid; grid-template-columns: 3fr 1.6fr 4fr; gap: 4px 24px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid #9cbfdf; } .ds-row-name { font-family: 'Gabarito Variable', system-ui, sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.015em; } .ds-row-years { font-weight: 700; } .ds-row-note { font-size: 16px; color: #415e7a; } .ds-row.is-match .ds-row-name { font-weight: 800; } .ds-row-tag { position: absolute; right: 0; top: 50%; transform: translateY(-50%) rotate(-4deg); padding: 6px 12px; border-radius: 999px; background: #f4e6a6; font-size: 13px; font-weight: 700; box-shadow: 0 4px 10px -4px rgb(36 67 95 / .35); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Club Carnet",
+    "overview": "Being part of Canovelles means having its carnet. The site is a player's club card: matte pastel-blue plastic (sky) on a misty blue ground, every word printed in one deep blue-slate ink, with the card itself as the hero object. The visitor types a name and birth year directly onto the card; the card prints the group, a butter season sticker presses on, a thin iridescent strip shimmers once along the card's edge, and the card flips in 3D to show what that group does. The same card returns at the close and on the pre-registration page as a live preview of the form.\n\nAway from the card, the page is calm and flat: wide sky and mist fields, ink rules dividing stages, generous type in Gabarito, body and labels in Atkinson Hyperlegible Next with tabular figures. Colour is quiet and lives on objects (card plastic, stickers, the photo duotone); type stays ink. Club photos are printed on card stock in a blue duotone. The crest is the identity anchor and is the only place orange exists.\n\nConfirmed rejections: the sports-club default (dark full-bleed action hero, condensed caps, row of team cards) and the pastel-kids default (blobs, cream, rounded everything).",
+    "keyCharacteristics": [
+      "One object carries the story: the carnet, at credit-card ratio (1.586), tilted a few degrees, with soft layered shadow.",
+      "Three dyes only (sky, butter, mint) on a mist ground; all type in ink or faded ink.",
+      "Iridescence only on card edges, shimmering once when a group is found.",
+      "Typed input prints onto the object; no toasts, no pop-ups.",
+      "Real club photos in blue duotone, printed with the card corner.",
+      "One motion grammar: print-in, sticker press, card flip, all on the same ease-out curve."
+    ],
+    "rules": [
+      { "name": "The Three Dyes Rule", "body": "Sky, butter and mint are the only hues besides ink and the mist neutrals. The single exception is the error plum and its halo on form validation. Nothing else gets a new hue.", "section": "colors" },
+      { "name": "The Crest Owns the Orange Rule", "body": "Crest orange exists only inside the crest, which is never redrawn, outlined or recoloured.", "section": "colors" },
+      { "name": "The Ink Type Rule", "body": "Text is ink or faded ink. Dyes appear behind type (stickers, tags, highlighter), never as the type colour; the only coloured text is the error message.", "section": "colors" },
+      { "name": "The Edge-Only Iridescence Rule", "body": "The iridescent strip (mint, pale blue, lilac, rose, butter) lives only on the bottom edge of carnet faces. It shimmers once, when a group is found, and is still under reduced motion.", "section": "colors" },
+      { "name": "The Printed Card Rule", "body": "Anything the card printer would print (titles, names, group, typed values, buttons) is Gabarito; anything read or labelled is Atkinson.", "section": "typography" },
+      { "name": "The Tabular Years Rule", "body": "Body runs with tabular figures site-wide so year ranges stack cleanly.", "section": "typography" },
+      { "name": "The Card Stock Lifts Rule", "body": "Only physical card objects (the carnet, the sticker sheet, stickers) cast shadow. Sections, rows, photos and text never do.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do let the carnet be the story: type onto it, print the result onto it, flip it for detail.",
+      "Do keep all type in ink (#24435f) or faded ink, and put colour behind it on objects.",
+      "Do use only sky, butter and mint as hues; reserve plum (#8a2f45) and its rose halo for form errors.",
+      "Do derive corners from the card ratio (3.7cqi on the card, 14px buttons, 12px fields); pills only for stickers.",
+      "Do animate with the one ease-out curve (cubic-bezier(0.16, 1, 0.3, 1)) and only for print-in, sticker press, card flip and the single strip shimmer; disable them under reduced motion.",
+      "Do render club photos in the blue duotone with the shared corner.",
+      "Do separate stages with 2px ink rules and rows with 1px deep-sky rules."
+    ],
+    "donts": [
+      "Don't use the sports-club default: dark full-bleed action hero, condensed caps, row of team cards.",
+      "Don't use the pastel-kids default: blobs, cream grounds, rounded everything.",
+      "Don't put the iridescent strip anywhere but card edges, or loop its shimmer.",
+      "Don't apply crest orange outside the crest, or redraw, outline or recolour the crest.",
+      "Don't confirm input with toasts or pop-ups; print it onto the card.",
+      "Don't add hard offset shadows or shadow on sections, rows, photos or text.",
+      "Don't put eyebrow labels or kickers above headings.",
+      "Don't reuse acta template tokens (petrol ink, biro hand face, square cells) in this world."
+    ]
+  }
+}
