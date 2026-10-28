@@ -6,3 +6,4 @@ dist/
 .DS_Store
 **/.impeccable/hook.cache.json
 _site/
+.impeccable/questions/

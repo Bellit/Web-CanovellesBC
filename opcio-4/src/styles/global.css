@@ -1,0 +1,221 @@
+@import '@fontsource-variable/doto/full.css';
+@import '@fontsource-variable/sofia-sans';
+@import '@fontsource-variable/sofia-sans-extra-condensed';
+
+/* El marcador del pavelló: caixa de xapa lacada, finestres negres, bombetes i vinil retallat. */
+:root {
+  --cabinet: #14161a;
+  --bezel: #24272d;
+  --bezel-hi: #33373f;
+  --window: #0a0b0d;
+  --bulb-off: #2a2620;
+  --amber: #ffb21f;
+  --red: #ff4a2e;
+  --red-deep: #c92c14;
+  --vinyl: #f2efe6;
+  --vinyl-soft: #bdb8aa;
+  --home: #2b5cff;
+
+  --font-dot: 'Doto Variable', monospace;
+  --font-plate: 'Sofia Sans Extra Condensed Variable', 'Arial Narrow', sans-serif;
+  --font-body: 'Sofia Sans Variable', system-ui, sans-serif;
+
+  --page: 1280px;
+  --gutter: clamp(16px, 3.4vw, 40px);
+
+  color-scheme: dark;
+  accent-color: var(--amber);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 76px;
+  scrollbar-color: var(--bezel-hi) var(--cabinet);
+}
+
+body {
+  margin: 0;
+  background: var(--cabinet);
+  color: var(--vinyl);
+  font-family: var(--font-body);
+  font-size: clamp(17px, 1.15vw, 19px);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--window);
+}
+
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--page));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 50;
+  padding: 10px 16px;
+  background: var(--amber);
+  color: var(--window);
+  font-weight: 800;
+}
+.skip:focus {
+  top: 12px;
+}
+
+/* Vinil retallat: les plaques del marcador. */
+.plate {
+  font-family: var(--font-plate);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Finestra de bombetes: les apagades es veuen sempre al darrere. */
+.dots {
+  font-family: var(--font-dot);
+  font-weight: 900;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.window {
+  background-color: var(--window);
+  background-image: radial-gradient(circle, var(--bulb-off) 0 32%, transparent 38%);
+  background-size: 9px 9px;
+  border: 3px solid #000;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.9);
+}
+
+/* Polsador vermell de temps mort. */
+.push {
+  --size: 76px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vinyl);
+  text-decoration: none;
+  cursor: pointer;
+}
+.push__cap {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--red);
+  border: 5px solid #3a3d44;
+  box-shadow:
+    0 6px 0 var(--red-deep),
+    0 10px 18px rgb(0 0 0 / 0.55),
+    inset 0 -4px 0 rgb(0 0 0 / 0.18);
+  transition:
+    transform 0.08s linear,
+    box-shadow 0.08s linear;
+}
+.push__cap svg {
+  width: 40%;
+  fill: none;
+  stroke: var(--vinyl);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.push__label {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+.push__label b {
+  font-family: var(--font-plate);
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+.push__label span {
+  font-size: 16px;
+  color: var(--vinyl-soft);
+}
+.push:hover .push__cap {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 0 var(--red-deep),
+    0 10px 18px rgb(0 0 0 / 0.55),
+    inset 0 -4px 0 rgb(0 0 0 / 0.18);
+}
+.push:active .push__cap {
+  transform: translateY(5px);
+  box-shadow:
+    0 1px 0 var(--red-deep),
+    0 3px 6px rgb(0 0 0 / 0.55);
+}
+.push:focus-visible {
+  outline: none;
+}
+.push:focus-visible .push__cap {
+  outline: 3px solid var(--amber);
+  outline-offset: 4px;
+}
+
+/* Cargol de la caixa. */
+.rivet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3a3e46;
+  border: 2px solid #111215;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .push__cap {
+    transition: none;
+  }
+}

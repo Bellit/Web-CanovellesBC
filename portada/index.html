@@ -31,7 +31,7 @@
     h1 { margin: 0; font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.1; letter-spacing: -0.01em; }
     header p { margin: 6px 0 0; color: var(--muted); }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px; }
     .opcio {
       display: flex; flex-direction: column;
       background: var(--card);
@@ -57,6 +57,22 @@
     .m2 { background: linear-gradient(135deg, #eef4fa, #c4dcf0); color: #24435f; }
     .m2 b { font-weight: 700; letter-spacing: -0.02em; }
     .m2 .holo { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #bfe3d3, #cfe3f5 22%, #d9cdf2 44%, #f2cad6 64%, #f4e6a6 82%, #bfe3d3); }
+
+    .m3 { position: relative; background: #1f4fbf; color: #fff; overflow: hidden; }
+    .m3 svg { position: absolute; top: 0; right: 12px; width: 62%; }
+    .m3 rect { fill: #ef5a2e; }
+    .m3 path { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; }
+    .m3 .colors i { border-color: rgb(255 255 255 / .7); }
+    .m3 b { position: relative; font-weight: 800; font-stretch: 112%; letter-spacing: -0.02em; }
+
+    .m4 { background: #14161a; color: #ffb21f; }
+    .m4 b {
+      align-self: flex-start;
+      padding: 6px 12px;
+      background: #0a0b0d radial-gradient(circle, #2a2620 0 32%, transparent 38%) 0 0 / 7px 7px;
+      border: 2px solid #000; border-radius: 3px;
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 2.2rem; letter-spacing: .06em;
+    }
 
     .text { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
     .num { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
@@ -106,6 +122,33 @@
           <h2>Propera i amable</h2>
           <p>Colors suaus i el carnet del club com a element principal. Ara té la portada i la pàgina de preinscripció.</p>
           <span class="veure">Veure l’opció 2 →</span>
+        </div>
+      </a>
+
+      <a class="opcio" href="opcio-3/">
+        <div class="mostra m3">
+          <svg viewBox="0 0 200 120" aria-hidden="true"><rect x="70" y="0" width="60" height="72" /><path d="M70 0 V72 H130 V0 M84 72 A16 16 0 0 0 116 72 M12 0 V30 A90 90 0 0 0 188 30 V0" /></svg>
+          <b>Del primer bot</b>
+          <div class="colors"><i style="background:#1f4fbf"></i><i style="background:#ef5a2e"></i><i style="background:#1f8a5b"></i><i style="background:#ffd23f"></i></div>
+        </div>
+        <div class="text">
+          <span class="num">Opció 3</span>
+          <h2>Clàssica, amb colors de pista</h2>
+          <p>Estructura de web de sempre amb els colors del terra del pavelló i entrades suaus. La secció especial: troba el grup del teu fill sobre una mitja pista.</p>
+          <span class="veure">Veure l’opció 3 →</span>
+        </div>
+      </a>
+
+      <a class="opcio" href="opcio-4/">
+        <div class="mostra m4">
+          <b>19:95</b>
+          <div class="colors"><i style="background:#14161a"></i><i style="background:#ffb21f"></i><i style="background:#ff4a2e"></i><i style="background:#2b5cff"></i></div>
+        </div>
+        <div class="text">
+          <span class="num">Opció 4</span>
+          <h2>El marcador del pavelló</h2>
+          <p>La proposta més atrevida: tota la web és el marcador. El scroll fa córrer el rellotge, les fotos s’encenen amb bombetes i la preinscripció és el botó de temps mort.</p>
+          <span class="veure">Veure l’opció 4 →</span>
         </div>
       </a>
     </main>

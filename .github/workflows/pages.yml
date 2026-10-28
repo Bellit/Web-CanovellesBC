@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         # Per afegir una opció nova: crea la carpeta opcio-N i afegeix-la aquí.
-        opcio: [opcio-1, opcio-2]
+        opcio: [opcio-1, opcio-2, opcio-3, opcio-4]
     defaults:
       run:
         working-directory: ${{ matrix.opcio }}

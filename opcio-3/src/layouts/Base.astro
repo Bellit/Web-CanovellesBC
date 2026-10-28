@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import { club } from '../data/club';
+import { url } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = club.descripcio } = Astro.props;
+const fullTitle = title ? `${title} | ${club.nomCurt}` : `${club.nom} | Del primer bot al primer equip`;
+const noindex = import.meta.env.PUBLIC_PREVIEW === 'true';
+---
+
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1f4fbf" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Una sola manera d'entrar: el contingut puja i les línies es pinten quan arriben a la pantalla.
+      const items = document.querySelectorAll<HTMLElement>('[data-reveal], [data-paint-group]');
+      document.querySelectorAll<SVGGeometryElement>('[data-paint]').forEach((p) => {
+        p.style.setProperty('--len', String(Math.ceil(p.getTotalLength())));
+      });
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        },
+        { rootMargin: '0px 0px -4% 0px' },
+      );
+      items.forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

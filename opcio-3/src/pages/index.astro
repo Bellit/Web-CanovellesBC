@@ -1,0 +1,584 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CourtFinder from '../components/CourtFinder.astro';
+import { club, etapes, valors } from '../data/club';
+import { url } from '../lib/url';
+import fotoEquip from '../assets/fotos/home-blue-mini.png';
+import fotoEscola from '../assets/fotos/canovelles-blue-3.jpg';
+import fotoFamilia from '../assets/fotos/canovelles-fotofamilia-1.jpg';
+import fotoJoc from '../assets/fotos/canovelles-blue-2.jpg';
+
+const colorsEtapa = ['outer', 'zone', 'court', 'ink'];
+---
+
+<Base>
+  <a class="skip" href="#principal">Salta al contingut</a>
+  <Header />
+  <main id="principal">
+    <section class="hero">
+      <div class="wrap hero__in">
+        <div class="hero__copy">
+          <h1>Del primer bot al primer equip.</h1>
+          <p>
+            Bàsquet a Canovelles des de {club.fundacio}. Escola des del {club.escola} i {club.equips} equips, de l’Escoleta
+            als veterans, al {club.adreca.pavello}.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href={url('/preinscripcio/')}>
+              Preinscripció {club.temporada}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="btn btn--ghost" href="#grups">Troba el seu grup</a>
+          </div>
+        </div>
+        <div class="hero__key" data-paint-group>
+          <Image src={fotoEquip} alt="Un equip femení del club fa pinya amb l’entrenadora a la pista del pavelló." widths={[480, 760, 1000]} sizes="(max-width: 900px) 92vw, 46vw" loading="eager" />
+          <svg viewBox="0 0 400 480" aria-hidden="true">
+            <path data-paint d="M40 480 V120 H360 V480" />
+            <path data-paint style="--i:2" d="M110 120 A90 90 0 0 1 290 120" />
+            <path data-paint style="--i:3" d="M40 210 H22 M40 270 H22 M40 330 H22 M40 390 H22 M360 210 H378 M360 270 H378 M360 330 H378 M360 390 H378" />
+          </svg>
+        </div>
+      </div>
+      <p class="sideline wrap" data-reveal>
+        <span>Fundat el {club.fundacio}</span>
+        <span>Escola des del {club.escola}</span>
+        <span>{club.equips} equips la temporada {club.temporada}</span>
+        <span>{club.lema}</span>
+      </p>
+    </section>
+
+    <CourtFinder />
+
+    <section class="etapes" id="etapes" aria-labelledby="etapes-titol">
+      <div class="wrap">
+        <div class="etapes__head" data-reveal>
+          <h2 id="etapes-titol">Quatre etapes, un sol club</h2>
+          <p>Tots els equips del Canovelles han sortit de l’escola. Cada etapa té el seu ritme, però la samarreta és la mateixa.</p>
+        </div>
+        <ol class="etapes__band">
+          {
+            etapes.map((e, i) => (
+              <li class={`etapa etapa--${colorsEtapa[i]}`} style={`--grow:${e.grups.length};--i:${i}`} data-reveal>
+                <h3>{e.nom}</h3>
+                <p>{e.text}</p>
+                <ul>
+                  {e.grups.map((g) => (
+                    <li>{g}</li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="escola" aria-labelledby="escola-titol">
+      <div class="wrap escola__in">
+        <figure class="escola__foto" data-reveal>
+          <Image src={fotoEscola} alt="Una entrenadora apunta una jugada mentre els nens l’escolten." widths={[400, 700]} sizes="(max-width: 860px) 92vw, 40vw" />
+        </figure>
+        <div class="escola__text">
+          <h2 id="escola-titol" data-reveal>L’escola, el cor del club</h2>
+          <p class="escola__lead" data-reveal>Des del març del {club.escola}, els més petits aprenen a jugar sense pressa i sense que el resultat sigui el més important.</p>
+          <dl class="escola__grups">
+            <div data-reveal style="--i:1">
+              <dt>Escoleta</dt>
+              <dd>El primer contacte amb la pilota, jugant.</dd>
+            </div>
+            <div data-reveal style="--i:2">
+              <dt>Escobol</dt>
+              <dd>Les primeres normes i els primers partits.</dd>
+            </div>
+            <div data-reveal style="--i:3">
+              <dt>Pre-Mini i Mini</dt>
+              <dd>Competició federada adaptada a l’edat.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="club" id="club" aria-labelledby="club-titol">
+      <div class="club__foto" data-reveal>
+        <Image src={fotoFamilia} alt="Foto de família de tots els equips del club a la pista del pavelló." widths={[700, 1100, 1366]} sizes="100vw" />
+      </div>
+      <div class="wrap club__in">
+        <div class="club__intro" data-reveal>
+          <h2 id="club-titol">Som un club petit, però els nostres jugadors són molt grans</h2>
+          <p>
+            El {club.nomCurt} va néixer el {club.fundacio} a Canovelles. No som una acadèmia d’elit: som un club de barri on
+            els pares, els entrenadors i els jugadors es coneixen pel nom.
+          </p>
+        </div>
+        <ul class="valors">
+          {
+            valors.map((v, i) => (
+              <li data-reveal style={`--i:${i % 3}`}>
+                <h3>{v.nom}</h3>
+                <p>{v.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="onsom" id="on-som" aria-labelledby="onsom-titol">
+      <div class="wrap onsom__in">
+        <div data-reveal>
+          <h2 id="onsom-titol">Entrenem i juguem al pavelló</h2>
+          <address>
+            <b>{club.adreca.pavello}</b><br />
+            {club.adreca.carrer}<br />
+            {club.adreca.cp} {club.adreca.poblacio}
+          </address>
+          <div class="onsom__actions">
+            <a class="btn btn--court" href={club.adreca.mapa} rel="noopener">
+              Com arribar-hi
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="btn btn--ghost" href={`mailto:${club.correus.general}`}>Escriu-nos</a>
+          </div>
+          <p class="onsom__note">Els horaris de cada grup es comuniquen en fer la preinscripció.</p>
+        </div>
+        <figure class="onsom__foto" data-reveal style="--i:1">
+          <Image src={fotoJoc} alt="Un jugador sènior del club entra a cistella en un partit." widths={[400, 700]} sizes="(max-width: 860px) 92vw, 36vw" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="final" aria-labelledby="final-titol">
+      <div class="wrap final__in" data-reveal>
+        <h2 id="final-titol">La temporada {club.temporada} comença a la pista</h2>
+        <p>Omple la preinscripció i et responem amb l’horari i la quota del seu grup. No cal pagar res ara.</p>
+        <a class="btn btn--line" href={url('/preinscripcio/')}>
+          Fes la preinscripció
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+        </a>
+      </div>
+      <svg class="final__circle" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="96" />
+        <circle cx="100" cy="100" r="36" />
+      </svg>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* Portada */
+  .hero {
+    padding-top: clamp(28px, 4vw, 56px);
+    overflow: hidden;
+  }
+  .hero__in {
+    display: grid;
+    grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+    align-items: center;
+    gap: clamp(28px, 5vw, 72px);
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 88px);
+    font-stretch: 112%;
+    font-weight: 850;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+  .hero__copy > p {
+    margin-top: clamp(18px, 2vw, 28px);
+    max-width: 46ch;
+    font-size: clamp(18px, 1.4vw, 21px);
+    color: var(--ink-soft);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+  .hero__actions .btn--ghost {
+    color: var(--court);
+  }
+  /* La foto omple la zona; la línia de tirs lliures i el seu semicercle queden a fora, com a la pista. */
+  .hero__key {
+    position: relative;
+    aspect-ratio: 400 / 480;
+    background: var(--court);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  /* La zona pintada de taronja; la foto hi queda a dins amb un marge de pintura. */
+  .hero__key::before {
+    content: '';
+    position: absolute;
+    left: 10%;
+    top: 25%;
+    width: 80%;
+    height: 75%;
+    background: var(--zone);
+  }
+  .hero__key img {
+    position: absolute;
+    left: 14%;
+    top: 29%;
+    width: 72%;
+    height: 71%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .hero__key svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero__key path {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 5;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .sideline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    margin-top: clamp(32px, 4vw, 56px);
+    margin-bottom: clamp(40px, 5vw, 72px);
+    padding-top: 18px;
+    border-top: var(--paint) solid var(--zone);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .sideline span:not(:last-child)::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 16px;
+    border-radius: 50%;
+    background: var(--zone);
+    vertical-align: middle;
+  }
+  .sideline span:last-child {
+    color: var(--court);
+  }
+
+  /* Etapes */
+  .etapes {
+    padding-block: clamp(64px, 8vw, 120px);
+  }
+  .etapes__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px 48px;
+    align-items: end;
+    margin-bottom: clamp(32px, 4vw, 56px);
+  }
+  .etapes h2 {
+    font-size: clamp(36px, 4.4vw, 60px);
+  }
+  .etapes__head p {
+    max-width: 46ch;
+    color: var(--ink-soft);
+  }
+  .etapes__band {
+    display: flex;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .etapa {
+    flex: var(--grow) 1 190px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: clamp(260px, 26vw, 340px);
+    padding: clamp(18px, 2vw, 28px);
+    border-radius: var(--radius);
+    color: var(--white);
+    position: relative;
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  }
+  .etapa::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 2px solid rgb(255 255 255 / 0.4);
+    border-radius: 3px;
+    pointer-events: none;
+  }
+  .etapa:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .etapa--outer {
+    background: var(--outer-deep);
+  }
+  .etapa--zone {
+    background: var(--zone-deep);
+  }
+  .etapa--court {
+    background: var(--court);
+  }
+  .etapa--ink {
+    background: var(--ink);
+  }
+  .etapa h3 {
+    font-size: clamp(24px, 2.1vw, 32px);
+    font-stretch: 100%;
+  }
+  .etapa > p {
+    max-width: 28ch;
+    font-size: 16px;
+    color: var(--white);
+  }
+  .etapa ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: auto 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .etapa ul li {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.24);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* Escola */
+  .escola {
+    padding-block: clamp(32px, 4vw, 56px) clamp(64px, 8vw, 120px);
+  }
+  .escola__in {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+  }
+  .escola__foto {
+    margin: 0;
+  }
+  .escola__foto img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .escola h2 {
+    font-size: clamp(36px, 4.4vw, 60px);
+  }
+  .escola__lead {
+    margin-top: 18px;
+    max-width: 44ch;
+    font-size: clamp(18px, 1.4vw, 21px);
+    color: var(--ink-soft);
+  }
+  .escola__grups {
+    display: grid;
+    gap: 0;
+    margin: 28px 0 0;
+  }
+  .escola__grups div {
+    display: grid;
+    grid-template-columns: 11ch 1fr;
+    gap: 16px;
+    padding-block: 16px;
+    border-top: 2px solid var(--floor-deep);
+  }
+  .escola__grups dt {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--outer-deep);
+  }
+  .escola__grups dd {
+    margin: 0;
+  }
+
+  /* El club */
+  .club {
+    background: var(--outer-deep);
+    color: var(--white);
+    padding-bottom: clamp(64px, 8vw, 120px);
+  }
+  .club__foto img {
+    width: 100%;
+    height: clamp(260px, 42vw, 560px);
+    object-fit: cover;
+    object-position: 50% 55%;
+  }
+  .club__in {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(32px, 5vw, 80px);
+    margin-top: clamp(48px, 6vw, 88px);
+  }
+  .club h2 {
+    font-size: clamp(32px, 3.6vw, 52px);
+  }
+  .club__intro p {
+    margin-top: 18px;
+    max-width: 44ch;
+    color: #e2f3ea;
+  }
+  .valors {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(24px, 3vw, 48px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Els valors se separen amb línies de pista pintades, amb els extrems arrodonits. */
+  .valors li {
+    position: relative;
+    padding-block: 22px 22px;
+  }
+  .valors li::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: var(--paint);
+    border-radius: var(--paint);
+    background: var(--white);
+  }
+  .valors h3 {
+    font-size: 24px;
+    color: var(--line);
+  }
+  .valors p {
+    margin-top: 6px;
+    color: #e2f3ea;
+    font-size: 16px;
+  }
+
+  /* On som */
+  .onsom {
+    padding-block: clamp(64px, 8vw, 120px);
+  }
+  .onsom__in {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+  }
+  .onsom h2 {
+    font-size: clamp(36px, 4.4vw, 60px);
+  }
+  address {
+    margin-top: 22px;
+    font-style: normal;
+    font-size: clamp(19px, 1.5vw, 22px);
+    line-height: 1.5;
+  }
+  .onsom__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .onsom__actions .btn--ghost {
+    color: var(--court);
+  }
+  .onsom__note {
+    margin-top: 18px;
+    font-size: 16px;
+    color: var(--ink-soft);
+  }
+  .onsom__foto {
+    margin: 0;
+  }
+  .onsom__foto img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 30% 50%;
+    border-radius: var(--radius);
+  }
+
+  /* Tancament */
+  .final {
+    position: relative;
+    background: var(--zone);
+    color: var(--white);
+    padding-block: clamp(64px, 8vw, 112px);
+    overflow: hidden;
+  }
+  .final__in {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: start;
+    gap: 18px;
+  }
+  .final h2 {
+    max-width: 16ch;
+    font-size: clamp(38px, 5vw, 72px);
+  }
+  .final p {
+    max-width: 44ch;
+    font-size: clamp(18px, 1.4vw, 21px);
+    color: var(--ink);
+  }
+  .final .btn {
+    margin-top: 10px;
+  }
+  .final__circle {
+    position: absolute;
+    right: -6vw;
+    top: 50%;
+    width: clamp(260px, 36vw, 520px);
+    translate: 0 -50%;
+    fill: none;
+    stroke: rgb(255 255 255 / 0.45);
+    stroke-width: 3;
+  }
+
+  @media (max-width: 900px) {
+    .hero__in,
+    .escola__in,
+    .club__in,
+    .onsom__in,
+    .etapes__head {
+      grid-template-columns: 1fr;
+    }
+    .hero__key {
+      max-width: 520px;
+    }
+    .etapes__band {
+      flex-direction: column;
+    }
+    .etapa {
+      flex: none;
+      min-height: 0;
+    }
+    .etapa ul {
+      margin-top: 8px;
+    }
+    .onsom__foto {
+      max-width: 420px;
+    }
+  }
+  @media (max-width: 560px) {
+    .valors {
+      grid-template-columns: 1fr;
+    }
+    .sideline {
+      display: grid;
+    }
+    .sideline span::after {
+      display: none !important;
+    }
+  }
+</style>

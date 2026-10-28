@@ -7,6 +7,8 @@ Aquest repositori conté diverses propostes de web per al Canovelles Bàsquet Cl
 | `portada/` | Pàgina per triar la proposta (HTML estàtic) |
 | `opcio-1/` | Proposta 1: web completa, blau marí i groc (vegeu `opcio-1/README.md`) |
 | `opcio-2/` | Proposta 2: web v2 amb el carnet del club (vegeu `opcio-2/README.md`) |
+| `opcio-3/` | Proposta 3: web clàssica amb colors de pista i el buscador de grup sobre una mitja pista |
+| `opcio-4/` | Proposta 4: tota la web és el marcador del pavelló |
 
 ## Previsualització (GitHub Pages)
 
@@ -15,6 +17,8 @@ Cada `push` a `main` publica-ho tot amb `.github/workflows/pages.yml`:
 - <https://bellit.github.io/Web-CanovellesBC/>: portada
 - <https://bellit.github.io/Web-CanovellesBC/opcio-1/>
 - <https://bellit.github.io/Web-CanovellesBC/opcio-2/>
+- <https://bellit.github.io/Web-CanovellesBC/opcio-3/>
+- <https://bellit.github.io/Web-CanovellesBC/opcio-4/>
 
 Les còpies de previsualització porten `noindex` perquè Google no les indexi.
 

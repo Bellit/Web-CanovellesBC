@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T09:25:41.790Z",
+  "title": "Design System: Canovelles BC · Opció 4",
+  "extensions": {
+    "colorMeta": {
+      "cabinet": {
+        "role": "neutral",
+        "displayName": "Cabinet Graphite",
+        "canonical": "#14161a",
+        "tonalRamp": [
+          "#090b0f",
+          "#14161a",
+          "#222428",
+          "#3d4044",
+          "#5b5e63",
+          "#7b7d83",
+          "#9c9ea4",
+          "#c1c4ca"
+        ]
+      },
+      "bezel": {
+        "role": "neutral",
+        "displayName": "Bezel Steel",
+        "canonical": "#24272d",
+        "tonalRamp": [
+          "#090b10",
+          "#14161a",
+          "#24272d",
+          "#33373f",
+          "#5a5e65",
+          "#7a7d85",
+          "#9b9ea6",
+          "#c0c4cc"
+        ]
+      },
+      "bezel-hi": {
+        "role": "neutral",
+        "displayName": "Bezel Highlight",
+        "canonical": "#33373f",
+        "tonalRamp": [
+          "#080b12",
+          "#20242c",
+          "#33373f",
+          "#3c4048",
+          "#595e66",
+          "#797d87",
+          "#9a9fa8",
+          "#bfc4ce"
+        ]
+      },
+      "window": {
+        "role": "neutral",
+        "displayName": "Window Black",
+        "canonical": "#0a0b0d",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#1d1f24",
+          "#232426",
+          "#3e4042",
+          "#5c5e60",
+          "#7c7d80",
+          "#9d9ea1",
+          "#c2c4c7"
+        ]
+      },
+      "bulb-off": {
+        "role": "neutral",
+        "displayName": "Unlit Bulb",
+        "canonical": "#2a2620",
+        "tonalRamp": [
+          "#0e0b06",
+          "#1f1a10",
+          "#2a2620",
+          "#433f39",
+          "#5a4a2a",
+          "#817c75",
+          "#a39e96",
+          "#c9c3bb"
+        ]
+      },
+      "amber": {
+        "role": "primary",
+        "displayName": "Bulb Amber",
+        "canonical": "#ffb21f",
+        "tonalRamp": [
+          "#1f1a10",
+          "#3d2f14",
+          "#5a4a2a",
+          "#806426",
+          "#a5843a",
+          "#d49a22",
+          "#ffb21f",
+          "#ffd77a"
+        ]
+      },
+      "amber-dim": {
+        "role": "primary",
+        "displayName": "Dim Amber",
+        "canonical": "#a5843a",
+        "tonalRamp": [
+          "#1f1a10",
+          "#3d2f14",
+          "#5a4a2a",
+          "#806426",
+          "#a5843a",
+          "#d49a22",
+          "#ffb21f",
+          "#ffd77a"
+        ]
+      },
+      "red": {
+        "role": "secondary",
+        "displayName": "Foul Red",
+        "canonical": "#ff4a2e",
+        "tonalRamp": [
+          "#3a0a04",
+          "#651206",
+          "#93200c",
+          "#c92c14",
+          "#e33b20",
+          "#ff4a2e",
+          "#ff7a63",
+          "#ffb7a6"
+        ]
+      },
+      "red-deep": {
+        "role": "secondary",
+        "displayName": "Skirt Red",
+        "canonical": "#c92c14",
+        "tonalRamp": [
+          "#3a0a04",
+          "#651206",
+          "#93200c",
+          "#c92c14",
+          "#e33b20",
+          "#ff4a2e",
+          "#ff7a63",
+          "#ffb7a6"
+        ]
+      },
+      "vinyl": {
+        "role": "neutral",
+        "displayName": "Vinyl White",
+        "canonical": "#f2efe6",
+        "tonalRamp": [
+          "#26241d",
+          "#424038",
+          "#605d56",
+          "#807d75",
+          "#a19e96",
+          "#bdb8aa",
+          "#d9d5ca",
+          "#f2efe6"
+        ]
+      },
+      "vinyl-soft": {
+        "role": "neutral",
+        "displayName": "Vinyl Soft",
+        "canonical": "#bdb8aa",
+        "tonalRamp": [
+          "#282419",
+          "#443f34",
+          "#625d51",
+          "#827d70",
+          "#a39e91",
+          "#bdb8aa",
+          "#d4cfc1",
+          "#f3eee0"
+        ]
+      },
+      "home": {
+        "role": "tertiary",
+        "displayName": "Home Blue",
+        "canonical": "#2b5cff",
+        "tonalRamp": [
+          "#0c0058",
+          "#080085",
+          "#0a1bb5",
+          "#1a42e5",
+          "#2b5cff",
+          "#538eff",
+          "#7bb9ff",
+          "#ace8ff"
+        ]
+      },
+      "housing": {
+        "role": "neutral",
+        "displayName": "Housing Black",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000",
+          "#0a0b0d",
+          "#111215",
+          "#1d1f24",
+          "#24272d",
+          "#33373f",
+          "#3a3e46",
+          "#5b5e63"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Clock Digits",
+        "purpose": "The FUNDACIÓ clock and big board numbers, always inside a window."
+      },
+      "headline": {
+        "displayName": "Period Plate",
+        "purpose": "Period titles and the page H1, uppercase vinyl."
+      },
+      "title": {
+        "displayName": "Lead Plate",
+        "purpose": "The opening line of each period."
+      },
+      "readout": {
+        "displayName": "Readout",
+        "purpose": "Period tags, rail clock, table figures, console output."
+      },
+      "body": {
+        "displayName": "Running Text",
+        "purpose": "Everything a parent reads; max 52ch."
+      },
+      "label": {
+        "displayName": "Vinyl Label",
+        "purpose": "Every uppercase plate, nav plate and button label."
+      }
+    },
+    "shadows": [
+      {
+        "name": "cabinet-lift",
+        "value": "inset 0 2px 0 #33373f, 0 30px 60px -30px rgb(0 0 0 / 0.9)",
+        "purpose": "Board and every period cabinet."
+      },
+      {
+        "name": "window-recess",
+        "value": "inset 0 2px 6px rgb(0 0 0 / 0.9)",
+        "purpose": "Every bulb window."
+      },
+      {
+        "name": "input-recess",
+        "value": "inset 0 2px 5px rgb(0 0 0 / 0.8)",
+        "purpose": "Form fields."
+      },
+      {
+        "name": "push-skirt",
+        "value": "0 6px 0 #c92c14, 0 10px 18px rgb(0 0 0 / 0.55), inset 0 -4px 0 rgb(0 0 0 / 0.18)",
+        "purpose": "Red push cap at rest."
+      },
+      {
+        "name": "push-pressed",
+        "value": "0 1px 0 #c92c14, 0 3px 6px rgb(0 0 0 / 0.55)",
+        "purpose": "Red push cap on :active, with translateY(5px)."
+      },
+      {
+        "name": "key",
+        "value": "inset 0 -4px 0 rgb(0 0 0 / 0.22), 0 6px 12px rgb(0 0 0 / 0.55)",
+        "purpose": "Console key at rest (rail CTA uses a 3px/4px 10px variant)."
+      },
+      {
+        "name": "lamp-bezel",
+        "value": "0 0 0 3px #33373f",
+        "purpose": "Steel ring around each lamp housing."
+      }
+    ],
+    "motion": [
+      {
+        "name": "press",
+        "value": "0.08s linear",
+        "purpose": "Push cap and keys travelling on :active."
+      },
+      {
+        "name": "plate-swap",
+        "value": "0.15s linear",
+        "purpose": "Background and color swap on vinyl plates and outline buttons."
+      },
+      {
+        "name": "led-blink",
+        "value": "1.2s steps(1) infinite",
+        "purpose": "Rail CTA LED."
+      },
+      {
+        "name": "wait-blink",
+        "value": "1.6s steps(1) infinite",
+        "purpose": "VISITANT 00 waiting digits."
+      },
+      {
+        "name": "lamp-step",
+        "value": "260ms per lamp, no transition",
+        "purpose": "Lamp panels switching on one by one."
+      },
+      {
+        "name": "bulb-rows",
+        "value": "600ms total, rows top to bottom, 16ms ticks",
+        "purpose": "Bulb photo switching on."
+      },
+      {
+        "name": "photo-swap",
+        "value": "opacity 0.35s steps(4)",
+        "purpose": "Bulb matrix to real photo."
+      },
+      {
+        "name": "row-lit",
+        "value": "background-color 0.2s steps(2)",
+        "purpose": "Players table row lighting."
+      },
+      {
+        "name": "count-tick",
+        "value": "setInterval integer steps over about 1.4s",
+        "purpose": "Digits counting up like a clock."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "560px"
+      },
+      {
+        "name": "board-stack",
+        "value": "620px"
+      },
+      {
+        "name": "signup-stack",
+        "value": "900px"
+      },
+      {
+        "name": "rail-two-row",
+        "value": "980px"
+      },
+      {
+        "name": "rail-crest-only",
+        "value": "1180px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Push Button (TEMPS MORT)",
+      "kind": "button",
+      "refersTo": "push-cap",
+      "description": "Red hardware push button for every pre-registration call.",
+      "html": "<a class=\"ds-push\" href=\"#\"><span class=\"ds-push__cap\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></span><span class=\"ds-push__label\"><b>Temps mort</b><span>Preinscripció 2025-26</span></span></a>",
+      "css": ".ds-push{display:inline-flex;align-items:center;gap:16px;color:var(--vinyl,#f2efe6);text-decoration:none;cursor:pointer}.ds-push__cap{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--red,#ff4a2e);border:5px solid #3a3d44;box-shadow:0 6px 0 var(--red-deep,#c92c14),0 10px 18px rgb(0 0 0/.55),inset 0 -4px 0 rgb(0 0 0/.18);transition:transform .08s linear,box-shadow .08s linear}.ds-push__cap svg{width:40%;fill:none;stroke:var(--vinyl,#f2efe6);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.ds-push__label{display:grid;gap:4px}.ds-push__label b{font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-size:30px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;line-height:.9}.ds-push__label span{font-size:16px;color:var(--vinyl-soft,#bdb8aa)}.ds-push:active .ds-push__cap{transform:translateY(5px);box-shadow:0 1px 0 var(--red-deep,#c92c14),0 3px 6px rgb(0 0 0/.55)}.ds-push:focus-visible{outline:none}.ds-push:focus-visible .ds-push__cap{outline:3px solid var(--amber,#ffb21f);outline-offset:4px}"
+    },
+    {
+      "name": "Rail CTA",
+      "kind": "button",
+      "refersTo": "rail-cta",
+      "description": "Compact red TEMPS MORT plate with a blinking LED on the rail.",
+      "html": "<a class=\"ds-cta\" href=\"#\"><span class=\"ds-cta__led\"></span>Temps mort</a>",
+      "css": ".ds-cta{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px;border-radius:3px;background:var(--red,#ff4a2e);color:var(--vinyl,#f2efe6);font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;box-shadow:inset 0 -3px 0 rgb(0 0 0/.22),0 4px 10px rgb(0 0 0/.5);transition:transform .08s linear,box-shadow .08s linear}.ds-cta:active{transform:translateY(2px);box-shadow:inset 0 -1px 0 rgb(0 0 0/.22),0 1px 3px rgb(0 0 0/.5)}.ds-cta:focus-visible{outline:3px solid var(--amber,#ffb21f);outline-offset:3px}.ds-cta__led{width:9px;height:9px;border-radius:50%;background:var(--amber,#ffb21f);animation:ds-blink 1.2s steps(1) infinite}@keyframes ds-blink{50%{background:#6b3b0a}}"
+    },
+    {
+      "name": "Vinyl Outline Button",
+      "kind": "button",
+      "refersTo": "vinyl-btn",
+      "description": "Secondary actions such as directions and email.",
+      "html": "<a class=\"ds-vinyl-btn\" href=\"#\">Com arribar-hi</a>",
+      "css": ".ds-vinyl-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:2px solid var(--vinyl,#f2efe6);border-radius:3px;color:var(--vinyl,#f2efe6);font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:21px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background-color .15s linear,color .15s linear}.ds-vinyl-btn:hover{background:var(--vinyl,#f2efe6);color:var(--window,#0a0b0d)}.ds-vinyl-btn:focus-visible{outline:3px solid var(--amber,#ffb21f);outline-offset:3px}"
+    },
+    {
+      "name": "Nav Vinyl Plate",
+      "kind": "nav",
+      "refersTo": "nav-plate",
+      "description": "Rail navigation: vinyl plates carrying dot-matrix period chips.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\"><span class=\"ds-nav__p\">P1</span>El club</a><a href=\"#\"><span class=\"ds-nav__p\">P2</span>Escola</a><a href=\"#\"><span class=\"ds-nav__p\">P3</span>Grups</a><a href=\"#\"><span class=\"ds-nav__p\">P4</span>On som</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:12px;padding:12px;background:var(--bezel,#24272d)}.ds-nav a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px 0 4px;border:2px solid #000;border-radius:3px;background:var(--vinyl,#f2efe6);color:var(--window,#0a0b0d);font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background-color .15s linear}.ds-nav a:hover{background:var(--amber,#ffb21f)}.ds-nav a:focus-visible{outline:3px solid var(--amber,#ffb21f);outline-offset:3px}.ds-nav__p{padding:2px 5px;border-radius:2px;background:var(--window,#0a0b0d);color:var(--red,#ff4a2e);font-family:var(--font-dot,'Doto Variable',monospace);font-size:15px;font-weight:900}"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Recessed black form field with an amber focus border.",
+      "html": "<label class=\"ds-field\"><span>Nom i cognoms</span><input placeholder=\"Nom\"></label>",
+      "css": ".ds-field{display:grid;gap:6px;color:var(--vinyl,#f2efe6);font-family:var(--font-body,'Sofia Sans Variable',system-ui,sans-serif);font-weight:700}.ds-field input{min-height:52px;padding:12px 14px;border:2px solid #000;border-radius:3px;background:var(--window,#0a0b0d);color:var(--vinyl,#f2efe6);font:500 18px/1.3 var(--font-body,'Sofia Sans Variable',system-ui,sans-serif);box-shadow:inset 0 2px 5px rgb(0 0 0/.8);transition:border-color .15s linear}.ds-field input::placeholder{color:#938e82}.ds-field input:hover{border-color:var(--bezel-hi,#33373f)}.ds-field input:focus-visible{outline:none;border-color:var(--amber,#ffb21f)}"
+    },
+    {
+      "name": "Bulb Window",
+      "kind": "card",
+      "refersTo": "window",
+      "description": "Black dot-grid window that holds every Doto figure.",
+      "html": "<div class=\"ds-window\"><span class=\"ds-dots\">19:95</span></div>",
+      "css": ".ds-window{display:inline-block;padding:14px 22px;background-color:var(--window,#0a0b0d);background-image:radial-gradient(circle,var(--bulb-off,#2a2620) 0 32%,transparent 38%);background-size:9px 9px;border:3px solid #000;border-radius:4px;box-shadow:inset 0 2px 6px rgb(0 0 0/.9)}.ds-dots{font-family:var(--font-dot,'Doto Variable',monospace);font-weight:900;font-size:96px;line-height:1;letter-spacing:.02em;color:var(--amber,#ffb21f);font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Cabinet Module",
+      "kind": "card",
+      "refersTo": "cabinet",
+      "description": "The raised steel module every period lives in.",
+      "html": "<section class=\"ds-cabinet\"><header class=\"ds-cabinet__head\"><span class=\"ds-cabinet__tag\">P1</span><h2>El club</h2><span class=\"ds-cabinet__plate\">Local · des de 1995</span></header><p>Som un club petit, però els nostres jugadors són molt grans.</p></section>",
+      "css": ".ds-cabinet{display:grid;gap:32px;padding:32px;background:var(--bezel,#24272d);border:3px solid #000;border-radius:6px;box-shadow:inset 0 2px 0 var(--bezel-hi,#33373f),0 30px 60px -30px rgb(0 0 0/.9);color:var(--vinyl,#f2efe6);font-family:var(--font-body,'Sofia Sans Variable',system-ui,sans-serif)}.ds-cabinet__head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}.ds-cabinet__tag{padding:8px 12px;background:#0a0b0d radial-gradient(circle,#2a2620 0 32%,transparent 38%) 0 0/9px 9px;border:3px solid #000;border-radius:4px;font-family:var(--font-dot,'Doto Variable',monospace);font-weight:900;font-size:36px;line-height:1;color:var(--red,#ff4a2e)}.ds-cabinet h2{margin:0;font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-size:72px;font-weight:850;line-height:.85;letter-spacing:.04em;text-transform:uppercase}.ds-cabinet__plate{margin-left:auto;padding:6px 12px 5px;background:var(--vinyl,#f2efe6);color:var(--window,#0a0b0d);font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase}.ds-cabinet p{margin:0}"
+    },
+    {
+      "name": "Lamp Panel",
+      "kind": "custom",
+      "refersTo": "lamp",
+      "description": "Values and escola steps as panel lamps that switch on one by one.",
+      "html": "<ul class=\"ds-lamps\"><li class=\"is-lit\"><span class=\"ds-lamp\"></span><b>Respecte</b><span>Rival, àrbitre i company.</span></li><li><span class=\"ds-lamp\"></span><b>Esforç</b><span>Cada entrenament compta.</span></li></ul>",
+      "css": ".ds-lamps{margin:0;padding:16px;list-style:none;background:var(--window,#0a0b0d);border:3px solid #000;border-radius:4px;font-family:var(--font-body,'Sofia Sans Variable',system-ui,sans-serif)}.ds-lamps li{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;padding-block:12px;border-top:1px solid #1d1f24}.ds-lamp{grid-row:span 2;width:30px;height:30px;border-radius:50%;background:var(--bulb-off,#2a2620);border:4px solid #000;box-shadow:0 0 0 3px var(--bezel-hi,#33373f)}.ds-lamps b{font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:24px;letter-spacing:.04em;text-transform:uppercase;color:var(--vinyl,#f2efe6)}.ds-lamps li>span:last-child{font-size:16px;color:var(--vinyl-soft,#bdb8aa)}.ds-lamps li.is-lit .ds-lamp{background:var(--amber,#ffb21f)}.ds-lamps li.is-lit b{color:var(--amber,#ffb21f)}"
+    },
+    {
+      "name": "Bulb Photo Toggle",
+      "kind": "button",
+      "refersTo": "bulb-toggle",
+      "description": "aria-pressed toggle between the bulb matrix and the real photo.",
+      "html": "<button class=\"ds-bulb-toggle\" type=\"button\" aria-pressed=\"false\">Veure la foto</button>",
+      "css": ".ds-bulb-toggle{min-height:40px;padding:0 12px;border:2px solid var(--vinyl-soft,#bdb8aa);border-radius:3px;background:var(--window,#0a0b0d);color:var(--vinyl,#f2efe6);font-family:var(--font-plate,'Sofia Sans Extra Condensed Variable','Arial Narrow',sans-serif);font-weight:800;font-size:17px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:background-color .15s linear,color .15s linear}.ds-bulb-toggle:hover{background:var(--vinyl,#f2efe6);color:var(--window,#0a0b0d)}.ds-bulb-toggle[aria-pressed=true]{border-color:var(--amber,#ffb21f);color:var(--amber,#ffb21f)}.ds-bulb-toggle:focus-visible{outline:3px solid var(--amber,#ffb21f);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pavelló Scoreboard",
+    "overview": "Every surface is a module of one lacquered steel cabinet: the scoreboard hanging in the Pavelló Municipal de Canovelles. Information lives in black bulb windows where unlit dots are always visible behind the lit ones, names and labels are white vinyl-cut plates stuck onto the steel, and the one blue vinyl stripe marks the home side. Scroll is the game clock: the rail reads PERÍODE and a 40-minute clock that advances with the page, and each section is a numbered period (P1 El club, P2 L'escola, P3 Els grups, P4 On som, then PRÒRROGA).\n\nThe board is dense and physical but never decorative for its own sake. Depth is the depth of real hardware: recessed windows, a raised bezel lip, rivets, a push button with a skirt that travels when pressed. Light is literal: bulbs are dots that are on or off, never glowing halos. Motion is mechanical: digits tick, lamps switch on one at a time, bulb rows light top to bottom, and nothing eases or slides.\n\nPhotography is not a hero. Club photos are rendered as the board's own amber bulb matrix and resolve into the real photo only when someone asks with the toggle.",
+    "keyCharacteristics": [
+      "Graphite cabinet, black windows, amber and red bulbs, white vinyl plates, one home-blue stripe.",
+      "Doto dot-matrix for every number and readout; Sofia Sans Extra Condensed for vinyl plates; Sofia Sans for running text.",
+      "Unlit bulbs always visible behind lit ones (dot-grid windows, dim lamp housings, off dots in the canvas).",
+      "Stepped, linear, or instant motion only; no easing curves, no sliding.",
+      "Physical depth: recessed windows, raised cabinets, a travelling push button."
+    ],
+    "rules": [
+      {
+        "name": "The Bulbs-Are-Light Rule",
+        "body": "Amber and red are bulb colors; they sit on Window Black or Bezel Steel. The only exceptions are the red push button and red rail CTA (painted hardware) and the amber nav-plate hover.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Stripe Rule",
+        "body": "Home Blue marks the home side only. It never becomes a link, a button or a text color.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dots-Are-Data Rule",
+        "body": "Doto is used only for figures and short scoreboard readouts in uppercase, always inside a window. Sentences are never set in Doto.",
+        "section": "typography"
+      },
+      {
+        "name": "The Plate Rule",
+        "body": "Outside Doto readouts, any uppercase label is a vinyl plate (Extra Condensed 800, 0.04em). There is no other uppercase style.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Glow Rule",
+        "body": "Lit means filled with amber or red. No blurred colored shadows, no text-shadow, no neon.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Press-Travels Rule",
+        "body": "Pressable hardware (push cap, keys) translates down on :active and its shadow shortens; nothing else moves.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put every number and readout in Doto inside a dot-grid window, with the unlit bulbs visible behind it.",
+      "Do make every uppercase label a vinyl plate (Extra Condensed 800, 0.04em, 3px corners).",
+      "Do give every new section its own cabinet module with a window period tag and a plate headline.",
+      "Do animate with steps(), linear 0.08–0.15s, or setTimeout ticks; honour prefers-reduced-motion by jumping straight to the end state.",
+      "Do route every pre-registration call through the red push button or the rail CTA."
+    ],
+    "donts": [
+      "Don't add gradients other than the unlit-bulb dot grid.",
+      "Don't add glows, neon, text-shadow or colored blurred shadows; a lit bulb is a filled dot.",
+      "Don't use easing curves or sliding/translate entrances; the only translation is a pressed button travelling down.",
+      "Don't show a club photo as a plain hero image; photos enter as a Bulb Photo.",
+      "Don't use Home Blue for anything except the home-side plate.",
+      "Don't set sentences in Doto, or body copy in the condensed plate face."
+    ]
+  }
+}

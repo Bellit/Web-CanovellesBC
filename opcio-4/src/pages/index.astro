@@ -1,0 +1,992 @@
+---
+import Base from '../layouts/Base.astro';
+import BulbPhoto from '../components/BulbPhoto.astro';
+import { club, grups, valors, nascuts } from '../data/club';
+import { url } from '../lib/url';
+import fotoEscola from '../assets/fotos/canovelles-blue-3.jpg';
+import fotoEquip from '../assets/fotos/home-blue-mini.png';
+import fotoJoc from '../assets/fotos/canovelles-blue-2.jpg';
+
+const sigles = { masc: 'M', fem: 'F', mixt: 'MX' } as const;
+---
+
+<Base>
+  <main id="principal">
+    <section class="board-wrap" data-period="1" aria-labelledby="titol">
+      <div class="wrap">
+        <div class="board">
+          <span class="rivet board__r1"></span><span class="rivet board__r2"></span>
+          <span class="rivet board__r3"></span><span class="rivet board__r4"></span>
+
+          <div class="side side--home">
+            <p class="side__plate plate">Local</p>
+            <div class="side__team">
+              <img src={url('/escut.svg')} alt="" width="64" height="58" />
+              <h1 id="titol" class="dots side__name">
+                <span aria-hidden="true">CANOVELLES BC</span>
+                <span class="sr">Canovelles Bàsquet Club</span>
+              </h1>
+            </div>
+            <div class="score">
+              <span class="window score__win"><span class="dots score__num" data-count={club.equips}>{club.equips}</span></span>
+              <span class="plate score__label">Equips</span>
+            </div>
+          </div>
+
+          <div class="centre">
+            <p class="plate centre__label">Fundació</p>
+            <div class="window centre__clock">
+              <span class="dots" data-clock="19:95">19:95</span>
+            </div>
+            <div class="centre__row">
+              <div>
+                <p class="plate centre__label">Període</p>
+                <span class="window mini"><span class="dots mini__num mini__num--red">1</span></span>
+              </div>
+              <div>
+                <p class="plate centre__label">Escola</p>
+                <span class="window mini"><span class="dots mini__num" data-count={club.escola}>{club.escola}</span></span>
+              </div>
+            </div>
+            <a class="push centre__push" href={url('/preinscripcio/')}>
+              <span class="push__cap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></span>
+              <span class="push__label"><b>Temps mort</b><span>Preinscripció {club.temporada}</span></span>
+            </a>
+          </div>
+
+          <div class="side side--away">
+            <p class="side__plate side__plate--away plate">Visitant</p>
+            <p class="dots side__name side__name--away">LA TEVA FAMÍLIA</p>
+            <div class="score">
+              <span class="window score__win"><span class="dots score__num score__num--wait">00</span></span>
+              <span class="plate score__label">Hi falteu vosaltres</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tunnel">
+          <p class="tunnel__text">
+            Bàsquet a Canovelles des de {club.fundacio}. Escola des del {club.escola} i {club.equips} equips, de l’Escoleta
+            als veterans, al {club.adreca.pavello}.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="period" id="club" data-period="1" aria-labelledby="club-titol">
+      <div class="wrap">
+        <div class="cabinet">
+          <header class="period__head">
+            <span class="window period__tag"><span class="dots">P1</span></span>
+            <h2 id="club-titol" class="plate">El club</h2>
+            <span class="plate period__plate">Local · des de {club.fundacio}</span>
+          </header>
+          <BulbPhoto src={fotoEquip} alt="Un equip femení del club fa pinya amb l’entrenadora a la pista del pavelló." ratio="21 / 9" focus="50% 40%" pitch={10} />
+          <div class="club-row">
+            <div class="period__text">
+              <p class="lead">Som un club petit, però els nostres jugadors són molt grans.</p>
+              <p>Va néixer el {club.fundacio} a Canovelles. No som una acadèmia d’elit: som un club de barri on els pares, els entrenadors i els jugadors es coneixen pel nom.</p>
+            </div>
+            <div class="lamps-panel">
+              <p class="plate lamps-panel__title">Valors</p>
+              <ul class="lamps" data-lamps>
+                {
+                  valors.map((v) => (
+                    <li>
+                      <span class="lamp" aria-hidden="true" />
+                      <span class="plate lamps__name">{v.nom}</span>
+                      <span class="lamps__text">{v.text}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="period" id="escola" data-period="2" aria-labelledby="escola-titol">
+      <div class="wrap">
+        <div class="cabinet">
+          <header class="period__head">
+            <span class="window period__tag"><span class="dots">P2</span></span>
+            <h2 id="escola-titol" class="plate">L’escola</h2>
+            <span class="plate period__plate">Des del {club.escola}</span>
+          </header>
+          <div class="escola-row">
+            <div class="period__text">
+              <p class="lead">Des del març del {club.escola}, els més petits aprenen a jugar sense pressa.</p>
+              <ol class="steps" data-lamps>
+                <li>
+                  <span class="lamp" aria-hidden="true"></span>
+                  <span class="plate steps__name">Escoleta</span>
+                  <span class="steps__text">El primer contacte amb la pilota, jugant.</span>
+                </li>
+                <li>
+                  <span class="lamp" aria-hidden="true"></span>
+                  <span class="plate steps__name">Escobol</span>
+                  <span class="steps__text">Les primeres normes i els primers partits. El resultat és el que menys importa.</span>
+                </li>
+                <li>
+                  <span class="lamp" aria-hidden="true"></span>
+                  <span class="plate steps__name">Pre-Mini i Mini</span>
+                  <span class="steps__text">Competició federada adaptada a l’edat.</span>
+                </li>
+              </ol>
+            </div>
+            <BulbPhoto src={fotoEscola} alt="Una entrenadora apunta una jugada mentre els nens l’escolten." ratio="1 / 1" pitch={7} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="period" id="grups" data-period="3" aria-labelledby="grups-titol">
+      <div class="wrap">
+        <div class="cabinet">
+        <header class="period__head">
+          <span class="window period__tag"><span class="dots">P3</span></span>
+          <h2 id="grups-titol" class="plate">Els grups</h2>
+        </header>
+
+        <div class="console">
+          <form class="console__form" id="console" autocomplete="off">
+            <label class="plate" for="console-any">Any de naixement</label>
+            <div class="console__row">
+              <input class="window dots" id="console-any" inputmode="numeric" maxlength="4" placeholder="2017" aria-describedby="console-out" />
+              <button class="console__enter plate" type="submit">Entra</button>
+            </div>
+          </form>
+          <div class="console__out window" aria-live="polite">
+            <p class="dots" id="console-out">ESCRIU L’ANY</p>
+          </div>
+          <a class="console__go plate" id="console-go" href={url('/preinscripcio/')} hidden>
+            Preinscripció a aquest grup
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+
+        <div class="panel">
+          <table>
+            <caption class="plate">Jugadors · Local · Temporada {club.temporada}</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="plate">Núm.</th>
+                <th scope="col" class="plate">Grup</th>
+                <th scope="col" class="plate">Nascuts</th>
+                <th scope="col" class="plate">Equips</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                grups.map((g) => (
+                  <tr data-row={g.nom}>
+                    <td class="dots panel__num">{String(g.num).padStart(2, '0')}</td>
+                    <th scope="row" class="panel__name">
+                      {g.nom}
+                      <span class="panel__note">{g.nota}</span>
+                    </th>
+                    <td class="dots panel__years">{nascuts(g.anys)}</td>
+                    <td class="dots panel__teams">{g.equips.map((e) => sigles[e]).join(' ')}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <p class="panel__foot">M masculí · F femení · MX mixt. Anys orientatius, pendents de confirmar pel club.</p>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="period" id="on-som" data-period="4" aria-labelledby="onsom-titol">
+      <div class="wrap">
+        <div class="cabinet">
+          <header class="period__head">
+            <span class="window period__tag"><span class="dots">P4</span></span>
+            <h2 id="onsom-titol" class="plate">On som</h2>
+            <span class="plate period__plate">Juguem a casa</span>
+          </header>
+          <p class="venue window"><span class="dots">PAVELLÓ MUNICIPAL</span></p>
+          <div class="onsom-row">
+            <div class="period__text">
+              <p class="lead">{club.adreca.pavello}</p>
+              <address>{club.adreca.carrer}<br />{club.adreca.cp} {club.adreca.poblacio}</address>
+              <p>Hi entrenem i hi juguem els partits a casa. Els horaris de cada grup es comuniquen en fer la preinscripció.</p>
+              <div class="links">
+                <a class="vinyl-btn plate" href={club.adreca.mapa} rel="noopener">Com arribar-hi</a>
+                <a class="vinyl-btn plate" href={`mailto:${club.correus.general}`}>Escriu-nos</a>
+              </div>
+            </div>
+            <BulbPhoto src={fotoJoc} alt="Un jugador sènior del club entra a cistella en un partit." ratio="4 / 5" focus="35% 40%" pitch={8} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overtime" data-period="P" aria-labelledby="final-titol">
+      <div class="wrap overtime__in">
+        <div class="window overtime__win">
+          <p class="dots overtime__dots" aria-hidden="true">PRÒRROGA</p>
+        </div>
+        <div class="overtime__text">
+          <h2 id="final-titol" class="plate">Ara jugueu vosaltres</h2>
+          <p>Omple la preinscripció i et responem amb l’horari i la quota del seu grup. No cal pagar res ara.</p>
+          <a class="push" href={url('/preinscripcio/')}>
+            <span class="push__cap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg></span>
+            <span class="push__label"><b>Temps mort</b><span>Preinscripció {club.temporada}</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  import { grupPerAny } from '../data/club';
+  import { url } from '../lib/url';
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // En engegar el marcador, els números compten sense suavitzar, com un rellotge.
+  if (!reduce) {
+    document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+      const end = Number(el.dataset.count);
+      const from = end > 100 ? end - 26 : 0;
+      let v = from;
+      el.textContent = String(v);
+      const t = setInterval(() => {
+        v++;
+        el.textContent = String(v).padStart(String(end).length, '0');
+        if (v >= end) clearInterval(t);
+      }, 1400 / (end - from));
+    });
+    document.querySelectorAll<HTMLElement>('[data-clock]').forEach((el) => {
+      const [m, s] = el.dataset.clock!.split(':').map(Number);
+      const total = m * 100 + s;
+      let v = 0;
+      const t = setInterval(() => {
+        v = Math.min(total, v + 37);
+        el.textContent = `${String(Math.floor(v / 100)).padStart(2, '0')}:${String(v % 100).padStart(2, '0')}`;
+        if (v >= total) clearInterval(t);
+      }, 28);
+    });
+  }
+
+  // Panells de llums: s'encenen d'un en un, sense suavitzar, quan el període entra a la pantalla.
+  document.querySelectorAll<HTMLElement>('[data-lamps]').forEach((list) => {
+    const items = [...list.children] as HTMLElement[];
+    const light = () => {
+      if (reduce) return list.classList.add('is-lit');
+      items.forEach((li, i) => setTimeout(() => li.classList.add('is-lit'), i * 260));
+    };
+    new IntersectionObserver(
+      (entries, io) => {
+        if (!entries[0].isIntersecting) return;
+        light();
+        io.disconnect();
+      },
+      { threshold: 0.4 },
+    ).observe(list);
+  });
+
+  // Consola de la taula: l'any encén la fila del grup.
+  const form = document.getElementById('console') as HTMLFormElement;
+  const input = document.getElementById('console-any') as HTMLInputElement;
+  const out = document.getElementById('console-out')!;
+  const go = document.getElementById('console-go') as HTMLAnchorElement;
+  const rows = [...document.querySelectorAll<HTMLTableRowElement>('[data-row]')];
+
+  input.addEventListener('input', () => {
+    input.value = input.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    rows.forEach((r) => r.classList.remove('is-lit'));
+    go.hidden = true;
+    const v = input.value;
+    if (!/^\d{4}$/.test(v)) {
+      out.textContent = 'QUATRE XIFRES';
+      out.dataset.state = 'error';
+      return;
+    }
+    const g = grupPerAny(Number(v));
+    if (!g) {
+      out.textContent = 'ENCARA NO: ESCOLETA 2022';
+      out.dataset.state = 'error';
+      return;
+    }
+    out.dataset.state = 'ok';
+    out.textContent = `${v} > ${g.nom.toUpperCase()}`;
+    const row = rows.find((r) => r.dataset.row === g.nom);
+    row?.classList.add('is-lit');
+    row?.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    go.href = `${url('/preinscripcio/')}?any=${v}&grup=${encodeURIComponent(g.nom)}`;
+    go.hidden = false;
+  });
+</script>
+
+<style>
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Marcador */
+  .board-wrap {
+    padding-block: clamp(24px, 4vw, 56px) clamp(56px, 7vw, 96px);
+  }
+  .board {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: clamp(20px, 3vw, 48px);
+    padding: clamp(28px, 4vw, 56px) clamp(20px, 3.4vw, 48px);
+    background: var(--bezel);
+    border: 3px solid #000;
+    border-radius: 6px;
+    box-shadow:
+      inset 0 2px 0 var(--bezel-hi),
+      0 30px 60px -30px rgb(0 0 0 / 0.9);
+  }
+  .rivet {
+    position: absolute;
+  }
+  .board__r1 {
+    top: 12px;
+    left: 12px;
+  }
+  .board__r2 {
+    top: 12px;
+    right: 12px;
+  }
+  .board__r3 {
+    bottom: 12px;
+    left: 12px;
+  }
+  .board__r4 {
+    bottom: 12px;
+    right: 12px;
+  }
+  .side {
+    display: grid;
+    align-content: space-between;
+    gap: 20px;
+  }
+  .side__plate {
+    justify-self: start;
+    padding: 6px 14px 5px;
+    background: var(--home);
+    color: var(--vinyl);
+    font-size: clamp(20px, 1.8vw, 26px);
+  }
+  .side__plate--away {
+    justify-self: end;
+    background: var(--vinyl);
+    color: var(--window);
+  }
+  .side__team {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .side__team img {
+    width: clamp(48px, 5vw, 68px);
+    flex: none;
+  }
+  .side__team {
+    min-width: 0;
+  }
+  .side__name {
+    font-size: clamp(24px, 2.5vw, 38px);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    color: var(--amber);
+  }
+  .side__name--away {
+    text-align: right;
+    color: var(--vinyl);
+  }
+  .side--away .score {
+    justify-items: end;
+  }
+  .score {
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+  }
+  .score__win {
+    display: inline-block;
+    padding: 10px 18px;
+  }
+  .score__num {
+    font-size: clamp(64px, 9vw, 132px);
+    color: var(--red);
+  }
+  .score__num--wait {
+    color: var(--bulb-off);
+    animation: wait 1.6s steps(1) infinite;
+  }
+  @keyframes wait {
+    50% {
+      color: #5a4a2a;
+    }
+  }
+  .score__label {
+    font-size: 18px;
+    color: var(--vinyl-soft);
+  }
+  .centre {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 10px;
+  }
+  .centre__label {
+    font-size: 16px;
+    color: var(--vinyl-soft);
+    text-align: center;
+  }
+  .centre__clock {
+    padding: 14px 22px;
+  }
+  .centre__clock .dots {
+    font-size: clamp(72px, 10vw, 150px);
+    letter-spacing: 0.02em;
+  }
+  .centre__row {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+  }
+  .centre__push {
+    margin-top: 18px;
+  }
+  .centre__row > div {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+  }
+  .mini {
+    display: inline-block;
+    padding: 6px 12px;
+  }
+  .mini__num {
+    font-size: clamp(30px, 3vw, 44px);
+  }
+  .mini__num--red {
+    color: var(--red);
+  }
+
+  .tunnel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 48px;
+    margin-top: clamp(28px, 4vw, 48px);
+  }
+  .tunnel__text {
+    max-width: 52ch;
+    font-size: clamp(19px, 1.5vw, 23px);
+    color: var(--vinyl);
+  }
+
+  /* Períodes */
+  .period {
+    padding-block: clamp(48px, 6vw, 88px);
+    border-top: 3px solid #000;
+    box-shadow: inset 0 1px 0 var(--bezel);
+  }
+  /* Cada període és un altre mòdul de la mateixa caixa del marcador. */
+  .cabinet {
+    display: grid;
+    gap: clamp(24px, 3vw, 40px);
+    padding: clamp(20px, 3vw, 40px);
+    background: var(--bezel);
+    border: 3px solid #000;
+    border-radius: 6px;
+    box-shadow:
+      inset 0 2px 0 var(--bezel-hi),
+      0 30px 60px -30px rgb(0 0 0 / 0.9);
+  }
+  .period__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+  }
+  .period__plate {
+    margin-left: auto;
+    padding: 6px 12px 5px;
+    background: var(--vinyl);
+    color: var(--window);
+    font-size: clamp(16px, 1.4vw, 20px);
+  }
+  .club-row {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+  .escola-row {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+  .onsom-row {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: end;
+  }
+  .venue {
+    margin: 0;
+    padding: clamp(14px, 2vw, 24px);
+    overflow: hidden;
+    text-align: center;
+  }
+  .venue .dots {
+    font-size: clamp(30px, 6.4vw, 96px);
+    white-space: nowrap;
+  }
+
+  /* Panell de llums: cada valor és una bombeta que s'encén en arribar-hi. */
+  .lamps-panel {
+    padding: clamp(14px, 2vw, 22px);
+    background: var(--window);
+    border: 3px solid #000;
+    border-radius: 4px;
+  }
+  .lamps-panel__title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--vinyl-soft);
+  }
+  .lamps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(16px, 2vw, 28px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lamps li,
+  .steps li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    padding-block: 12px;
+    border-top: 1px solid #1d1f24;
+  }
+  /* Llum de panell: bombeta dins d'una carcassa de xapa. */
+  .lamp {
+    grid-row: span 2;
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: var(--bulb-off);
+    border: 4px solid #000;
+    box-shadow: 0 0 0 3px var(--bezel-hi);
+  }
+  .is-lit > li > .lamp,
+  .is-lit .lamp {
+    background: var(--amber);
+  }
+  .lamps__name,
+  .steps__name {
+    font-size: 24px;
+    color: var(--vinyl);
+  }
+  .is-lit .lamps__name,
+  .is-lit .steps__name {
+    color: var(--amber);
+  }
+  .lamps__text,
+  .steps__text {
+    font-size: 16px;
+    color: var(--vinyl-soft);
+  }
+  .period__tag {
+    padding: 8px 12px;
+  }
+  .period__tag .dots {
+    font-size: clamp(30px, 3vw, 42px);
+    color: var(--red);
+  }
+  .period__head h2 {
+    font-size: clamp(48px, 7vw, 104px);
+    font-weight: 850;
+    line-height: 0.85;
+  }
+  .period__text {
+    display: grid;
+    gap: 16px;
+    max-width: 52ch;
+  }
+  .lead {
+    font-family: var(--font-plate);
+    font-size: clamp(30px, 3vw, 44px);
+    font-weight: 750;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .period__text > p:not(.lead),
+  address {
+    color: var(--vinyl-soft);
+    font-style: normal;
+  }
+  address {
+    color: var(--vinyl);
+    font-size: clamp(19px, 1.5vw, 22px);
+  }
+
+  .steps {
+    display: grid;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Consola i panell de jugadors */
+  .console {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'form out'
+      'form go';
+    gap: 12px 24px;
+    align-items: end;
+    margin-bottom: 28px;
+    padding: 20px;
+    background: var(--bezel);
+    border: 3px solid #000;
+    border-radius: 4px;
+  }
+  .console__form {
+    grid-area: form;
+  }
+  .console__form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: var(--vinyl-soft);
+  }
+  .console__row {
+    display: flex;
+    gap: 10px;
+  }
+  .console__row input {
+    width: 5.6ch;
+    min-height: 64px;
+    padding: 0 12px;
+    font-size: 42px;
+    color: var(--amber);
+  }
+  .console__row input::placeholder {
+    color: #958775;
+  }
+  .console__row input:focus-visible {
+    outline-offset: 2px;
+  }
+  .console__enter {
+    min-height: 64px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--vinyl);
+    color: var(--window);
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow:
+      inset 0 -4px 0 rgb(0 0 0 / 0.22),
+      0 6px 12px rgb(0 0 0 / 0.55);
+    transition: transform 0.08s linear, box-shadow 0.08s linear;
+  }
+  .console__enter:active {
+    transform: translateY(3px);
+    box-shadow:
+      inset 0 -1px 0 rgb(0 0 0 / 0.22),
+      0 2px 4px rgb(0 0 0 / 0.55);
+  }
+  .console__out {
+    grid-area: out;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    overflow: hidden;
+  }
+  .console__out .dots {
+    font-size: clamp(22px, 2.6vw, 36px);
+    white-space: nowrap;
+  }
+  .console__out [data-state='error'] {
+    color: var(--red);
+  }
+  .console__go {
+    grid-area: go;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    color: var(--amber);
+    text-decoration: none;
+  }
+  .console__go svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .console__go:hover {
+    text-decoration: underline;
+  }
+
+  .panel {
+    padding: clamp(14px, 2vw, 24px);
+    background: var(--window);
+    border: 3px solid #000;
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  caption {
+    padding-bottom: 14px;
+    text-align: left;
+    font-size: 20px;
+    color: var(--vinyl-soft);
+  }
+  thead th {
+    padding: 0 12px 10px;
+    border-bottom: 2px solid var(--bezel-hi);
+    text-align: left;
+    font-size: 16px;
+    color: var(--vinyl-soft);
+  }
+  tbody tr {
+    transition: background-color 0.2s steps(2);
+  }
+  tbody td,
+  tbody th {
+    padding: 12px;
+    border-bottom: 1px solid #1d1f24;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .panel__num,
+  .panel__years,
+  .panel__teams {
+    font-size: clamp(24px, 2.4vw, 34px);
+    color: #a5843a;
+  }
+  .panel__name {
+    font-family: var(--font-plate);
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .panel__note {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--vinyl-soft);
+  }
+  tbody tr:hover .panel__num,
+  tbody tr:hover .panel__years,
+  tbody tr:hover .panel__teams {
+    color: var(--amber);
+  }
+  tr.is-lit {
+    background: #1f1a10;
+  }
+  tr.is-lit .panel__num,
+  tr.is-lit .panel__years,
+  tr.is-lit .panel__teams {
+    color: var(--amber);
+  }
+  tr.is-lit .panel__num {
+    color: var(--red);
+  }
+  tr.is-lit .panel__name {
+    color: var(--amber);
+  }
+  .panel__foot {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--vinyl-soft);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .vinyl-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 18px;
+    border: 2px solid var(--vinyl);
+    border-radius: 3px;
+    font-size: 21px;
+    text-decoration: none;
+    transition: background-color 0.15s linear, color 0.15s linear;
+  }
+  .vinyl-btn:hover {
+    background: var(--vinyl);
+    color: var(--window);
+  }
+
+  /* Pròrroga */
+  .overtime {
+    padding-block: clamp(56px, 7vw, 104px) 0;
+    border-top: 3px solid #000;
+  }
+  .overtime__in {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(28px, 4vw, 64px);
+    align-items: center;
+  }
+  .overtime__win {
+    padding: clamp(18px, 3vw, 40px) clamp(14px, 2vw, 28px);
+    overflow: hidden;
+  }
+  .overtime__dots {
+    font-size: clamp(40px, 7.4vw, 112px);
+    color: var(--red);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .overtime__text {
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+  .overtime h2 {
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.9;
+  }
+  .overtime__text p {
+    color: var(--vinyl-soft);
+  }
+
+  @media (max-width: 980px) {
+    .board {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'centre centre'
+        'home away';
+    }
+    .centre {
+      grid-area: centre;
+    }
+    .side--home {
+      grid-area: home;
+    }
+    .side--away {
+      grid-area: away;
+    }
+    .club-row,
+    .escola-row,
+    .onsom-row,
+    .overtime__in {
+      grid-template-columns: 1fr;
+    }
+    .onsom-row [data-bulbs] {
+      max-width: 420px;
+    }
+    .tunnel {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 620px) {
+    .board {
+      grid-template-areas:
+        'home away'
+        'centre centre';
+      gap: 22px 14px;
+      padding-top: 30px;
+    }
+    #club [data-bulbs] {
+      aspect-ratio: 4 / 3 !important;
+    }
+    .side__team {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .side__team img {
+      width: 40px;
+    }
+    .side__name {
+      font-size: 21px;
+    }
+    .score__num {
+      font-size: 56px;
+    }
+    .score__label {
+      font-size: 15px;
+    }
+    .centre__clock .dots {
+      font-size: 64px;
+    }
+    .panel__years {
+      white-space: nowrap;
+      font-size: 19px;
+    }
+    .lamps {
+      grid-template-columns: 1fr;
+    }
+    .period__plate {
+      margin-left: 0;
+    }
+    .cabinet {
+      padding: 16px;
+    }
+    .console {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'form' 'out' 'go';
+    }
+    .panel {
+      padding: 10px 6px;
+    }
+    tbody td,
+    tbody th,
+    thead th {
+      padding-inline: 6px;
+    }
+    .panel__teams {
+      display: none;
+    }
+    thead th:last-child {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .score__num--wait {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T09:25:01.237Z",
+  "title": "Design System: Canovelles Bàsquet Club · Opció 3",
+  "extensions": {
+    "colorMeta": {
+      "court": {
+        "role": "primary",
+        "displayName": "Court Blue",
+        "canonical": "#1f4fbf",
+        "tonalRamp": [
+          "oklch(15% 0.090 263.4)",
+          "oklch(25% 0.090 263.4)",
+          "oklch(35% 0.184 263.4)",
+          "oklch(45% 0.184 263.4)",
+          "oklch(55% 0.184 263.4)",
+          "oklch(68% 0.184 263.4)",
+          "oklch(82% 0.050 263.4)",
+          "oklch(95% 0.050 263.4)"
+        ]
+      },
+      "court-deep": {
+        "role": "primary",
+        "displayName": "Deep Court",
+        "canonical": "#173c93",
+        "tonalRamp": [
+          "oklch(15% 0.090 263.5)",
+          "oklch(25% 0.090 263.5)",
+          "oklch(35% 0.150 263.5)",
+          "oklch(45% 0.150 263.5)",
+          "oklch(55% 0.150 263.5)",
+          "oklch(68% 0.150 263.5)",
+          "oklch(82% 0.050 263.5)",
+          "oklch(95% 0.050 263.5)"
+        ]
+      },
+      "zone": {
+        "role": "secondary",
+        "displayName": "Zone Orange",
+        "canonical": "#ef5a2e",
+        "tonalRamp": [
+          "oklch(15% 0.090 36.6)",
+          "oklch(25% 0.090 36.6)",
+          "oklch(35% 0.192 36.6)",
+          "oklch(45% 0.192 36.6)",
+          "oklch(55% 0.192 36.6)",
+          "oklch(68% 0.192 36.6)",
+          "oklch(82% 0.050 36.6)",
+          "oklch(95% 0.050 36.6)"
+        ]
+      },
+      "zone-deep": {
+        "role": "secondary",
+        "displayName": "Deep Zone",
+        "canonical": "#c94419",
+        "tonalRamp": [
+          "oklch(15% 0.090 36.8)",
+          "oklch(25% 0.090 36.8)",
+          "oklch(35% 0.177 36.8)",
+          "oklch(45% 0.177 36.8)",
+          "oklch(55% 0.177 36.8)",
+          "oklch(68% 0.177 36.8)",
+          "oklch(82% 0.050 36.8)",
+          "oklch(95% 0.050 36.8)"
+        ]
+      },
+      "outer": {
+        "role": "tertiary",
+        "displayName": "Outer Green",
+        "canonical": "#1f8a5b",
+        "tonalRamp": [
+          "oklch(15% 0.090 158.9)",
+          "oklch(25% 0.090 158.9)",
+          "oklch(35% 0.119 158.9)",
+          "oklch(45% 0.119 158.9)",
+          "oklch(55% 0.119 158.9)",
+          "oklch(68% 0.119 158.9)",
+          "oklch(82% 0.050 158.9)",
+          "oklch(95% 0.050 158.9)"
+        ]
+      },
+      "outer-deep": {
+        "role": "tertiary",
+        "displayName": "Deep Outer Green",
+        "canonical": "#176b46",
+        "tonalRamp": [
+          "oklch(15% 0.090 159.1)",
+          "oklch(25% 0.090 159.1)",
+          "oklch(35% 0.098 159.1)",
+          "oklch(45% 0.098 159.1)",
+          "oklch(55% 0.098 159.1)",
+          "oklch(68% 0.098 159.1)",
+          "oklch(82% 0.050 159.1)",
+          "oklch(95% 0.050 159.1)"
+        ]
+      },
+      "line": {
+        "role": "tertiary",
+        "displayName": "Line Yellow",
+        "canonical": "#ffd23f",
+        "tonalRamp": [
+          "oklch(15% 0.090 90.9)",
+          "oklch(25% 0.090 90.9)",
+          "oklch(35% 0.162 90.9)",
+          "oklch(45% 0.162 90.9)",
+          "oklch(55% 0.162 90.9)",
+          "oklch(68% 0.162 90.9)",
+          "oklch(82% 0.050 90.9)",
+          "oklch(95% 0.050 90.9)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0f1b3d",
+        "tonalRamp": [
+          "oklch(15% 0.067 266.6)",
+          "oklch(25% 0.067 266.6)",
+          "oklch(35% 0.067 266.6)",
+          "oklch(45% 0.067 266.6)",
+          "oklch(55% 0.067 266.6)",
+          "oklch(68% 0.067 266.6)",
+          "oklch(82% 0.050 266.6)",
+          "oklch(95% 0.050 266.6)"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#3b4766",
+        "tonalRamp": [
+          "oklch(15% 0.055 267.7)",
+          "oklch(25% 0.055 267.7)",
+          "oklch(35% 0.055 267.7)",
+          "oklch(45% 0.055 267.7)",
+          "oklch(55% 0.055 267.7)",
+          "oklch(68% 0.055 267.7)",
+          "oklch(82% 0.050 267.7)",
+          "oklch(95% 0.050 267.7)"
+        ]
+      },
+      "floor": {
+        "role": "neutral",
+        "displayName": "Floor Grey",
+        "canonical": "#eef0f3",
+        "tonalRamp": [
+          "oklch(15% 0.005 258.3)",
+          "oklch(25% 0.005 258.3)",
+          "oklch(35% 0.005 258.3)",
+          "oklch(45% 0.005 258.3)",
+          "oklch(55% 0.005 258.3)",
+          "oklch(68% 0.005 258.3)",
+          "oklch(82% 0.005 258.3)",
+          "oklch(95% 0.005 258.3)"
+        ]
+      },
+      "floor-deep": {
+        "role": "neutral",
+        "displayName": "Floor Rule",
+        "canonical": "#dfe3ea",
+        "tonalRamp": [
+          "oklch(15% 0.010 261.8)",
+          "oklch(25% 0.010 261.8)",
+          "oklch(35% 0.010 261.8)",
+          "oklch(45% 0.010 261.8)",
+          "oklch(55% 0.010 261.8)",
+          "oklch(68% 0.010 261.8)",
+          "oklch(82% 0.010 261.8)",
+          "oklch(95% 0.010 261.8)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.000 89.9)",
+          "oklch(25% 0.000 89.9)",
+          "oklch(35% 0.000 89.9)",
+          "oklch(45% 0.000 89.9)",
+          "oklch(55% 0.000 89.9)",
+          "oklch(68% 0.000 89.9)",
+          "oklch(82% 0.000 89.9)",
+          "oklch(95% 0.000 89.9)"
+        ]
+      },
+      "court-mist": {
+        "role": "neutral",
+        "displayName": "Court Mist",
+        "canonical": "#dbe4fb",
+        "tonalRamp": [
+          "oklch(15% 0.033 268.7)",
+          "oklch(25% 0.033 268.7)",
+          "oklch(35% 0.033 268.7)",
+          "oklch(45% 0.033 268.7)",
+          "oklch(55% 0.033 268.7)",
+          "oklch(68% 0.033 268.7)",
+          "oklch(82% 0.033 268.7)",
+          "oklch(95% 0.033 268.7)"
+        ]
+      },
+      "outer-mist": {
+        "role": "neutral",
+        "displayName": "Outer Mist",
+        "canonical": "#e2f3ea",
+        "tonalRamp": [
+          "oklch(15% 0.022 163.1)",
+          "oklch(25% 0.022 163.1)",
+          "oklch(35% 0.022 163.1)",
+          "oklch(45% 0.022 163.1)",
+          "oklch(55% 0.022 163.1)",
+          "oklch(68% 0.022 163.1)",
+          "oklch(82% 0.022 163.1)",
+          "oklch(95% 0.022 163.1)"
+        ]
+      },
+      "field-rule": {
+        "role": "neutral",
+        "displayName": "Field Rule",
+        "canonical": "#b9c1d3",
+        "tonalRamp": [
+          "oklch(15% 0.027 266.6)",
+          "oklch(25% 0.027 266.6)",
+          "oklch(35% 0.027 266.6)",
+          "oklch(45% 0.027 266.6)",
+          "oklch(55% 0.027 266.6)",
+          "oklch(68% 0.027 266.6)",
+          "oklch(82% 0.027 266.6)",
+          "oklch(95% 0.027 266.6)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline and pre-registration page title only; Anybody 850 at 112% width."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section h2s; the finder and final CTA run up to 64px and 72px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Stage cards, values, detail-card group name, form legends; 100% width at card level."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Paragraph under a headline, 44-46ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text; 16px inside cards."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Group chips, detail-card terms, notes; sentence case."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "All buttons; 16px in the header."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hover-lift",
+        "value": "0 2px 4px rgb(15 27 61 / 0.08), 0 14px 32px -12px rgb(15 27 61 / 0.3)",
+        "purpose": "Buttons (lift 2px) and stage cards (lift 4px) on hover only."
+      },
+      {
+        "name": "card-on-field",
+        "value": "0 18px 40px -18px rgb(5 14 40 / 0.6)",
+        "purpose": "White detail card sitting on the Court Blue finder field."
+      },
+      {
+        "name": "focus-halo",
+        "value": "0 0 0 4px rgb(31 79 191 / 0.2)",
+        "purpose": "Form field focus, with a Court Blue border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for every transition and entrance."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity 0 to 1 + translateY(14px) to 0 over 0.9s, stagger 90ms",
+        "purpose": "Content entering the viewport, once."
+      },
+      {
+        "name": "paint",
+        "value": "stroke-dashoffset to 0 over 1.6s, stagger 120ms",
+        "purpose": "Court lines drawing themselves as their group enters, once."
+      },
+      {
+        "name": "route",
+        "value": "stroke-dashoffset to 0 over 0.9s",
+        "purpose": "Court finder route from the rim to the selected group; the ball moves and rolls on the same 0.9s."
+      },
+      {
+        "name": "button",
+        "value": "transform, box-shadow and inset over 0.4s",
+        "purpose": "Button hover lift and inset line widening."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Reveal, paint, route, ball and button transitions disabled; content and lines shown in their final state."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "560px"
+      },
+      {
+        "name": "header-two-row",
+        "value": "860px"
+      },
+      {
+        "name": "single-column",
+        "value": "900px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default painted button in Deep Zone with an inset line; the main pre-registration call.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Preinscripció 2026-27 <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn{--btn-bg:#c94419;--btn-fg:#fff;--btn-line:rgb(255 255 255 / 0.55);position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border:0;border-radius:6px;background:var(--btn-bg);color:var(--btn-fg);font:700 17px/1 'Hanken Grotesk Variable',system-ui,sans-serif;text-decoration:none;cursor:pointer;isolation:isolate;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn::after{content:'';position:absolute;inset:5px;border:2px solid var(--btn-line);border-radius:3px;pointer-events:none;transition:inset .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgb(15 27 61 / 0.08),0 14px 32px -12px rgb(15 27 61 / 0.3)}.ds-btn:hover::after{inset:3px}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:active{transform:none;box-shadow:none}.ds-btn:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}"
+    },
+    {
+      "name": "Court Button",
+      "kind": "button",
+      "refersTo": "button-court",
+      "description": "Court Blue variant for wayfinding actions.",
+      "html": "<a class=\"ds-btn ds-btn--court\" href=\"#\">Com arribar-hi <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn{--btn-bg:#c94419;--btn-fg:#fff;--btn-line:rgb(255 255 255 / 0.55);position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border:0;border-radius:6px;background:var(--btn-bg);color:var(--btn-fg);font:700 17px/1 'Hanken Grotesk Variable',system-ui,sans-serif;text-decoration:none;cursor:pointer;isolation:isolate;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn::after{content:'';position:absolute;inset:5px;border:2px solid var(--btn-line);border-radius:3px;pointer-events:none;transition:inset .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgb(15 27 61 / 0.08),0 14px 32px -12px rgb(15 27 61 / 0.3)}.ds-btn:hover::after{inset:3px}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:active{transform:none;box-shadow:none}.ds-btn:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}.ds-btn--court{--btn-bg:#1f4fbf}"
+    },
+    {
+      "name": "Line Button on Zone",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Yellow button with ink inset line, used on blue or orange fields.",
+      "html": "<div class=\"ds-zone\"><a class=\"ds-btn ds-btn--line\" href=\"#\">Fes la preinscripció <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h13M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-btn{--btn-bg:#c94419;--btn-fg:#fff;--btn-line:rgb(255 255 255 / 0.55);position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border:0;border-radius:6px;background:var(--btn-bg);color:var(--btn-fg);font:700 17px/1 'Hanken Grotesk Variable',system-ui,sans-serif;text-decoration:none;cursor:pointer;isolation:isolate;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn::after{content:'';position:absolute;inset:5px;border:2px solid var(--btn-line);border-radius:3px;pointer-events:none;transition:inset .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgb(15 27 61 / 0.08),0 14px 32px -12px rgb(15 27 61 / 0.3)}.ds-btn:hover::after{inset:3px}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:active{transform:none;box-shadow:none}.ds-btn:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}.ds-zone{background:#ef5a2e;padding:32px;border-radius:6px}.ds-btn--line{--btn-bg:#ffd23f;--btn-fg:#0f1b3d;--btn-line:rgb(15 27 61 / 0.35)}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent button; text and flush outline in Court Blue on the floor.",
+      "html": "<a class=\"ds-btn ds-btn--ghost\" href=\"#\">Troba el seu grup</a>",
+      "css": ".ds-btn{--btn-bg:#c94419;--btn-fg:#fff;--btn-line:rgb(255 255 255 / 0.55);position:relative;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border:0;border-radius:6px;background:var(--btn-bg);color:var(--btn-fg);font:700 17px/1 'Hanken Grotesk Variable',system-ui,sans-serif;text-decoration:none;cursor:pointer;isolation:isolate;transition:transform .4s cubic-bezier(0.16,1,0.3,1),box-shadow .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn::after{content:'';position:absolute;inset:5px;border:2px solid var(--btn-line);border-radius:3px;pointer-events:none;transition:inset .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgb(15 27 61 / 0.08),0 14px 32px -12px rgb(15 27 61 / 0.3)}.ds-btn:hover::after{inset:3px}.ds-btn:hover svg{transform:translateX(3px)}.ds-btn:active{transform:none;box-shadow:none}.ds-btn:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}.ds-btn--ghost{--btn-bg:transparent;--btn-fg:#1f4fbf;--btn-line:#1f4fbf}.ds-btn--ghost::after,.ds-btn--ghost:hover::after{inset:0}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Pre-registration field: white, 2px rule border, Court Blue focus halo.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-n\">Nom i cognoms</label><input id=\"ds-n\"></div>",
+      "css": ".ds-field{display:grid;gap:6px;max-width:360px;font-family:'Hanken Grotesk Variable',system-ui,sans-serif;color:#0f1b3d}.ds-field label{font-weight:700}.ds-field input{min-height:52px;padding:12px 14px;border:2px solid #b9c1d3;border-radius:6px;background:#fff;color:#0f1b3d;font:500 18px/1.3 'Hanken Grotesk Variable',system-ui,sans-serif;transition:border-color .25s cubic-bezier(0.16,1,0.3,1),box-shadow .25s cubic-bezier(0.16,1,0.3,1)}.ds-field input:hover{border-color:#3b4766}.ds-field input:focus-visible{outline:none;border-color:#1f4fbf;box-shadow:0 0 0 4px rgb(31 79 191 / 0.2)}.ds-field input[aria-invalid='true']{border-color:#c94419}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Translucent floor header, Court Blue bottom rule, Zone underline that paints in on hover.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">Canovelles <b>BC</b></a><nav><a href=\"#\">Troba el grup</a><a href=\"#\">Etapes</a><a href=\"#\">El club</a><a href=\"#\">On som</a></nav></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:32px;min-height:72px;padding:0 24px;background:rgb(238 240 243 / 0.92);border-bottom:3px solid #1f4fbf;font-family:'Hanken Grotesk Variable',system-ui,sans-serif;color:#0f1b3d}.ds-brand{font:700 19px 'Anybody Variable','Arial Narrow',sans-serif;text-decoration:none;color:inherit}.ds-brand b{color:#1f4fbf}.ds-nav nav{display:flex;gap:28px;margin-left:auto}.ds-nav nav a{position:relative;padding-block:6px;font-weight:600;font-size:16px;color:inherit;text-decoration:none}.ds-nav nav a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:3px;background:#ef5a2e;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(0.16,1,0.3,1)}.ds-nav nav a:hover::after,.ds-nav nav a:focus-visible::after{transform:scaleX(1)}"
+    },
+    {
+      "name": "Stage Card",
+      "kind": "card",
+      "refersTo": "stage-card",
+      "description": "Whole-field colour card with inset painted line and pill group chips.",
+      "html": "<article class=\"ds-stage\"><h3>Escola</h3><p>El primer contacte amb la pilota, jugant.</p><ul><li>Escoleta</li><li>Escobol</li></ul></article>",
+      "css": ".ds-stage{position:relative;display:flex;flex-direction:column;gap:10px;width:260px;min-height:280px;padding:24px;border-radius:6px;background:#176b46;color:#fff;font-family:'Hanken Grotesk Variable',system-ui,sans-serif;transition:transform .5s cubic-bezier(0.16,1,0.3,1),box-shadow .5s cubic-bezier(0.16,1,0.3,1)}.ds-stage::before{content:'';position:absolute;inset:8px;border:2px solid rgb(255 255 255 / 0.4);border-radius:3px;pointer-events:none}.ds-stage:hover{transform:translateY(-4px);box-shadow:0 2px 4px rgb(15 27 61 / 0.08),0 14px 32px -12px rgb(15 27 61 / 0.3)}.ds-stage h3{margin:0;font:800 28px/0.98 'Anybody Variable','Arial Narrow',sans-serif;letter-spacing:-0.02em}.ds-stage p{margin:0;font-size:16px}.ds-stage ul{display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 0;padding:0;list-style:none}.ds-stage li{padding:4px 10px;border-radius:999px;background:rgb(0 0 0 / 0.24);font-size:14px;font-weight:700}"
+    },
+    {
+      "name": "Court Spot",
+      "kind": "chip",
+      "refersTo": "court-spot",
+      "description": "Group position on the finder court; turns yellow with ink text when selected.",
+      "html": "<div class=\"ds-court\"><button class=\"ds-spot\" aria-pressed=\"false\"><span class=\"ds-dot\"></span>Mini</button><button class=\"ds-spot\" aria-pressed=\"true\"><span class=\"ds-dot\"></span>Infantil</button></div>",
+      "css": ".ds-court{display:flex;gap:16px;padding:32px;background:#1f4fbf;border-radius:6px}.ds-spot{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border:0;border-radius:999px;background:#1f4fbf;color:#fff;font:700 16px/1.1 'Hanken Grotesk Variable',system-ui,sans-serif;cursor:pointer;transition:background-color .35s cubic-bezier(0.16,1,0.3,1),color .35s cubic-bezier(0.16,1,0.3,1)}.ds-dot{width:14px;height:14px;border:3px solid #fff;border-radius:50%;background:#1f4fbf;transition:scale .35s cubic-bezier(0.16,1,0.3,1)}.ds-spot:hover{background:#173c93}.ds-spot:hover .ds-dot{scale:1.2}.ds-spot:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}.ds-spot[aria-pressed='true']{background:#ffd23f;color:#0f1b3d}.ds-spot[aria-pressed='true'] .ds-dot{background:#0f1b3d;border-color:#0f1b3d}"
+    },
+    {
+      "name": "Painted Key",
+      "kind": "custom",
+      "refersTo": "hero-key",
+      "description": "Hero photo frame: orange lane on Court Blue, yellow lane lines, hash marks and free-throw semicircle that paint in.",
+      "html": "<div class=\"ds-key\"><div class=\"ds-photo\"></div><svg viewBox=\"0 0 400 480\" aria-hidden=\"true\"><path pathLength=\"1\" d=\"M40 480 V120 H360 V480\"/><path pathLength=\"1\" d=\"M110 120 A90 90 0 0 1 290 120\"/><path d=\"M40 210 H22 M40 270 H22 M40 330 H22 M40 390 H22 M360 210 H378 M360 270 H378 M360 330 H378 M360 390 H378\"/></svg></div>",
+      "css": ".ds-key{position:relative;width:280px;aspect-ratio:400/480;background:#1f4fbf;border-radius:6px;overflow:hidden}.ds-key::before{content:'';position:absolute;left:10%;top:25%;width:80%;height:75%;background:#ef5a2e}.ds-photo{position:absolute;left:14%;top:29%;width:72%;height:71%;background:#dfe3ea}.ds-key svg{position:absolute;inset:0;width:100%;height:100%}.ds-key path{fill:none;stroke:#ffd23f;stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke}.ds-key path[pathLength]{stroke-dasharray:1;stroke-dashoffset:1;animation:ds-paint 1.6s cubic-bezier(0.16,1,0.3,1) forwards}.ds-key path[pathLength]+path[pathLength]{animation-delay:.24s}@keyframes ds-paint{to{stroke-dashoffset:0}}@media (prefers-reduced-motion:reduce){.ds-key path[pathLength]{animation:none;stroke-dashoffset:0}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pavilion Floor",
+    "overview": "The site is the floor of the Pavelló Municipal de Canovelles seen from above. Every section is a whole field of one synthetic-floor colour (court blue, zone orange, outer green, ink, or the pale grey floor), and the only ornament is what a multisport floor actually carries: painted lines with round ends, keys, free-throw arcs, the centre circle, the rim and backboard. Structure is conventional (header, hero, sections, footer), so parents on a phone never have to learn the page; the character comes from colour used at full field scale and from lines that paint themselves in.\n\nDensity is relaxed and sporty: large Anybody headlines stretched wide, short Hanken Grotesk paragraphs capped around 44-46ch, generous section padding. Photos are real club photos, cropped square-cornered to the 6px base radius or run full bleed (the club family photo). The hero sets the photo inside a painted key: an orange lane on court blue with yellow lane hash marks and the free-throw semicircle outside the lane. Motion has one grammar: lines paint along their length (stroke-dashoffset) and content rises 14px, both on the same exponential ease-out, once, and not at all under reduced motion.",
+    "keyCharacteristics": [
+      "Whole sections as flat court-colour fields; no gradients, no textures.",
+      "Painted lines (2-5px, round caps) as the only ornament: keys, arcs, centre circles, sidelines.",
+      "Anybody wide (112% width) for display; Hanken Grotesk for everything read.",
+      "Buttons are painted rectangles with an inset line, like a zone marked on the floor.",
+      "One motion grammar: lines paint, content rises 14px, ease cubic-bezier(0.16, 1, 0.3, 1)."
+    ],
+    "rules": [
+      {
+        "name": "The Whole Field Rule",
+        "body": "A floor colour is used as an entire section or card field, never as a small accent dot on grey. If a colour appears, it owns its area.",
+        "section": "colors"
+      },
+      {
+        "name": "The Yellow Is Paint Rule",
+        "body": "Line Yellow is for lines, focus, selection and the one yellow button; it is never a section background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wide Voice Rule",
+        "body": "Width 112% is for page and section headlines; card-level titles drop back to 100% so they fit narrow fields.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Floor Rule",
+        "body": "Surfaces are flat at rest; a shadow means \"this responds to you\" or \"this card is lifted off the court\".",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give each section one whole floor colour (court, zone, outer-deep, ink, or floor) and keep its content inside that field.",
+      "**Do** draw ornament only from real court markings, as round-capped strokes (2-5px) that paint in via stroke-dashoffset when entering the viewport.",
+      "**Do** use Deep Zone for the default button and white text; use the Line button on blue or orange fields.",
+      "**Do** reveal content by rising 14px over 0.9s on cubic-bezier(0.16, 1, 0.3, 1), staggered 90ms, once; switch all of it off under prefers-reduced-motion.",
+      "**Do** soften text on coloured fields with a tinted mist colour (court-mist, outer-mist), not opacity."
+    ],
+    "donts": [
+      "**Don't** use gradients, textures or glow; the floor is flat paint.",
+      "**Don't** make Line Yellow a section background or body text colour on the floor.",
+      "**Don't** add shadows to surfaces at rest; shadow is hover feedback or the one card lifted off the court.",
+      "**Don't** use white body text on Zone Orange; on that field body text is ink and only the large headline is white.",
+      "**Don't** redraw or recolour the club crest; it sits on the Floor Grey header and the Ink footer as supplied."
+    ]
+  }
+}

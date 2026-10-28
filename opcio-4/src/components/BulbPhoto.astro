@@ -1,0 +1,215 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  /** Proporció de la finestra, p. ex. "16 / 9". */
+  ratio?: string;
+  /** Distància entre bombetes en píxels de pantalla. */
+  pitch?: number;
+  focus?: string;
+}
+
+const { src, alt, ratio = '4 / 3', pitch = 8, focus = '50% 50%' } = Astro.props;
+const img = await getImage({ src, width: Math.min(src.width, 1400), format: 'webp' });
+---
+
+<figure class="bulbs window" style={`aspect-ratio:${ratio}`} data-bulbs data-pitch={pitch}>
+  <img src={img.src} alt={alt} loading="lazy" decoding="async" style={`object-position:${focus}`} />
+  <canvas aria-hidden="true"></canvas>
+  <button type="button" class="bulbs__toggle plate" aria-pressed="false">Veure la foto</button>
+</figure>
+
+<script>
+  // Dibuixa la foto com la matriu de bombetes del marcador: cada punt s'encén segons la llum de la imatge.
+  const AMBER = [255, 178, 31];
+  const OFF = '#2a2620';
+
+  function draw(fig: HTMLElement) {
+    const img = fig.querySelector('img')!;
+    const canvas = fig.querySelector('canvas')!;
+    const pitch = Number(fig.dataset.pitch) || 8;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = fig.clientWidth;
+    const h = fig.clientHeight;
+    if (!w || !h || !img.naturalWidth) return null;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    const ctx = canvas.getContext('2d')!;
+    ctx.scale(dpr, dpr);
+
+    // Mostreja la imatge a la mida de la graella, retallada com object-fit: cover.
+    const cols = Math.floor(w / pitch);
+    const lines = Math.floor(h / pitch);
+    const sample = document.createElement('canvas');
+    sample.width = cols;
+    sample.height = lines;
+    const sx = sample.getContext('2d', { willReadFrequently: true })!;
+    const scale = Math.max(cols / img.naturalWidth, lines / img.naturalHeight);
+    const dw = img.naturalWidth * scale;
+    const dh = img.naturalHeight * scale;
+    const [fx, fy] = getComputedStyle(img).objectPosition.split(' ').map((v) => parseFloat(v) / 100);
+    sx.drawImage(img, (cols - dw) * (fx || 0.5), (lines - dh) * (fy || 0.5), dw, dh);
+    const data = sx.getImageData(0, 0, cols, lines).data;
+
+    // Les fotos del club són fosques i poc contrastades: s'estira la llum entre els percentils 4 i 96.
+    const lums = new Float32Array(cols * lines);
+    for (let k = 0; k < lums.length; k++) {
+      lums[k] = (0.299 * data[k * 4] + 0.587 * data[k * 4 + 1] + 0.114 * data[k * 4 + 2]) / 255;
+    }
+    const sorted = Float32Array.from(lums).sort();
+    const lo = sorted[Math.floor(sorted.length * 0.04)];
+    const hi = sorted[Math.floor(sorted.length * 0.96)];
+    const span = Math.max(0.05, hi - lo);
+
+    const ox = (w - cols * pitch) / 2 + pitch / 2;
+    const oy = (h - lines * pitch) / 2 + pitch / 2;
+    const max = pitch * 0.42;
+    return (shown: number) => {
+      ctx.fillStyle = '#0a0b0d';
+      ctx.fillRect(0, 0, w, h);
+      for (let y = 0; y < lines; y++) {
+        for (let x = 0; x < cols; x++) {
+          const lum = Math.min(1, Math.max(0, (lums[y * cols + x] - lo) / span));
+          const on = y < shown ? Math.pow(lum, 1.7) : 0;
+          ctx.beginPath();
+          if (on < 0.12) {
+            ctx.fillStyle = OFF;
+            ctx.arc(ox + x * pitch, oy + y * pitch, max * 0.55, 0, Math.PI * 2);
+          } else {
+            const a = 0.35 + on * 0.65;
+            ctx.fillStyle = `rgba(${AMBER[0]},${AMBER[1]},${AMBER[2]},${a})`;
+            ctx.arc(ox + x * pitch, oy + y * pitch, max * (0.5 + on * 0.5), 0, Math.PI * 2);
+          }
+          ctx.fill();
+        }
+      }
+    };
+  }
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-bulbs]').forEach((fig) => {
+    const img = fig.querySelector('img')!;
+    let render: ((n: number) => void) | null = null;
+    let lit = false;
+
+    const prepare = () => {
+      render = draw(fig);
+      if (!render) return;
+      fig.classList.add('is-ready');
+      if (lit || reduce) render(9999);
+      else render(0);
+    };
+
+    // Les bombetes s'encenen per files, com quan s'engega el marcador.
+    const switchOn = () => {
+      if (lit || !render) return;
+      lit = true;
+      // El progrés depèn del temps, no del nombre de passos: si el navegador frena els temporitzadors, acaba igual.
+      const start = performance.now();
+      const step = () => {
+        const p = (performance.now() - start) / 600;
+        if (p >= 1) return render!(9999);
+        // Les files es llegeixen a cada pas: si la finestra canvia de mida a mig encendre, segueix bé.
+        render!(Math.ceil(p * Math.floor(fig.clientHeight / (Number(fig.dataset.pitch) || 8))));
+        setTimeout(step, 16);
+      };
+      step();
+    };
+
+    const start = () => {
+      prepare();
+      new IntersectionObserver(
+        (entries, io) => {
+          if (entries[0].isIntersecting) {
+            switchOn();
+            io.disconnect();
+          }
+        },
+        { threshold: 0.35 },
+      ).observe(fig);
+    };
+
+    img.loading = 'eager';
+    if (img.complete && img.naturalWidth) start();
+    else img.addEventListener('load', start, { once: true });
+
+    let raf = 0;
+    new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        if (!fig.classList.contains('is-ready')) return;
+        render = draw(fig);
+        render?.(lit ? 9999 : 0);
+      });
+    }).observe(fig);
+
+    // El botó alterna bombetes i foto real; tocar la foto fa el mateix.
+    const toggle = fig.querySelector<HTMLButtonElement>('.bulbs__toggle')!;
+    const set = (photo: boolean) => {
+      fig.classList.toggle('is-photo', photo);
+      toggle.setAttribute('aria-pressed', String(photo));
+      toggle.textContent = photo ? 'Tornar a les bombetes' : 'Veure la foto';
+    };
+    fig.addEventListener('click', () => set(!fig.classList.contains('is-photo')));
+  });
+</script>
+
+<style>
+  .bulbs {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .bulbs img,
+  .bulbs canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .bulbs img {
+    object-fit: cover;
+    transition: opacity 0.35s steps(4);
+  }
+  /* Amb JS, la foto real només es veu quan algú la demana: mentre carrega, la finestra és de bombetes apagades. */
+  :global(.js) .bulbs img {
+    opacity: 0;
+  }
+  :global(.js) .bulbs.is-photo img {
+    opacity: 1;
+  }
+  .bulbs.is-photo canvas {
+    opacity: 0;
+  }
+  .bulbs__toggle {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    min-height: 40px;
+    padding: 0 12px;
+    border: 2px solid var(--vinyl-soft);
+    border-radius: 3px;
+    background: var(--window);
+    color: var(--vinyl);
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.15s linear, color 0.15s linear;
+  }
+  .bulbs__toggle:hover {
+    background: var(--vinyl);
+    color: var(--window);
+  }
+  .bulbs__toggle[aria-pressed='true'] {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+  .bulbs__toggle[aria-pressed='true']:hover {
+    background: var(--amber);
+    color: var(--window);
+  }
+</style>
