@@ -33,9 +33,6 @@ const noindex = import.meta.env.PUBLIC_PREVIEW === 'true';
     <script>
       // Una sola manera d'entrar: el contingut puja i les línies es pinten quan arriben a la pantalla.
       const items = document.querySelectorAll<HTMLElement>('[data-reveal], [data-paint-group]');
-      document.querySelectorAll<SVGGeometryElement>('[data-paint]').forEach((p) => {
-        p.style.setProperty('--len', String(Math.ceil(p.getTotalLength())));
-      });
       const io = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {

@@ -212,9 +212,10 @@ a {
   opacity: 1;
   transform: none;
 }
+/* Cada traç porta pathLength="1": la longitud ja és coneguda des del primer frame, sense mesurar-la amb JS. */
 .js [data-paint] {
-  stroke-dasharray: var(--len, 1200);
-  stroke-dashoffset: var(--len, 1200);
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.02;
   transition: stroke-dashoffset 1.6s var(--ease);
   transition-delay: calc(var(--i, 0) * 120ms);
 }

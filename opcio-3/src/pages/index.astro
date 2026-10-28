@@ -37,9 +37,9 @@ const colorsEtapa = ['outer', 'zone', 'court', 'ink'];
         <div class="hero__key" data-paint-group>
           <Image src={fotoEquip} alt="Un equip femení del club fa pinya amb l’entrenadora a la pista del pavelló." widths={[480, 760, 1000]} sizes="(max-width: 900px) 92vw, 46vw" loading="eager" />
           <svg viewBox="0 0 400 480" aria-hidden="true">
-            <path data-paint d="M40 480 V120 H360 V480" />
-            <path data-paint style="--i:2" d="M110 120 A90 90 0 0 1 290 120" />
-            <path data-paint style="--i:3" d="M40 210 H22 M40 270 H22 M40 330 H22 M40 390 H22 M360 210 H378 M360 270 H378 M360 330 H378 M360 390 H378" />
+            <path data-paint pathLength="1" d="M40 480 V120 H360 V480" />
+            <path data-paint pathLength="1" style="--i:2" d="M110 120 A90 90 0 0 1 290 120" />
+            <path data-paint pathLength="1" style="--i:3" d="M40 210 H22 M40 270 H22 M40 330 H22 M40 390 H22 M360 210 H378 M360 270 H378 M360 330 H378 M360 390 H378" />
           </svg>
         </div>
       </div>
@@ -231,6 +231,13 @@ const colorsEtapa = ['outer', 'zone', 'court', 'ink'];
     object-fit: cover;
     object-position: 50% 30%;
   }
+  .js .hero__key img {
+    opacity: 0;
+    transition: opacity 0.8s var(--ease) 0.15s;
+  }
+  .js .hero__key.is-in img {
+    opacity: 1;
+  }
   .hero__key svg {
     position: absolute;
     inset: 0;
@@ -240,9 +247,8 @@ const colorsEtapa = ['outer', 'zone', 'court', 'ink'];
   .hero__key path {
     fill: none;
     stroke: var(--line);
-    stroke-width: 5;
+    stroke-width: 6;
     stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
   }
   .sideline {
     display: flex;
